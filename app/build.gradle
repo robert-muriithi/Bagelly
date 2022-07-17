@@ -53,6 +53,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.6'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.2.0'
+    implementation 'com.google.firebase:firebase-bom:30.2.0'
 
     //Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
@@ -64,13 +65,9 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
 
-    //Google maps
-    implementation 'com.google.android.gms:play-services-maps:18.0.2'
-
-    implementation "com.google.android.gms:play-services-location:20.0.0"
-    implementation "com.google.android.gms:play-services-places:17.0.0"
 
     //hilt dagger
     implementation 'com.google.dagger:hilt-android:2.41'
     kapt 'com.google.dagger:hilt-android-compiler:2.40.5'
+
 }

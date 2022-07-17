@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
 
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="dev.robert.bagelly.ui.fragments.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="dev.robert.bagelly.ui.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.ShopsFragment"
+        android:label="Shops"
+        tools:layout="@layout/fragment_shops" />
+    <fragment
+        android:id="@+id/sellFragment"
+        android:name="dev.robert.bagelly.ui.fragments.SellFragment"
+        android:label="@string/sell"
+        tools:layout="@layout/fragment_sell" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="dev.robert.bagelly.ui.fragments.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="dev.robert.bagelly.ui.fragments.FavoritesFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorites" />
+    <dialog
+        android:id="@+id/signInFragment"
+        android:name="dev.robert.bagelly.ui.fragments.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" />
 </navigation>

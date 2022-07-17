@@ -1,10 +1,12 @@
-package dev.robert.bagelly.ui.fragmets
+package dev.robert.bagelly.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentHomeBinding
 
@@ -17,8 +19,20 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
+        (activity as AppCompatActivity).supportActionBar?.hide()
+        (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
+        (activity as AppCompatActivity).supportActionBar?.title = "Home"
+
+        binding.accountImage.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
+        }
 
         return view
+    }
+
+    override fun onResume() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
+        super.onResume()
     }
 
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "666453612151",
+    "project_id": "bagelly-4e97e",
+    "storage_bucket": "bagelly-4e97e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666453612151:android:34bae16a5b6d895a4a5872",
+        "android_client_info": {
+          "package_name": "dev.robert.bagelly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666453612151-91932hps5bpi65uvra3q4ovf1mg256dd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4j6gTzvM8W6EGfQ-jUYFSkWRe6vKAi8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666453612151-91932hps5bpi65uvra3q4ovf1mg256dd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
