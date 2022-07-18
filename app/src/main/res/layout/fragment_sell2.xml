@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.SellFragment">
+    tools:context=".ui.fragments.SellFragment2">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -16,10 +16,10 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/sellFragmentToolbar"
-            app:title="Post a new item"
-            app:titleTextColor="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            app:title="Post new item"
+            app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -106,7 +106,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nextButton"
-                android:text="@string/next"
+                android:text="Finish"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 app:cornerRadius="5dp"

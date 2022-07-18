@@ -7,22 +7,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.SearchFragment">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/searchFragmentToolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <SearchView
-            android:id="@+id/searchView"
-            app:queryHint="Type to search"
-            app:defaultQueryHint="Xiaomi"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/searchFragmentToolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
-    </com.google.android.material.appbar.MaterialToolbar>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                app:queryHint="Type to search"
+                app:defaultQueryHint="Xiaomi"
+                android:focusableInTouchMode="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
