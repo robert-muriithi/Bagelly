@@ -21,10 +21,12 @@ class HomeFragment : Fragment() {
         val view = binding.root
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
-        (activity as AppCompatActivity).supportActionBar?.title = "Home"
 
         binding.accountImage.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
+        }
+        binding.searchButton.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
 
         return view

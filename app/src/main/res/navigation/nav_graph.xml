@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_homeFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopsFragment"
@@ -34,7 +37,11 @@
         android:id="@+id/sellFragment"
         android:name="dev.robert.bagelly.ui.fragments.SellFragment"
         android:label="@string/sell"
-        tools:layout="@layout/fragment_sell" />
+        tools:layout="@layout/fragment_sell" >
+        <action
+            android:id="@+id/action_sellFragment_to_sellFragment2"
+            app:destination="@id/sellFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="dev.robert.bagelly.ui.fragments.ProfileFragment"
@@ -50,4 +57,14 @@
         android:name="dev.robert.bagelly.ui.fragments.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="dev.robert.bagelly.ui.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/sellFragment2"
+        android:name="dev.robert.bagelly.ui.fragments.SellFragment2"
+        android:label="fragment_sell2"
+        tools:layout="@layout/fragment_sell2" />
 </navigation>

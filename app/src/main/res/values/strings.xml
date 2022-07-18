@@ -31,4 +31,317 @@
     <string name="recently_uploaded_items">Recently uploaded items</string>
     <string name="recent">Recent</string>
     <string name="robert_muriithi">Robert Muriithi</string>
+    <string name="animals_and_pets">Animals and pets</string>
+    <string name="select_a_category">Select a category</string>
+    <string name="select_a_sub_category">Select a sub-category</string>
+    <string name="category">Category</string>
+    <string name="sub_category">Sub-category</string>
+    <string name="next">Next</string>
+
+    <array name="category">
+        <item>Agriculture and Food</item>
+        <item>Animals and Pets</item>
+        <item>Commercial equipment and Tools</item>
+        <item>Electronics</item>
+        <item>Fashion</item>
+        <item>Health and Beauty</item>
+        <item>Home furniture and Appliances</item>
+        <item>Mobile phones, Laptops and tablets</item>
+        <item>Property</item>
+        <item>Babies' items</item>
+        <item>Repair and construction</item>
+        <item>Services</item>
+        <item>Vehicles</item>
+        <item>Machinery</item>
+        <item>Other</item>
+    </array>
+    <string-array name="stores">
+        <item>Accommodation and travel agencies</item>
+        <item>Electronics stores</item>
+        <item>Fashion stores</item>
+        <item>Mobile phone stores</item>
+        <item>Home and living stores</item>
+        <item>Service providers</item>
+        <item>Vehicle dealers</item>
+        <item>Other Stores</item>
+    </string-array>
+    <string-array name="electronics">
+        <item>Accessories and supplies for electronics</item>
+        <item>Audio and music equipment</item>
+        <item>Computer accessories</item>
+        <item>Computer Hardware</item>
+        <item>Computer monitors</item>
+        <item>headphones</item>
+        <item>laptops and computers</item>
+        <item>networking products</item>
+        <item>photo and video cameras</item>
+        <item>printers and scanners</item>
+        <item>security and surveillance</item>
+        <item>software</item>
+        <item>tv and dvd equipment</item>
+        <item>video game consoles</item>
+        <item>video games</item>
+
+    </string-array>
+    <string name="choose_theme_text">Choose theme</string>
+    <string name="txt_title">Hello Android Theme!</string>
+    <string name="change_theme_txt">Change theme</string>
+    <string-array name="agriculture">
+        <item>Farm machinery and equipment</item>
+        <item>Feeds supplements and seeds</item>
+        <item>Livestock and poultry</item>
+        <item>Meals and drinks</item>
+    </string-array>
+    <string-array name="animals">
+        <item>Birds</item>
+        <item>Cats and Kittens</item>
+        <item>Dogs and puppies</item>
+        <item>Fish</item>
+        <item>Other Animals</item>
+        <item>Pets accessories</item>
+        <item>Reptile</item>
+    </string-array>
+
+    <string-array name="babies">
+        <item>Babies and kids accessories</item>
+        <item>Baby and Child care</item>
+        <item>Children clothing</item>
+        <item>Children furniture</item>
+        <item>Children gear and safety</item>
+        <item>Children shoes</item>
+        <item>Maternity and pregnancy</item>
+        <item>Prams and strollers</item>
+        <item>Toys</item>
+    </string-array>
+    <string-array name="equipment">
+        <item>Industrial ovens</item>
+        <item>Manufacturing equipment</item>
+        <item>Manufacturing materials</item>
+        <item>Medical supplies and equipment</item>
+        <item>Printing equipment</item>
+        <item>Restaurant and catering equipment</item>
+        <item>Safetywear and equipment</item>
+        <item>Salon equipment</item>
+        <item>Stationery</item>
+        <item>Store Equipment</item>
+    </string-array>
+    <string-array name="fashion">
+        <item>Bags</item>
+        <item>Clothing</item>
+        <item>Clothing accessories</item>
+        <item>Jewelry</item>
+        <item>Shoes</item>
+        <item>Watches</item>
+        <item>Wedding wear and accessories</item>
+    </string-array>
+    <string-array name="health">
+        <item>Bath and body</item>
+        <item>Fragrance</item>
+        <item>Hair beauty</item>
+        <item>Makeup</item>
+        <item>Sexual wellness</item>
+        <item>Skin care</item>
+        <item>Tobacco accessories</item>
+        <item>Tools and accessories</item>
+        <item>Vitamins and supplements</item>
+    </string-array>
+    <string-array name="furniture">
+        <item>Furniture</item>
+        <item>Garden</item>
+        <item>Home Accessories</item>
+        <item>Home Appliances</item>
+        <item>Kitchen and dining</item>
+        <item>Kitchen Appliances</item>
+    </string-array>
+
+    <string-array name="mobile">
+        <item>Accessories for mobile phones and tablets</item>
+        <item>Mobile phones</item>
+        <item>Smart watches and trackers</item>
+        <item>Tablets</item>
+    </string-array>
+    <string-array name="property">
+        <item>Commercial property for rent</item>
+        <item>COmmercial property for sale</item>
+        <item>Event centres venues and workstations</item>
+        <item>Houses and apartments for rent</item>
+        <item>Houses and apartments for sale</item>
+        <item>Land and plot for sale</item>
+        <item>Land and plot for rent</item>
+        <item>Short let</item>
+
+    </string-array>
+    <string-array name="repair">
+        <item>Building materials</item>
+        <item>Doors</item>
+        <item>Electrical equipment</item>
+        <item>Electrical hand tools</item>
+        <item>Hand tools</item>
+        <item>Measuring and layout tools</item>
+        <item>Other repair and construction items</item>
+        <item>Plumbing and water supply</item>
+        <item>Solar energy</item>
+        <item>Windows</item>
+    </string-array>
+    <string-array name="seeking">
+        <item>Accounting and finance CVS</item>
+        <item>Advertising and marketing CVS</item>
+        <item>Arts and entertainment CVS</item>
+        <item>Childcare and babysitting CVS</item>
+        <item>Clerical and administrative CVS</item>
+        <item>Computing and IT CVS</item>
+        <item>Construction and skilled trade CVS</item>
+        <item>Consulting and strategy CVS</item>
+        <item>Customer service CVS</item>
+        <item>Driver CVS</item>
+        <item>Engineering and architecture CVS</item>
+        <item>Farming and veterinary CVS</item>
+        <item>Gardening and landscaping CVS</item>
+        <item>Health and beauty CVS</item>
+        <item>Healthcare and nursing CVS</item>
+        <item>Accounting and finance CVS</item>
+        <item>Advertising and marketing CVS</item>
+        <item>Arts and entertainment CVS</item>
+        <item>Childcare and babysitting CVS</item>
+        <item>Clerical and administrative CVS</item>
+        <item>Computing and IT CVS</item>
+        <item>Construction and skilled trade CVS</item>
+        <item>Consulting and strategy CVS</item>
+        <item>Customer service CVS</item>
+        <item>Driver CVS</item>
+        <item>Engineering and architecture CVS</item>
+        <item>Farming and veterinary CVS</item>
+        <item>Gardening and landscaping CVS</item>
+        <item>Health and beauty CVS</item>
+        <item>Healthcare and nursing CVS</item>
+
+    </string-array>
+    <string-array name="services">
+        <item>Automotive services</item>
+        <item>Building and trades services</item>
+        <item>Chauffeur and airport transfer services</item>
+        <item>Childcare and education services</item>
+        <item>Classes and courses</item>
+        <item>Cleaning services</item>
+        <item>Computer and IT services</item>
+        <item>DJ and entertainment services</item>
+        <item>Fitness and personal training services</item>
+        <item>Health and beauty services</item>
+        <item>Landscaping and gardening services</item>
+        <item>Legal services</item>
+        <item>Logistics services</item>
+        <item>Manufacturing services</item>
+        <item>Other services</item>
+        <item>Party and events catering services</item>
+        <item>Pets services</item>
+        <item>Photography and video services</item>
+        <item>Printing services</item>
+        <item>Recruitment services</item>
+        <item>Repair services</item>
+        <item>Tax and financial services</item>
+        <item>Travel agents and tours</item>
+        <item>Wedding venues and services</item>
+
+    </string-array>
+    <string-array name="sports">
+        <item>Arts and crafts</item>
+        <item>Books and games</item>
+        <item>CDs and DVDs</item>
+        <item>Camping gear</item>
+        <item>Musical instruments and gear</item>
+        <item>Sports Equipment</item>
+    </string-array>
+    <string-array name="vehicles">
+        <item>Buses and minibuses</item>
+        <item>Cars</item>
+        <item>Heavy equipment</item>
+        <item>Motorcycles and scooters</item>
+        <item>Trucks and trailers</item>
+        <item>Vehicle parts and accessories</item>
+        <item>Watercraft and boats</item>
+    </string-array>
+    <string-array name="typefarm">
+        <item>Cages</item>
+        <item>Corn Flakes Machines</item>
+        <item>Egg Incubators</item>
+        <item>Feeders</item>
+        <item>Fish Ponds</item>
+        <item>Hammer mills</item>
+        <item>Knapsack sprayers</item>
+        <item>Milling machines</item>
+        <item>Poultry cages</item>
+        <item>Poultry drinkers</item>
+        <item>Poultry vaccinators</item>
+        <item>Power tillers</item>
+        <item>Rice Destoners</item>
+        <item>Seed trays</item>
+        <item>Shellers</item>
+        <item>Smoking kilns</item>
+        <item>Tarpaulins</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="typelivestock">
+        <item>Cane Rats</item>
+        <item>Chickens</item>
+        <item>Chinhillas</item>
+        <item>Cows</item>
+        <item>Ducks</item>
+        <item>Geese</item>
+        <item>Goats</item>
+        <item>Guinea fowls</item>
+        <item>Pigs</item>
+        <item>Rabbits</item>
+        <item>Roosters</item>
+        <item>Sheep</item>
+        <item>Turkey</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="typemeals">
+        <item>Alcoholic drinks</item>
+        <item>Bakery products</item>
+        <item>Dairy products</item>
+        <item>Eggs</item>
+        <item>Fruits</item>
+        <item>Grains</item>
+        <item>Groceries</item>
+        <item>Fish</item>
+        <item>Hot drinks</item>
+        <item>Juices</item>
+        <item>Meat products</item>
+        <item>Ready meals</item>
+        <item>Soft drinks</item>
+        <item>Sauces</item>
+        <item>Snacks</item>
+        <item>Spices</item>
+        <item>Sweeties</item>
+        <item>Vegetables</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="conditionfarm">
+        <item>Brand new</item>
+        <item>Used</item>
+        <item>Seller refurbished</item>
+        <item>Manufacturer refurbished</item>
+        <item>For parts or not working</item>
+    </string-array>
+    <string-array name="typefeeds">
+        <item>Feeds</item>
+        <item>Seeds</item>
+        <item>Supplements</item>
+    </string-array>
+    <string name="submitted_lang">Submitted language:</string>
+    <string-array name="region">
+        <item>Nairobi</item>
+        <item>Mombasa</item>
+        <item>Kisumu</item>
+        <item>Nakuru</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="order">
+        <item>Relevant</item>
+        <item>Newest</item>
+        <item>Lowest price</item>
+        <item>Highest price</item>
+
+    </string-array>
 </resources>
