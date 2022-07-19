@@ -33,18 +33,20 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_spinner_down.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_vehicle.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/drop_down_item.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_favorites.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_reset_password.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_search.xml" value="0.2" />
-        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell.xml" value="0.2" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell.xml" value="0.22" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell2.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_shops.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sign_in.xml" value="0.33" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sign_up.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_splash.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/recently_uploaded_item_layout.xml" value="0.33" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/simple_spinner_dropdown.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/menu/bottom_nav.xml" value="0.2" />
       </map>
     </option>

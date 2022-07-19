@@ -55,21 +55,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginTop="16dp"
-                android:background="#FFFFFF"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/category"
-                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:text="@string/sub_category"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
+                app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
 
             <Spinner
                 android:id="@+id/categorySpinner"
@@ -79,19 +78,19 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/sub_category"
-                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:text="@string/category"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
+                app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <Spinner
                 android:id="@+id/subCategorySpinner"
@@ -101,8 +100,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nextButton"
