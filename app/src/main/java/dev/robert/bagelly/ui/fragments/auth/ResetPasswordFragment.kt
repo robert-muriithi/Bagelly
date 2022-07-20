@@ -1,4 +1,4 @@
-package dev.robert.bagelly.ui.fragments
+package dev.robert.bagelly.ui.fragments.auth
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

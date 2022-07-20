@@ -1,4 +1,4 @@
-package dev.robert.bagelly.ui.fragments
+package dev.robert.bagelly.ui.fragments.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.databinding.FragmentSignUpBinding
+import dev.robert.bagelly.ui.fragments.auth.SignInFragment
+
 @AndroidEntryPoint
 class SignUpFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentSignUpBinding

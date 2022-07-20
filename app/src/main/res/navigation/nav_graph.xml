@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="dev.robert.bagelly.ui.fragments.SplashFragment"
+        android:name="dev.robert.bagelly.ui.fragments.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="dev.robert.bagelly.ui.fragments.HomeFragment"
+        android:name="dev.robert.bagelly.ui.fragments.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -30,12 +30,12 @@
     </fragment>
     <fragment
         android:id="@+id/shopsFragment"
-        android:name="dev.robert.bagelly.ui.fragments.ShopsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.shops.ShopsFragment"
         android:label="Shops"
         tools:layout="@layout/fragment_shops" />
     <fragment
         android:id="@+id/sellFragment"
-        android:name="dev.robert.bagelly.ui.fragments.SellFragment"
+        android:name="dev.robert.bagelly.ui.fragments.sell.SellFragment"
         android:label="@string/sell"
         tools:layout="@layout/fragment_sell" >
         <action
@@ -44,27 +44,27 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="dev.robert.bagelly.ui.fragments.ProfileFragment"
+        android:name="dev.robert.bagelly.ui.fragments.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="dev.robert.bagelly.ui.fragments.FavoritesFragment"
+        android:name="dev.robert.bagelly.ui.fragments.favorites.FavoritesFragment"
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorites" />
     <dialog
         android:id="@+id/signInFragment"
-        android:name="dev.robert.bagelly.ui.fragments.SignInFragment"
+        android:name="dev.robert.bagelly.ui.fragments.auth.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="dev.robert.bagelly.ui.fragments.SearchFragment"
+        android:name="dev.robert.bagelly.ui.fragments.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/sellFragment2"
-        android:name="dev.robert.bagelly.ui.fragments.SellFragment2"
+        android:name="dev.robert.bagelly.ui.fragments.sell.SellFragment2"
         android:label="fragment_sell2"
         tools:layout="@layout/fragment_sell2" >
         <argument

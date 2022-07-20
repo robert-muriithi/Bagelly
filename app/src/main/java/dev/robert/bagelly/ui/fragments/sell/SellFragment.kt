@@ -1,4 +1,4 @@
-package dev.robert.bagelly.ui.fragments
+package dev.robert.bagelly.ui.fragments.sell
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentSellBinding
+import dev.robert.bagelly.model.SellCategory
 
 @AndroidEntryPoint
 class SellFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -45,7 +47,7 @@ class SellFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.categorySpinner.adapter = spinnerAdapter
         //spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown)
         binding.categorySpinner.onItemSelectedListener = this
-        binding.nextButton.setOnClickListener { findNavController().navigate(R.id.action_sellFragment_to_sellFragment2) }
+
         binding.addPhotoOne.setOnClickListener { openFileChooser(IMAGE_REQUEST_CODE_1) }
         binding.addPhotoTwo.setOnClickListener { openFileChooser(IMAGE_REQUEST_CODE_2) }
         binding.addPhotoThree.setOnClickListener { openFileChooser(IMAGE_REQUEST_CODE_3) }
@@ -53,11 +55,29 @@ class SellFragment : Fragment(), AdapterView.OnItemSelectedListener {
         binding.photoTwo.setOnClickListener { openFileChooser(IMAGE_REQUEST_CODE_2) }
         binding.photoThree.setOnClickListener { openFileChooser(IMAGE_REQUEST_CODE_3) }
 
-        val sellCategory: String = binding.categorySpinner.selectedItem.toString()
-        val sellSubCategory: String = binding.subCategorySpinner.selectedItem.toString()
-
-
-
+        binding.nextButton.setOnClickListener {
+            val sellCategory = binding.categorySpinner.selectedItem.toString().trim()
+            val sellSubCategory = binding.subCategorySpinner.selectedItem.toString().trim()
+            when {
+                imageURI1 == null -> {
+                    Toast.makeText(requireContext(), "Please add all photos", Toast.LENGTH_SHORT).show()
+                }
+                imageURI2 == null -> {
+                    Toast.makeText(requireContext(), "Please add all photos", Toast.LENGTH_SHORT).show()
+                }
+                imageURI3 == null -> {
+                    Toast.makeText(requireContext(), "Please add all photos", Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    val sell = SellCategory(sellCategory, sellSubCategory,imagesArrayList)
+                    val action =
+                        SellFragmentDirections.actionSellFragmentToSellFragment2(
+                            sell
+                        )
+                    findNavController().navigate(action)
+                }
+            }
+        }
         return view
     }
 

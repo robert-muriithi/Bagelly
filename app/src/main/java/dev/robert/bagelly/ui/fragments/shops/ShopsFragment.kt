@@ -1,4 +1,4 @@
-package dev.robert.bagelly.ui.fragments
+package dev.robert.bagelly.ui.fragments.shops
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,7 +14,7 @@ class ShopsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentShopsBinding.inflate(inflater, container, false)
         val view = binding.root
