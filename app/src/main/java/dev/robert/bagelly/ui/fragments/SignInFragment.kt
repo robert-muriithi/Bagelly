@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.databinding.FragmentSignInBinding
 
-
+@AndroidEntryPoint
 class SignInFragment : BottomSheetDialogFragment() {
     private lateinit var binding : FragmentSignInBinding
     override fun onCreateView(

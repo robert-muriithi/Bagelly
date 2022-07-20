@@ -39,6 +39,7 @@
     <string name="next">Next</string>
     <string name="finish">Finish</string>
     <string name="step_2_0f_2">Step 2 0f 2</string>
+    <string name="upload_a_photo">Upload a photo</string>
 
     <array name="category">
         <item>Agriculture and Food</item>

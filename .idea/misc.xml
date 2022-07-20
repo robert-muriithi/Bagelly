@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/button_curved.xml" value="0.14" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/gradient_spinner.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_account.xml" value="0.177" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_add_photo.xml" value="0.2075" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_agriculture.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_animals_and_pets.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_bag.xml" value="0.177" />
@@ -16,6 +18,7 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_furniture.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_health.xml" value="0.2075" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_home.xml" value="0.177" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_image_placeholder.xml" value="0.2075" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_location.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_lock.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_logo.xml" value="0.22" />
@@ -39,8 +42,8 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_reset_password.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_search.xml" value="0.2" />
-        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell.xml" value="0.22" />
-        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell2.xml" value="0.2" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell.xml" value="0.33" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell2.xml" value="0.25" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_shops.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sign_in.xml" value="0.33" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sign_up.xml" value="0.2" />

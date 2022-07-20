@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.databinding.FragmentShopsBinding
-
+@AndroidEntryPoint
 class ShopsFragment : Fragment() {
     private lateinit var binding: FragmentShopsBinding
     override fun onCreateView(

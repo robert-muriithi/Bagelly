@@ -66,5 +66,9 @@
         android:id="@+id/sellFragment2"
         android:name="dev.robert.bagelly.ui.fragments.SellFragment2"
         android:label="fragment_sell2"
-        tools:layout="@layout/fragment_sell2" />
+        tools:layout="@layout/fragment_sell2" >
+        <argument
+            android:name="sell_category"
+            app:argType="dev.robert.bagelly.model.SellCategory" />
+    </fragment>
 </navigation>

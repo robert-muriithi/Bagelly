@@ -25,11 +25,10 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:elevation="20dp"
         android:backgroundTint="#D3D3D3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Step 1 0f 2"
+                android:text="Step 1 of 2"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -65,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:textColor="@color/black"
                 android:layout_marginTop="16dp"
                 android:text="@string/sub_category"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +77,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/spinner_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,6 +90,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/category"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -99,25 +101,111 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:background="@drawable/spinner_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/upload_a_photo"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subCategorySpinner" />
+
+            <ImageView
+                android:id="@+id/photoOne"
+                android:layout_width="150dp"
+                android:layout_height="210dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_curved"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_image_placeholder"
+                app:layout_constraintStart_toStartOf="@+id/textView19"
+                app:layout_constraintTop_toBottomOf="@+id/textView19"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/addPhotoOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_photo"
+                app:layout_constraintBottom_toBottomOf="@+id/photoOne"
+                app:layout_constraintEnd_toEndOf="@+id/photoOne"
+                app:layout_constraintStart_toStartOf="@+id/photoOne"
+                app:layout_constraintTop_toTopOf="@+id/photoOne" />
+
+            <ImageView
+                android:id="@+id/photoTwo"
+                android:layout_width="140dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/button_curved"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_image_placeholder"
+                app:layout_constraintStart_toEndOf="@+id/photoOne"
+                app:layout_constraintTop_toTopOf="@+id/photoOne"
+                tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/addPhotoTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_photo"
+                app:layout_constraintBottom_toBottomOf="@+id/photoTwo"
+                app:layout_constraintEnd_toEndOf="@+id/photoTwo"
+                app:layout_constraintStart_toStartOf="@+id/photoTwo"
+                app:layout_constraintTop_toTopOf="@+id/photoTwo" />
+
+            <ImageView
+                android:id="@+id/photoThree"
+                android:layout_width="140dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/button_curved"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_image_placeholder"
+                app:layout_constraintEnd_toEndOf="@+id/photoTwo"
+                app:layout_constraintStart_toEndOf="@+id/photoOne"
+                app:layout_constraintTop_toBottomOf="@+id/photoTwo"
+                tools:ignore="ContentDescription" />
+
+
+            <ImageView
+                android:id="@+id/addPhotoThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_photo"
+                app:layout_constraintBottom_toBottomOf="@+id/photoThree"
+                app:layout_constraintEnd_toEndOf="@+id/photoThree"
+                app:layout_constraintStart_toStartOf="@+id/photoThree"
+                app:layout_constraintTop_toTopOf="@+id/photoThree" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nextButton"
-                android:text="@string/next"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                app:cornerRadius="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:cornerRadius="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/photoOne" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

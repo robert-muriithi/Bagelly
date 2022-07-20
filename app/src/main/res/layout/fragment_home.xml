@@ -122,7 +122,8 @@
                     android:layout_marginTop="8dp"
                     android:clickable="true"
                     android:focusable="true"
-                    app:elevation="10dp">
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="10dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -162,6 +163,8 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="8dp"
                     android:clickable="true"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="10dp"
                     android:focusable="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -203,6 +206,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:clickable="true"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
                     android:focusable="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -243,6 +248,8 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="8dp"
                     android:clickable="true"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="10dp"
                     android:focusable="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -284,6 +291,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:clickable="true"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
                     android:focusable="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -325,6 +334,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
                     android:clickable="true"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
                     android:focusable="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -366,6 +377,8 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:clickable="true"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
                     android:focusable="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -406,6 +419,8 @@
                     android:layout_height="80dp"
                     android:layout_marginStart="8dp"
                     android:clickable="true"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="10dp"
                     android:focusable="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -427,7 +442,7 @@
                             android:layout_height="wrap_content"
                             android:layout_row="0"
                             android:layout_column="0"
-                            android:text="Phones &amp; laptops"
+                            android:text="Phones &amp; tablets"
                             android:textColor="@color/black"
                             android:textSize="10sp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -447,6 +462,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:clickable="true"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
                     android:focusable="true">
 
                     <androidx.constraintlayout.widget.ConstraintLayout

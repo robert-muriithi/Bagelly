@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
-
+@AndroidEntryPoint
 class ResetPasswordFragment : DialogFragment() {
 
     override fun onCreateView(
