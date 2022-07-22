@@ -37,6 +37,9 @@
     <string name="category">Category</string>
     <string name="sub_category">Sub-category</string>
     <string name="next">Next</string>
+    <string name="finish">Finish</string>
+    <string name="step_2_0f_2">Step 2 0f 2</string>
+    <string name="upload_a_photo">Upload a photo</string>
 
     <array name="category">
         <item>Agriculture and Food</item>
@@ -46,25 +49,15 @@
         <item>Fashion</item>
         <item>Health and Beauty</item>
         <item>Home furniture and Appliances</item>
-        <item>Mobile phones, Laptops and tablets</item>
+        <item>Mobile phones and tablets</item>
         <item>Property</item>
-        <item>Babies' items</item>
+        <item>Babies and kits items</item>
         <item>Repair and construction</item>
         <item>Services</item>
         <item>Vehicles</item>
-        <item>Machinery</item>
-        <item>Other</item>
+
     </array>
-    <string-array name="stores">
-        <item>Accommodation and travel agencies</item>
-        <item>Electronics stores</item>
-        <item>Fashion stores</item>
-        <item>Mobile phone stores</item>
-        <item>Home and living stores</item>
-        <item>Service providers</item>
-        <item>Vehicle dealers</item>
-        <item>Other Stores</item>
-    </string-array>
+
     <string-array name="electronics">
         <item>Accessories and supplies for electronics</item>
         <item>Audio and music equipment</item>
@@ -83,15 +76,15 @@
         <item>video games</item>
 
     </string-array>
-    <string name="choose_theme_text">Choose theme</string>
-    <string name="txt_title">Hello Android Theme!</string>
-    <string name="change_theme_txt">Change theme</string>
+
+
     <string-array name="agriculture">
         <item>Farm machinery and equipment</item>
         <item>Feeds supplements and seeds</item>
         <item>Livestock and poultry</item>
         <item>Meals and drinks</item>
     </string-array>
+
     <string-array name="animals">
         <item>Birds</item>
         <item>Cats and Kittens</item>
@@ -113,6 +106,7 @@
         <item>Prams and strollers</item>
         <item>Toys</item>
     </string-array>
+
     <string-array name="equipment">
         <item>Industrial ovens</item>
         <item>Manufacturing equipment</item>
@@ -125,6 +119,7 @@
         <item>Stationery</item>
         <item>Store Equipment</item>
     </string-array>
+
     <string-array name="fashion">
         <item>Bags</item>
         <item>Clothing</item>
@@ -134,6 +129,7 @@
         <item>Watches</item>
         <item>Wedding wear and accessories</item>
     </string-array>
+
     <string-array name="health">
         <item>Bath and body</item>
         <item>Fragrance</item>
@@ -145,6 +141,7 @@
         <item>Tools and accessories</item>
         <item>Vitamins and supplements</item>
     </string-array>
+
     <string-array name="furniture">
         <item>Furniture</item>
         <item>Garden</item>
@@ -160,9 +157,10 @@
         <item>Smart watches and trackers</item>
         <item>Tablets</item>
     </string-array>
+
     <string-array name="property">
         <item>Commercial property for rent</item>
-        <item>COmmercial property for sale</item>
+        <item>CCommercial property for sale</item>
         <item>Event centres venues and workstations</item>
         <item>Houses and apartments for rent</item>
         <item>Houses and apartments for sale</item>
@@ -171,6 +169,7 @@
         <item>Short let</item>
 
     </string-array>
+
     <string-array name="repair">
         <item>Building materials</item>
         <item>Doors</item>
@@ -183,39 +182,7 @@
         <item>Solar energy</item>
         <item>Windows</item>
     </string-array>
-    <string-array name="seeking">
-        <item>Accounting and finance CVS</item>
-        <item>Advertising and marketing CVS</item>
-        <item>Arts and entertainment CVS</item>
-        <item>Childcare and babysitting CVS</item>
-        <item>Clerical and administrative CVS</item>
-        <item>Computing and IT CVS</item>
-        <item>Construction and skilled trade CVS</item>
-        <item>Consulting and strategy CVS</item>
-        <item>Customer service CVS</item>
-        <item>Driver CVS</item>
-        <item>Engineering and architecture CVS</item>
-        <item>Farming and veterinary CVS</item>
-        <item>Gardening and landscaping CVS</item>
-        <item>Health and beauty CVS</item>
-        <item>Healthcare and nursing CVS</item>
-        <item>Accounting and finance CVS</item>
-        <item>Advertising and marketing CVS</item>
-        <item>Arts and entertainment CVS</item>
-        <item>Childcare and babysitting CVS</item>
-        <item>Clerical and administrative CVS</item>
-        <item>Computing and IT CVS</item>
-        <item>Construction and skilled trade CVS</item>
-        <item>Consulting and strategy CVS</item>
-        <item>Customer service CVS</item>
-        <item>Driver CVS</item>
-        <item>Engineering and architecture CVS</item>
-        <item>Farming and veterinary CVS</item>
-        <item>Gardening and landscaping CVS</item>
-        <item>Health and beauty CVS</item>
-        <item>Healthcare and nursing CVS</item>
 
-    </string-array>
     <string-array name="services">
         <item>Automotive services</item>
         <item>Building and trades services</item>
@@ -241,8 +208,8 @@
         <item>Tax and financial services</item>
         <item>Travel agents and tours</item>
         <item>Wedding venues and services</item>
-
     </string-array>
+
     <string-array name="sports">
         <item>Arts and crafts</item>
         <item>Books and games</item>
@@ -251,6 +218,7 @@
         <item>Musical instruments and gear</item>
         <item>Sports Equipment</item>
     </string-array>
+
     <string-array name="vehicles">
         <item>Buses and minibuses</item>
         <item>Cars</item>
@@ -260,6 +228,7 @@
         <item>Vehicle parts and accessories</item>
         <item>Watercraft and boats</item>
     </string-array>
+
     <string-array name="typefarm">
         <item>Cages</item>
         <item>Corn Flakes Machines</item>
@@ -280,6 +249,7 @@
         <item>Tarpaulins</item>
         <item>Other</item>
     </string-array>
+
     <string-array name="typelivestock">
         <item>Cane Rats</item>
         <item>Chickens</item>
@@ -296,6 +266,7 @@
         <item>Turkey</item>
         <item>Other</item>
     </string-array>
+
     <string-array name="typemeals">
         <item>Alcoholic drinks</item>
         <item>Bakery products</item>
@@ -317,6 +288,7 @@
         <item>Vegetables</item>
         <item>Other</item>
     </string-array>
+
     <string-array name="conditionfarm">
         <item>Brand new</item>
         <item>Used</item>
@@ -324,24 +296,19 @@
         <item>Manufacturer refurbished</item>
         <item>For parts or not working</item>
     </string-array>
+
     <string-array name="typefeeds">
         <item>Feeds</item>
         <item>Seeds</item>
         <item>Supplements</item>
     </string-array>
-    <string name="submitted_lang">Submitted language:</string>
-    <string-array name="region">
-        <item>Nairobi</item>
-        <item>Mombasa</item>
-        <item>Kisumu</item>
-        <item>Nakuru</item>
-        <item>Other</item>
-    </string-array>
+
+
     <string-array name="order">
         <item>Relevant</item>
         <item>Newest</item>
         <item>Lowest price</item>
         <item>Highest price</item>
-
     </string-array>
+
 </resources>

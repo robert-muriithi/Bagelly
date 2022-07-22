@@ -1,22 +1,25 @@
-package dev.robert.bagelly.ui.fragments
+package dev.robert.bagelly.ui.fragments.search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
-import dev.robert.bagelly.databinding.FragmentSell2Binding
+import dev.robert.bagelly.databinding.FragmentSearchBinding
 
-class SellFragment2 : Fragment() {
-    private lateinit var binding : FragmentSell2Binding
+@AndroidEntryPoint
+class SearchFragment : Fragment() {
+    private lateinit var binding : FragmentSearchBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSell2Binding.inflate(inflater, container, false)
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
         val view = binding.root
+
 
 
         return view
