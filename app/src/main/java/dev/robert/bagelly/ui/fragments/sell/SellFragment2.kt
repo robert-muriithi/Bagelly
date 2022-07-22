@@ -37,9 +37,6 @@ class SellFragment2 : Fragment() {
     var imageUrl3: String? = null
 
     val id: String = ""
-    private lateinit var storageReference: StorageReference
-    private lateinit var database: FirebaseFirestore
-
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +45,6 @@ class SellFragment2 : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSell2Binding.inflate(inflater, container, false)
         val view = binding.root
-        database = FirebaseFirestore.getInstance()
-        storageReference = FirebaseStorage.getInstance().getReference("item_images")
 
         imagesList = args.sellCategory.images!!
         imagesList.forEach {
@@ -113,7 +108,7 @@ class SellFragment2 : Fragment() {
                                     binding.finishButton.text = "Finish"
                                     Toast.makeText(
                                         requireContext(),
-                                        "Shop created successfully",
+                                        "${it.data} has been uploaded successfully",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
