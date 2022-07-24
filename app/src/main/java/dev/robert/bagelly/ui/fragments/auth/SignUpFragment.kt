@@ -82,26 +82,23 @@ class SignUpFragment : BottomSheetDialogFragment() {
                     if (CheckInternet.isConnected(requireContext())){
                         lifecycleScope.launch {
                             viewModel.register(name, email, phoneNumber, password)
-                            when(viewModel.register.value){
+                        }
+                        viewModel.register.observe(viewLifecycleOwner){ authResult ->
+                            when(authResult){
                                 is Resource.Loading -> {
-                                    binding.btnRegister.isEnabled = false
                                     binding.progressBar2.isVisible = true
+                                    binding.btnRegister.isEnabled = false
                                 }
                                 is Resource.Success -> {
-                                    binding.btnRegister.isEnabled = true
                                     binding.progressBar2.isVisible = false
-                                    Snackbar.make(view, "User created successfully \\n Verification link has been sent to you email", Snackbar.LENGTH_LONG).show()
+                                    binding.btnRegister.isEnabled = true
+                                    Snackbar.make(view, "Registration successful", Snackbar.LENGTH_LONG).show()
                                     dismiss()
                                 }
                                 is Resource.Error -> {
-                                    binding.btnRegister.isEnabled = true
                                     binding.progressBar2.isVisible = false
-                                    Snackbar.make(view, viewModel.register.value.toString(), Snackbar.LENGTH_LONG).show()
-                                }
-                                else -> {
                                     binding.btnRegister.isEnabled = true
-                                    binding.progressBar2.isVisible = false
-                                    Snackbar.make(view, "${viewModel.register.value.toString()} +Something went wrong", Snackbar.LENGTH_LONG).show()
+                                    Snackbar.make(view, authResult.string, Snackbar.LENGTH_LONG).show()
                                 }
                             }
                         }
