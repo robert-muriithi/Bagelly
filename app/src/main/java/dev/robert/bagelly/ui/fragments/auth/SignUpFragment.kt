@@ -31,7 +31,7 @@ class SignUpFragment : BottomSheetDialogFragment() {
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        (activity as AppCompatActivity).supportActionBar?.hide()
+        //(activity as AppCompatActivity).supportActionBar?.hide()
 
         binding.loginTv.setOnClickListener {
             SignInFragment().show(parentFragmentManager, "signIn")

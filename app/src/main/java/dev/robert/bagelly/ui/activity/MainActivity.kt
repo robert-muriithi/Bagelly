@@ -18,14 +18,14 @@ import dev.robert.bagelly.databinding.ActivityMainBinding
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var appBarConfiguration: AppBarConfiguration
+
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         WindowCompat.setDecorFitsSystemWindows(window, true)
-        setSupportActionBar(binding.toolbar)
+
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         val bottomNavigationView = binding.bottomNavigation
@@ -33,18 +33,8 @@ class MainActivity : AppCompatActivity() {
         //bottomNavigationView.setupWithNavController(navController)
         setupWithNavController(bottomNavigationView, navController)
 
-        appBarConfiguration = AppBarConfiguration(
-
-            setOf(
-                R.id.homeFragment,
-                R.id.shopsFragment,
-                R.id.sellFragment,
-                R.id.favoritesFragment,
-                R.id.profileFragment
-            )
-        )
         //appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
@@ -65,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
+        return navController.navigateUp()
                 || super.onSupportNavigateUp()
     }
 
