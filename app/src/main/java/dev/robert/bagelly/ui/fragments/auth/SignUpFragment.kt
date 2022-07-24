@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.databinding.FragmentSignUpBinding
 import dev.robert.bagelly.model.Users
@@ -22,7 +23,6 @@ import kotlinx.coroutines.launch
 class SignUpFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentSignUpBinding
     private val viewModel: AuthViewModel by viewModels()
-    private val id : String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,47 +38,78 @@ class SignUpFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            Toast.makeText(requireContext(), "Register", Toast.LENGTH_SHORT).show()
             val name = binding.nameInputLayout.editText?.text.toString()
             val email = binding.emailInputLayout.editText?.text.toString()
             val phoneNumber = binding.phoneNumberInputLayout.editText?.text.toString()
-            val user = Users(id, name, email, phoneNumber)
+            val password = binding.passInputLayout.editText?.text.toString().trim()
+            val confirmPassword = binding.confPassInputLayout.editText?.text.toString().trim()
+
+
             when{
-                name.isEmpty() -> binding.nameInputLayout.error = "Name is required"
-                email.isEmpty() -> binding.emailInputLayout.error = "Email is required"
-                phoneNumber.isEmpty() -> binding.phoneNumberInputLayout.error = "Phone number is required"
+                name.isEmpty() -> {
+                    binding.nameInputLayout.error = "Name is required"
+                    binding.nameInputLayout.isErrorEnabled = true
+                }
+                email.isEmpty() -> {
+                    binding.emailInputLayout.error = "Email is required"
+                    binding.emailInputLayout.isErrorEnabled = true
+                }
+                phoneNumber.isEmpty() ->{
+                    binding.phoneNumberInputLayout.error = "Phone number is required"
+                    binding.phoneNumberInputLayout.isErrorEnabled = true
+                }
+                password.isEmpty() -> {
+                    binding.passInputLayout.error = "Password is required"
+                    binding.passInputLayout.isErrorEnabled = true
+                }
+                confirmPassword.isEmpty() -> {
+                    binding.confPassInputLayout.error = "Confirm password is required"
+                    binding.confPassInputLayout.isErrorEnabled = true
+                }
+                password != confirmPassword -> {
+                    binding.passInputLayout.error = "Password does not match"
+                    binding.confPassInputLayout.error = "Password does not match"
+                    binding.passInputLayout.isErrorEnabled = true
+                }
                 else -> {
+                    binding.nameInputLayout.isErrorEnabled = false
+                    binding.emailInputLayout.isErrorEnabled = false
+                    binding.phoneNumberInputLayout.isErrorEnabled = false
+                    binding.passInputLayout.isErrorEnabled = false
+                    binding.confPassInputLayout.isErrorEnabled = false
+                    binding.btnRegister.isEnabled = false
+
                     if (CheckInternet.isConnected(requireContext())){
-                        viewLifecycleOwner.lifecycleScope.launch {
-                            viewModel.createUser(user)
-                        }
-                        viewModel.auth.observe(viewLifecycleOwner){ task ->
-                            when(task){
+                        lifecycleScope.launch {
+                            viewModel.register(name, email, phoneNumber, password)
+                            when(viewModel.register.value){
                                 is Resource.Loading -> {
-                                    binding.progressBar2.visibility = View.VISIBLE
                                     binding.btnRegister.isEnabled = false
+                                    binding.progressBar2.isVisible = true
                                 }
                                 is Resource.Success -> {
-                                    binding.progressBar2.visibility = View.GONE
                                     binding.btnRegister.isEnabled = true
-                                    Snackbar.make(view, "User created successfully", Snackbar.LENGTH_LONG).show()
+                                    binding.progressBar2.isVisible = false
+                                    Snackbar.make(view, "User created successfully \\n Verification link has been sent to you email", Snackbar.LENGTH_LONG).show()
                                     dismiss()
                                 }
                                 is Resource.Error -> {
-                                    binding.progressBar2.visibility = View.GONE
                                     binding.btnRegister.isEnabled = true
-                                    Snackbar.make(view, task.string, Snackbar.LENGTH_LONG).show()
+                                    binding.progressBar2.isVisible = false
+                                    Snackbar.make(view, viewModel.register.value.toString(), Snackbar.LENGTH_LONG).show()
+                                }
+                                else -> {
+                                    binding.btnRegister.isEnabled = true
+                                    binding.progressBar2.isVisible = false
+                                    Snackbar.make(view, "${viewModel.register.value.toString()} +Something went wrong", Snackbar.LENGTH_LONG).show()
                                 }
                             }
                         }
-
                     }
                     else {
-                        Snackbar.make(requireView(), "Connect to internet and try again", Snackbar.LENGTH_LONG)
-                            .setAction("CLOSE") { }
-                            .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
-                            .show()
+                        Snackbar.make(view, "No internet connection", Snackbar.LENGTH_LONG).show()
                     }
+
                 }
             }
         }

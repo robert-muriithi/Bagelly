@@ -1,10 +1,12 @@
 package dev.robert.bagelly.di
 
+import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.robert.bagelly.data.repository.AuthenticationRepository
 import dev.robert.bagelly.data.repository.AuthenticationRepositoryImpl
@@ -36,9 +38,17 @@ object AppModule {
     @Singleton
     fun providerAuthRepository(
         auth: FirebaseAuth,
-        db: FirebaseFirestore
+        db: FirebaseFirestore,
+        app: Application
     ): AuthenticationRepository {
-        return AuthenticationRepositoryImpl(auth, db)
+        return AuthenticationRepositoryImpl(auth, db, app)
     }
+
+    @Provides
+    @Singleton
+    @ApplicationContext
+    fun provideApplicationContext(@ApplicationContext app: Application): Application = app
+
+
 
 }

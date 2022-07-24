@@ -32,7 +32,7 @@ class SellItemsAdapter : ListAdapter<Sell, SellItemsAdapter.SellViewHolder>(Sell
 
     object SellDiffUtil : DiffUtil.ItemCallback<Sell>() {
         override fun areItemsTheSame(oldItem: Sell, newItem: Sell): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.itemName == newItem.itemName
         }
 
         override fun areContentsTheSame(oldItem: Sell, newItem: Sell): Boolean {
