@@ -1,25 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.profile.ProfileFragment">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/profileFragmentToolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-             />
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/profileFragmentToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:title="Profile"
+                app:titleTextColor="@color/light_grey" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/app_bar"
+        android:background="#F3F3F3">
+
+        <TextView
+            android:id="@+id/acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/my_account"
+            android:textSize="14sp" />
+
+        <RelativeLayout
+            android:id="@+id/accountsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="216dp"
+            android:layout_below="@id/acc"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/curved_bg"
+            android:backgroundTint="@color/white"
+            app:elevation="10dp">
+
+            <RelativeLayout
+                android:id="@+id/manageAccountLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/accountCircle"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_account"
+                    app:tint="@color/black" />
+
+                <TextView
+                    android:id="@+id/accountTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/accountCircle"
+                    android:text="@string/manage_my_account"
+                    android:textColor="#000000"
+                    tools:ignore="RelativeOverlap" />
+
+                <ImageView
+                    android:id="@+id/accountForwardIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    app:tint="#000000" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cartLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/manageAccountLayout"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/cartImage"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_baseline_shopping_cart_24"
+                    app:tint="#000000" />
+
+                <TextView
+                    android:id="@+id/cartTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/cartImage"
+                    android:text="@string/my_cart"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/cartForwardIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    app:tint="#000000" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/notificationsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cartLayout"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/notificationsImageIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_notification"
+                    app:tint="#000000">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/notificationsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/notificationsImageIcon"
+                    android:text="@string/notifications"
+                    android:textColor="#000000">
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/notificationForwardIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    app:tint="#000000">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/feedbackLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/notificationsLayout"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/feedbackIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_baseline_feedback_24"
+                    app:tint="#000000" />
+
+                <TextView
+                    android:id="@+id/feedbackTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_toEndOf="@id/feedbackIcon"
+                    android:text="@string/feedback"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/feedbackIconForward"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    app:tint="#000000">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/mysettingsTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/accountsLayout"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/my_settings"
+            android:textSize="14sp">
+
+        </TextView>
+
+        <RelativeLayout
+            app:elevation="10dp"
+            android:id="@+id/settingsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_below="@id/mysettingsTv"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/curved_bg">
+
+            <RelativeLayout
+                android:id="@+id/detailsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/detailsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/details"
+                    android:textColor="#000000">
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/iconForward"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    app:tint="#000000">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/settingLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/detailsLayout"
+                android:layout_marginTop="12dp">
+
+                <TextView
+                    android:id="@+id/settingsTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="6dp"
+                    android:text="@string/settings"
+                    android:textColor="#000000">
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/settingsIconForward"
+                    android:layout_width="24dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                    app:tint="#000000">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

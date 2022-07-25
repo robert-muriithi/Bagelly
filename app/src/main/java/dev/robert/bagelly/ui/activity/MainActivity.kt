@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                     supportActionBar?.hide()
                     binding.bottomNavigation.visibility = android.view.View.GONE
                 }
+                R.id.searchFragment -> {
+                    supportActionBar?.hide()
+                    binding.bottomNavigation.visibility = android.view.View.GONE
+                }
 
                 else -> {
                     supportActionBar?.show()

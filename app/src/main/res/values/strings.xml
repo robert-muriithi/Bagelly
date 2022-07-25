@@ -40,6 +40,19 @@
     <string name="finish">Finish</string>
     <string name="step_2_0f_2">Step 2 0f 2</string>
     <string name="upload_a_photo">Upload a photo</string>
+    <string name="my_account">MY ACCOUNT</string>
+    <string name="logout">LOGOUT</string>
+    <string name="settings">Settings</string>
+    <string name="manage_my_account">Manage My Account</string>
+    <string name="my_cart">My cart</string>
+    <string name="notifications">Notifications</string>
+    <string name="feedback">Feedback</string>
+    <string name="my_settings">MY SETTINGS</string>
+    <string name="details">Details</string>
+    <string name="recommended_for_you">Recommended for you</string>
+    <string name="tecno_mobile">Tecno Mobile</string>
+    <string name="nairobi_kenya">Nairobi, Kenya</string>
+    <string name="edit_profile">Edit</string>
 
     <array name="category">
         <item>Agriculture and Food</item>

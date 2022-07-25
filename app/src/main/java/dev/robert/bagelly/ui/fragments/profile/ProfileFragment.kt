@@ -21,7 +21,9 @@ class ProfileFragment : Fragment() {
         val view = binding.root
 
         (activity as AppCompatActivity).setSupportActionBar(binding.profileFragmentToolbar)
+        //(activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.title = "Profile"
+
 
 
         return view

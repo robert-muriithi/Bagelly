@@ -24,7 +24,8 @@ class AuthViewModel
             _register.value = Resource.Loading
             try {
                val result = repository.register(name, email, phoneNumber, password)
-                _register.postValue(result)
+                _register.value = result
+                Resource.Success(result)
 
             }catch (e: Exception){
                 _register.value = Resource.Error(e.message.toString())
