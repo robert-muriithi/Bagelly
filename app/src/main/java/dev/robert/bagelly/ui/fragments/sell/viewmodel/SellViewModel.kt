@@ -12,7 +12,10 @@ import dev.robert.bagelly.utils.Resource
 import javax.inject.Inject
 
 @HiltViewModel
-class SellViewModel @Inject constructor(private val repository: MainRepository) : ViewModel() {
+class SellViewModel
+   @Inject constructor(
+    private val repository: MainRepository)
+    : ViewModel() {
 
     private val _sell = MutableLiveData<Resource<List<Sell>>>()
     val sell: LiveData<Resource<List<Sell>>> = _sell

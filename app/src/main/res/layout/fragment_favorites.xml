@@ -8,6 +8,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -15,10 +16,25 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
+            app:title="Favorites"
+            app:titleTextColor="@color/light_grey"
             android:id="@+id/favoritesFragmentToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoritesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        app:spanCount="2"
+        tools:listitem="@layout/favorite_item_layout"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

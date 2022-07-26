@@ -8,19 +8,12 @@ import javax.inject.Inject
 class MainRepositoryImpl @Inject constructor(private val db: FirebaseFirestore) :
     MainRepository {
 
-    override suspend fun sell(item: Sell, result: (Resource<List<Sell>>) -> Unit) {
-        db.collection("sell_items")
-            .get()
-            .addOnSuccessListener { snapshot ->
-                val list = ArrayList<Sell>()
-                for (data in snapshot.documents) {
-                    val sell = data.toObject(Sell::class.java)
-                    if (sell != null) {
-                        list.add(sell)
-                    }
-                }
+    override suspend fun sell(sell: Sell, result: (Resource<List<Sell>>) -> Unit) {
+        db.collection("Sell_Items")
+            .add(sell)
+            .addOnSuccessListener {
                 result.invoke(
-                    Resource.Success(list)
+                    Resource.Success(arrayListOf(sell))
                 )
             }
             .addOnFailureListener {

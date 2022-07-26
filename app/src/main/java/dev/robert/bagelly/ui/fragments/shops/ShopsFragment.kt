@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentShopsBinding
 @AndroidEntryPoint
 class ShopsFragment : Fragment() {
@@ -20,7 +22,10 @@ class ShopsFragment : Fragment() {
         val view = binding.root
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).setSupportActionBar(binding.shopsFragmentToolbar)
-        (activity as AppCompatActivity).supportActionBar?.title = "Sell"
+
+        binding.addStoreFab.setOnClickListener {
+            findNavController().navigate(R.id.action_shopsFragment_to_createShopFragment)
+        }
 
 
         return view

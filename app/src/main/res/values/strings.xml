@@ -40,6 +40,26 @@
     <string name="finish">Finish</string>
     <string name="step_2_0f_2">Step 2 0f 2</string>
     <string name="upload_a_photo">Upload a photo</string>
+    <string name="my_account">MY ACCOUNT</string>
+    <string name="logout">LOGOUT</string>
+    <string name="settings">Settings</string>
+    <string name="manage_my_account">Manage My Account</string>
+    <string name="my_cart">My cart</string>
+    <string name="notifications">Notifications</string>
+    <string name="feedback">Feedback</string>
+    <string name="my_settings">MY SETTINGS</string>
+    <string name="details">Details</string>
+    <string name="recommended_for_you">Recommended for you</string>
+    <string name="tecno_mobile">Tecno Mobile</string>
+    <string name="nairobi_kenya">Nairobi, Kenya</string>
+    <string name="edit_profile">Edit</string>
+    <string name="electronic_shops">Electronic Shops</string>
+    <string name="home_and_living_stores">Home and Living Stores</string>
+    <string name="mobile_phones_shops">Mobile Phones Shops</string>
+    <string name="fashion_shops_amp_stores"><![CDATA[Fashion Shops & Stores]]></string>
+    <string name="motocycle_amp_vehicle_dealers"><![CDATA[Motocycle & Vehicle Dealers]]></string>
+    <string name="general_stores">General Stores</string>
+    <string name="service_providers">Service Providers</string>
 
     <array name="category">
         <item>Agriculture and Food</item>
@@ -309,6 +329,17 @@
         <item>Newest</item>
         <item>Lowest price</item>
         <item>Highest price</item>
+    </string-array>
+
+    <string-array name="settings_list">
+        <item>App Theme</item>
+        <item>Share this App</item>
+        <item>Language</item>
+        <item>About</item>
+        <item>Privacy policy</item>
+        <item>Terms of use</item>
+        <item>App Version : 1.0</item>
+        <item>Logout</item>
     </string-array>
 
 </resources>

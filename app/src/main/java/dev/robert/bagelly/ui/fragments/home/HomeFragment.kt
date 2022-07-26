@@ -29,6 +29,9 @@ class HomeFragment : Fragment() {
         binding.searchButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
         }
+        binding.imageView2.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_notificationsFragment)
+        }
 
         return view
     }
