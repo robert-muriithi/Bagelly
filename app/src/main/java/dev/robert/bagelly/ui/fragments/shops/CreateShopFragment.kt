@@ -6,29 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
-import dev.robert.bagelly.databinding.FragmentShopsBinding
+import dev.robert.bagelly.databinding.FragmentCreateShopBinding
+
 @AndroidEntryPoint
-class ShopsFragment : Fragment() {
-    private lateinit var binding: FragmentShopsBinding
+class CreateShopFragment : Fragment() {
+    private lateinit var binding: FragmentCreateShopBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentShopsBinding.inflate(inflater, container, false)
+        binding = FragmentCreateShopBinding.inflate(inflater, container, false)
         val view = binding.root
-        (activity as AppCompatActivity).supportActionBar?.hide()
-        (activity as AppCompatActivity).setSupportActionBar(binding.shopsFragmentToolbar)
 
-        binding.addStoreFab.setOnClickListener {
-            findNavController().navigate(R.id.action_shopsFragment_to_createShopFragment)
-        }
+        (activity as AppCompatActivity).supportActionBar?.hide()
+        (activity as AppCompatActivity).setSupportActionBar(binding.createShopToolbar)
 
 
         return view
     }
-
 }

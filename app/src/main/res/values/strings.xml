@@ -53,6 +53,13 @@
     <string name="tecno_mobile">Tecno Mobile</string>
     <string name="nairobi_kenya">Nairobi, Kenya</string>
     <string name="edit_profile">Edit</string>
+    <string name="electronic_shops">Electronic Shops</string>
+    <string name="home_and_living_stores">Home and Living Stores</string>
+    <string name="mobile_phones_shops">Mobile Phones Shops</string>
+    <string name="fashion_shops_amp_stores"><![CDATA[Fashion Shops & Stores]]></string>
+    <string name="motocycle_amp_vehicle_dealers"><![CDATA[Motocycle & Vehicle Dealers]]></string>
+    <string name="general_stores">General Stores</string>
+    <string name="service_providers">Service Providers</string>
 
     <array name="category">
         <item>Agriculture and Food</item>

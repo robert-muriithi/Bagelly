@@ -49,7 +49,15 @@ class MainActivity : AppCompatActivity() {
                 R.id.settingsFragment -> {
                     binding.bottomNavigation.visibility = android.view.View.GONE
                 }
-
+                R.id.notificationsSettingsFragment -> {
+                    binding.bottomNavigation.visibility = android.view.View.GONE
+                }
+                R.id.notificationsFragment -> {
+                    binding.bottomNavigation.visibility = android.view.View.GONE
+                }
+                R.id.createShopFragment -> {
+                    binding.bottomNavigation.visibility = android.view.View.GONE
+                }
                 else -> {
                     supportActionBar?.show()
                     binding.bottomNavigation.visibility = android.view.View.VISIBLE

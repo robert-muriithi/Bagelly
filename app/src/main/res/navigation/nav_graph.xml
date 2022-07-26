@@ -27,12 +27,34 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_agricultureAndFoodsFragment"
+            app:destination="@id/agricultureAndFoodsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_animalsAndPetsFragment"
+            app:destination="@id/animalsAndPetsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_animalsAndPetsItemsFragment"
+            app:destination="@id/animalsAndPetsItemsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_electronicsFragment"
+            app:destination="@id/electronicsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fashionFragment"
+            app:destination="@id/fashionFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopsFragment"
         android:name="dev.robert.bagelly.ui.fragments.shops.ShopsFragment"
         android:label="Shops"
-        tools:layout="@layout/fragment_shops" />
+        tools:layout="@layout/fragment_shops" >
+        <action
+            android:id="@+id/action_shopsFragment_to_createShopFragment"
+            app:destination="@id/createShopFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sellFragment"
         android:name="dev.robert.bagelly.ui.fragments.sell.SellFragment"
@@ -53,6 +75,9 @@
         <action
             android:id="@+id/action_profileFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationsSettingsFragment"
+            app:destination="@id/notificationsSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -97,4 +122,79 @@
         android:name="dev.robert.bagelly.ui.fragments.settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/notificationsSettingsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.notifications.NotificationsSettingsFragment"
+        android:label="fragment_notifications_settings"
+        tools:layout="@layout/fragment_notifications_settings" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" >
+        <action
+            android:id="@+id/action_notificationsFragment_to_notificationsSettingsFragment"
+            app:destination="@id/notificationsSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createShopFragment"
+        android:name="dev.robert.bagelly.ui.fragments.shops.CreateShopFragment"
+        android:label="fragment_create_shop"
+        tools:layout="@layout/fragment_create_shop" />
+    <fragment
+        android:id="@+id/agricultureAndFoodItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.AgricultureAndFoodItemsFragment"
+        android:label="fragment_agriculture_and_food_items"
+        tools:layout="@layout/fragment_agriculture_and_food_items" />
+    <fragment
+        android:id="@+id/agricultureAndFoodsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.AgricultureAndFoodsFragment"
+        android:label="fragment_agriculture_and_foods"
+        tools:layout="@layout/fragment_agriculture_and_foods" >
+        <action
+            android:id="@+id/action_agricultureAndFoodsFragment_to_agricultureAndFoodItemsFragment"
+            app:destination="@id/agricultureAndFoodItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animalsAndPetsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.AnimalsAndPetsFragment"
+        android:label="fragment_animals_and_pets"
+        tools:layout="@layout/fragment_animals_and_pets" >
+        <action
+            android:id="@+id/action_animalsAndPetsFragment_to_animalsAndPetsItemsFragment"
+            app:destination="@id/animalsAndPetsItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/animalsAndPetsItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.AnimalsAndPetsItemsFragment"
+        android:label="fragment_animals_and_pets_items"
+        tools:layout="@layout/fragment_animals_and_pets_items" />
+    <fragment
+        android:id="@+id/electronicsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.ElectronicsFragment"
+        android:label="fragment_electronics"
+        tools:layout="@layout/fragment_electronics" >
+        <action
+            android:id="@+id/action_electronicsFragment_to_electronicsItemsFragment"
+            app:destination="@id/electronicsItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/electronicsItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.ElectronicsItemsFragment"
+        android:label="fragment_electronics_items"
+        tools:layout="@layout/fragment_electronics_items" />
+    <fragment
+        android:id="@+id/fashionFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.FashionFragment"
+        android:label="fragment_fashion"
+        tools:layout="@layout/fragment_fashion" >
+        <action
+            android:id="@+id/action_fashionFragment_to_fashionItemsFragment"
+            app:destination="@id/fashionItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fashionItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.FashionItemsFragment"
+        android:label="fragment_fashion_items"
+        tools:layout="@layout/fragment_fashion_items" />
 </navigation>
