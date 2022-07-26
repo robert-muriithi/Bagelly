@@ -324,4 +324,15 @@
         <item>Highest price</item>
     </string-array>
 
+    <string-array name="settings_list">
+        <item>App Theme</item>
+        <item>Share this App</item>
+        <item>Language</item>
+        <item>About</item>
+        <item>Privacy policy</item>
+        <item>Terms of use</item>
+        <item>App Version : 1.0</item>
+        <item>Logout</item>
+    </string-array>
+
 </resources>

@@ -4,13 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.ActivityMainBinding
@@ -43,7 +38,15 @@ class MainActivity : AppCompatActivity() {
                     binding.bottomNavigation.visibility = android.view.View.GONE
                 }
                 R.id.searchFragment -> {
-                    supportActionBar?.hide()
+                    binding.bottomNavigation.visibility = android.view.View.GONE
+                }
+                R.id.myAccountFragment -> {
+                    binding.bottomNavigation.visibility = android.view.View.GONE
+                }
+                R.id.editProfileFragment -> {
+                    binding.bottomNavigation.visibility = android.view.View.GONE
+                }
+                R.id.settingsFragment -> {
                     binding.bottomNavigation.visibility = android.view.View.GONE
                 }
 

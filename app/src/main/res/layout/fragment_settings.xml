@@ -4,37 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.favorites.FavoritesFragment">
+    tools:context=".ui.fragments.settings.SettingsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
-        android:background="@color/white"
-        android:layout_width="match_parent"
+        android:id="@+id/appBarLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/settingsListView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            app:title="Favorites"
-            app:titleTextColor="@color/light_grey"
-            android:id="@+id/favoritesFragmentToolbar"
+            android:id="@+id/settingsToolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
+            android:layout_height="match_parent"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Settings"
+            app:titleTextColor="@color/light_grey" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/favoritesRecyclerView"
-        android:layout_width="match_parent"
+    <ListView
+        android:id="@+id/settingsListView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar"
-        app:spanCount="2"
-        tools:listitem="@layout/favorite_item_layout"/>
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

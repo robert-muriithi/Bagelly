@@ -33,7 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
             android:text="@string/my_account"
+            android:textColor="#000000"
             android:textSize="14sp" />
 
         <RelativeLayout
@@ -61,7 +63,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:src="@drawable/ic_account"
-                    app:tint="@color/black" />
+                    app:tint="@color/light_grey" />
 
                 <TextView
                     android:id="@+id/accountTv"
@@ -99,7 +101,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:src="@drawable/ic_baseline_shopping_cart_24"
-                    app:tint="#000000" />
+                    app:tint="@color/light_grey" />
 
                 <TextView
                     android:id="@+id/cartTv"
@@ -135,8 +137,8 @@
                     android:layout_width="24dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="10dp"
-                    android:src="@drawable/ic_notification"
-                    app:tint="#000000">
+                    android:src="@drawable/ic_notifications_filled"
+                    app:tint="@color/light_grey">
 
                 </ImageView>
 
@@ -179,7 +181,7 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:src="@drawable/ic_baseline_feedback_24"
-                    app:tint="#000000" />
+                    app:tint="@color/light_grey" />
 
                 <TextView
                     android:id="@+id/feedbackTv"
@@ -213,13 +215,14 @@
             android:layout_below="@id/accountsLayout"
             android:layout_marginStart="14dp"
             android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-medium"
             android:text="@string/my_settings"
+            android:textColor="@color/black"
             android:textSize="14sp">
 
         </TextView>
 
         <RelativeLayout
-            app:elevation="10dp"
             android:id="@+id/settingsLayout"
             android:layout_width="match_parent"
             android:layout_height="110dp"
@@ -227,8 +230,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
+            android:background="@drawable/curved_bg"
             android:backgroundTint="@color/white"
-            android:background="@drawable/curved_bg">
+            app:elevation="10dp">
 
             <RelativeLayout
                 android:id="@+id/detailsLayout"

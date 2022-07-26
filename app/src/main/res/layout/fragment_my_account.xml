@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F3F3F3"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.account.MyAccountFragment">
 
@@ -26,8 +27,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_marginTop="28dp"
         android:src="@drawable/avatar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,15 +37,18 @@
         app:layout_constraintTop_toBottomOf="@+id/app_bar" />
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:cardElevation="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circleImageView2" >
+        app:layout_constraintTop_toBottomOf="@+id/circleImageView2">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -52,5 +56,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:elevation="0dp"
+        android:text="@string/logout"
+        android:backgroundTint="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

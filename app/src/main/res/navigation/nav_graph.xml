@@ -50,6 +50,9 @@
         <action
             android:id="@+id/action_profileFragment_to_myAccountFragment"
             app:destination="@id/myAccountFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -79,5 +82,19 @@
         android:id="@+id/myAccountFragment"
         android:name="dev.robert.bagelly.ui.fragments.account.MyAccountFragment"
         android:label="fragment_my_account"
-        tools:layout="@layout/fragment_my_account" />
+        tools:layout="@layout/fragment_my_account" >
+        <action
+            android:id="@+id/action_myAccountFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="dev.robert.bagelly.ui.fragments.account.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

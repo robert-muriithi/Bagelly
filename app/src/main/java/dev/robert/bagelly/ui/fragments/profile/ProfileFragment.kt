@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentProfileBinding
 
 @AndroidEntryPoint
@@ -23,6 +25,14 @@ class ProfileFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.profileFragmentToolbar)
         //(activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.title = "Profile"
+
+        binding.manageAccountLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_myAccountFragment)
+        }
+        binding.settingLayout.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_settingsFragment)
+        }
+
 
 
 
