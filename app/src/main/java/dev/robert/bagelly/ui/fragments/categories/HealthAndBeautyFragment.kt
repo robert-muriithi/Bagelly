@@ -5,6 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentHealthAndBeautyBinding
@@ -12,6 +16,7 @@ import dev.robert.bagelly.databinding.FragmentHealthAndBeautyBinding
 @AndroidEntryPoint
 class HealthAndBeautyFragment : Fragment() {
     private lateinit var binding: FragmentHealthAndBeautyBinding
+    private lateinit var listItem : Array<String>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,6 +24,22 @@ class HealthAndBeautyFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHealthAndBeautyBinding.inflate(inflater, container, false)
         val view = binding.root
+        (activity as AppCompatActivity).setSupportActionBar(binding.healthAndBeautyFragmentToolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        listItem = resources.getStringArray(R.array.health)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listItem)
+        binding.healthAndBeautyFragmentListView.adapter = adapter
+
+        binding.healthAndBeautyFragmentListView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                val value = adapter.getItem(position)
+                Toast.makeText(
+                    requireContext(),
+                    value,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
 
 
 

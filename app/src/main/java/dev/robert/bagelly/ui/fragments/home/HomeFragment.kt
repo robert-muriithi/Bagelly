@@ -33,6 +33,13 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_notificationsFragment)
         }
 
+        binding.animalsCardView.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_animalsAndPetsFragment)
+        }
+        binding.agricultureCardView.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_agricultureAndFoodsFragment)
+        }
+
         return view
     }
 

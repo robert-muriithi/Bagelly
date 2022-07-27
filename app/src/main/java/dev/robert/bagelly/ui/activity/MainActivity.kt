@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,29 +34,16 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.splashFragment -> {
-                    supportActionBar?.hide()
-                    binding.bottomNavigation.visibility = android.view.View.GONE
-                }
-                R.id.searchFragment -> {
-                    binding.bottomNavigation.visibility = android.view.View.GONE
-                }
-                R.id.myAccountFragment -> {
-                    binding.bottomNavigation.visibility = android.view.View.GONE
-                }
-                R.id.editProfileFragment -> {
-                    binding.bottomNavigation.visibility = android.view.View.GONE
-                }
-                R.id.settingsFragment -> {
-                    binding.bottomNavigation.visibility = android.view.View.GONE
-                }
-                R.id.notificationsSettingsFragment -> {
-                    binding.bottomNavigation.visibility = android.view.View.GONE
-                }
-                R.id.notificationsFragment -> {
-                    binding.bottomNavigation.visibility = android.view.View.GONE
-                }
-                R.id.createShopFragment -> {
+                in listOf(
+                    R.id.splashFragment,
+                    R.id.searchFragment,
+                    R.id.myAccountFragment,
+                    R.id.editProfileFragment,
+                    R.id.settingsFragment,
+                    R.id.notificationsSettingsFragment,
+                    R.id.notificationsFragment,
+                    R.id.createShopFragment
+                ) -> {
                     binding.bottomNavigation.visibility = android.view.View.GONE
                 }
                 else -> {
@@ -64,8 +52,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
