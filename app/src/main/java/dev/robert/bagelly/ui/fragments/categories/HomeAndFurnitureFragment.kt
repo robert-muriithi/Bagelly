@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentHomeAndFurnitureBinding
@@ -33,6 +34,7 @@ class HomeAndFurnitureFragment : Fragment() {
         binding.homeAndFurnitureFragmentListView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 val value = adapter.getItem(position)
+                findNavController().navigate(R.id.action_homeAndFurnitureFragment_to_homeAndFurnitureItemsFragment)
                 Toast.makeText(
                     requireContext(),
                     value,

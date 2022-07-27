@@ -110,7 +110,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="6dp"
                     android:layout_toEndOf="@id/cartImage"
-                    android:text="@string/my_cart"
+                    android:text="@string/my_advertisements"
                     android:textColor="#000000" />
 
                 <ImageView
@@ -246,7 +246,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="6dp"
-                    android:text="@string/details"
+                    android:text="Deactivate Account"
                     android:textColor="#000000">
 
                 </TextView>

@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                     R.id.settingsFragment,
                     R.id.notificationsSettingsFragment,
                     R.id.notificationsFragment,
+                    R.id.deactivateAccountFragment
                 ) -> {
                     binding.bottomNavigation.visibility = android.view.View.GONE
                 }

@@ -96,6 +96,9 @@
         <action
             android:id="@+id/action_profileFragment_to_notificationsSettingsFragment"
             app:destination="@id/notificationsSettingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_deactivateAccountFragment"
+            app:destination="@id/deactivateAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -299,4 +302,9 @@
         android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.ServicesItemsFragment"
         android:label="fragment_services_items"
         tools:layout="@layout/fragment_services_items" />
+    <fragment
+        android:id="@+id/deactivateAccountFragment"
+        android:name="dev.robert.bagelly.ui.fragments.account.DeactivateAccountFragment"
+        android:label="fragment_deactivate_account"
+        tools:layout="@layout/fragment_deactivate_account" />
 </navigation>
