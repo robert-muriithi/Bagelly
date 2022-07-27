@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentPropertyBinding
@@ -34,6 +35,7 @@ class PropertyFragment : Fragment() {
         binding.propertyFragmentListView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 val value = adapter.getItem(position)
+                findNavController().navigate(R.id.action_propertyFragment_to_propertyItemsFragment)
                 Toast.makeText(
                     requireContext(),
                     value,

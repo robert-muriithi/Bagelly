@@ -45,6 +45,24 @@
         <action
             android:id="@+id/action_homeFragment_to_fashionFragment"
             app:destination="@id/fashionFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_healthAndBeautyFragment"
+            app:destination="@id/healthAndBeautyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_homeAndFurnitureFragment"
+            app:destination="@id/homeAndFurnitureFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_vehiclesFragment"
+            app:destination="@id/vehiclesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_phonesAndTabletsFragment"
+            app:destination="@id/phonesAndTabletsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_propertyFragment"
+            app:destination="@id/propertyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_servicesFragment"
+            app:destination="@id/servicesFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopsFragment"
@@ -197,4 +215,88 @@
         android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.FashionItemsFragment"
         android:label="fragment_fashion_items"
         tools:layout="@layout/fragment_fashion_items" />
+    <fragment
+        android:id="@+id/healthAndBeautyFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.HealthAndBeautyFragment"
+        android:label="fragment_health_and_beauty"
+        tools:layout="@layout/fragment_health_and_beauty" >
+        <action
+            android:id="@+id/action_healthAndBeautyFragment_to_healthAndBeautyItemsFragment"
+            app:destination="@id/healthAndBeautyItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/healthAndBeautyItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.HealthAndBeautyItemsFragment"
+        android:label="fragment_health_and_beauty_items"
+        tools:layout="@layout/fragment_health_and_beauty_items" />
+    <fragment
+        android:id="@+id/homeAndFurnitureFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.HomeAndFurnitureFragment"
+        android:label="fragment_home_and_furniture"
+        tools:layout="@layout/fragment_home_and_furniture" >
+        <action
+            android:id="@+id/action_homeAndFurnitureFragment_to_homeAndFurnitureItemsFragment"
+            app:destination="@id/homeAndFurnitureItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeAndFurnitureItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.HomeAndFurnitureItemsFragment"
+        android:label="fragment_home_and_furniture_items"
+        tools:layout="@layout/fragment_home_and_furniture_items" />
+    <fragment
+        android:id="@+id/vehiclesFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.VehiclesFragment"
+        android:label="fragment_vehicles"
+        tools:layout="@layout/fragment_vehicles" >
+        <action
+            android:id="@+id/action_vehiclesFragment_to_vehicleItemsFragment"
+            app:destination="@id/vehicleItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.VehicleItemsFragment"
+        android:label="fragment_vehicle_items"
+        tools:layout="@layout/fragment_vehicle_items" />
+    <fragment
+        android:id="@+id/phonesAndTabletsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.PhonesAndTabletsFragment"
+        android:label="fragment_phones_and_tablets"
+        tools:layout="@layout/fragment_phones_and_tablets" >
+        <action
+            android:id="@+id/action_phonesAndTabletsFragment_to_phonesAndTabletsItemsFragment"
+            app:destination="@id/phonesAndTabletsItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/phonesAndTabletsItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.PhonesAndTabletsItemsFragment"
+        android:label="fragment_phones_and_tablets_items"
+        tools:layout="@layout/fragment_phones_and_tablets_items" />
+    <fragment
+        android:id="@+id/propertyFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.PropertyFragment"
+        android:label="fragment_property"
+        tools:layout="@layout/fragment_property" >
+        <action
+            android:id="@+id/action_propertyFragment_to_propertyItemsFragment"
+            app:destination="@id/propertyItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/propertyItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.PropertyItemsFragment"
+        android:label="fragment_property_items"
+        tools:layout="@layout/fragment_property_items" />
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.ServicesFragment"
+        android:label="fragment_services"
+        tools:layout="@layout/fragment_services" >
+        <action
+            android:id="@+id/action_servicesFragment_to_servicesItemsFragment"
+            app:destination="@id/servicesItemsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/servicesItemsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.categories.subcategories.ServicesItemsFragment"
+        android:label="fragment_services_items"
+        tools:layout="@layout/fragment_services_items" />
 </navigation>
