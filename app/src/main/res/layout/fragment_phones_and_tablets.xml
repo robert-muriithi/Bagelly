@@ -7,6 +7,7 @@
     tools:context=".ui.fragments.categories.PhonesAndTabletsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout9"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -23,5 +24,12 @@
             app:titleTextColor="@color/light_grey" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <ListView
+        android:id="@+id/phonesAndTabletsFragmentListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

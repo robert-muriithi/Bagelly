@@ -23,6 +23,7 @@ class CreateShopFragment : Fragment() {
 
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).setSupportActionBar(binding.createShopToolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
         return view

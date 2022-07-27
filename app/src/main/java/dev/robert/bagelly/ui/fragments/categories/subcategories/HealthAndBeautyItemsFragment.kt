@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentHealthAndBeautyItemsBinding
@@ -19,6 +20,8 @@ class HealthAndBeautyItemsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHealthAndBeautyItemsBinding.inflate(inflater, container, false)
         val view = binding.root
+        (activity as AppCompatActivity).setSupportActionBar(binding.healthAndBeautyItemsFragmentToolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
 

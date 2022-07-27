@@ -8,23 +8,22 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
-import dev.robert.bagelly.databinding.FragmentVehicleItemsBinding
+import dev.robert.bagelly.databinding.FragmentServicesItemsBinding
 
 @AndroidEntryPoint
-class VehicleItemsFragment : Fragment() {
-    private lateinit var binding: FragmentVehicleItemsBinding
+class ServicesItemsFragment : Fragment() {
+   private lateinit var binding: FragmentServicesItemsBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentVehicleItemsBinding.inflate(inflater, container, false)
+        binding = FragmentServicesItemsBinding.inflate(inflater, container, false)
         val view = binding.root
-        (activity as AppCompatActivity).setSupportActionBar(binding.vehicleItemsFragmentToolbar)
+        (activity as AppCompatActivity).setSupportActionBar(binding.servicesItemsFragmentToolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
         return view
     }
-
 }

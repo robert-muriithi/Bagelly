@@ -23,14 +23,46 @@ class HomeFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
 
-        binding.accountImage.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
-        }
-        binding.searchButton.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
-        }
-        binding.imageView2.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_notificationsFragment)
+        binding.apply {
+            accountImage.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
+            }
+            searchButton.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+            }
+            imageView2.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_notificationsFragment)
+            }
+            agricultureCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_agricultureAndFoodsFragment)
+            }
+            animalsCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_animalsAndPetsFragment)
+            }
+            furnitureCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_homeAndFurnitureFragment)
+            }
+            electronicsCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_electronicsFragment)
+            }
+            vehiclesCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_vehiclesFragment)
+            }
+            healthAndBeautyCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_healthAndBeautyFragment)
+            }
+            fashionCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_fashionFragment)
+            }
+            phonesCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_phonesAndTabletsFragment)
+            }
+            propertyCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_propertyFragment)
+            }
+            servicesCardView.setOnClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_servicesFragment)
+            }
         }
 
         return view

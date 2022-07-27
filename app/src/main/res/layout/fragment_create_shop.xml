@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:title="Create a new Store"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:titleTextColor="@color/light_grey" />
     </com.google.android.material.appbar.AppBarLayout>
 
