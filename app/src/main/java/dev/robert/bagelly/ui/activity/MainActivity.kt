@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity() {
                     R.id.settingsFragment,
                     R.id.notificationsSettingsFragment,
                     R.id.notificationsFragment,
-                    R.id.createShopFragment
                 ) -> {
                     binding.bottomNavigation.visibility = android.view.View.GONE
                 }

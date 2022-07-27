@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
@@ -24,6 +25,8 @@ class ServicesFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentServicesBinding.inflate(inflater, container, false)
         val view = binding.root
+        (activity as AppCompatActivity).setSupportActionBar(binding.servicesFragmentToolbar)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         listItem = resources.getStringArray(R.array.services)
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, listItem)
