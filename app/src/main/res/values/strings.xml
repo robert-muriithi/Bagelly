@@ -60,6 +60,19 @@
     <string name="motocycle_amp_vehicle_dealers"><![CDATA[Motocycle & Vehicle Dealers]]></string>
     <string name="general_stores">General Stores</string>
     <string name="service_providers">Service Providers</string>
+    <string name="my_advertisements">My Advertisements</string>
+    <string name="first_name">First Name</string>
+    <string name="robert">Robert</string>
+    <string name="last_name">Last Name</string>
+    <string name="muriithi">Muriithi</string>
+    <string name="delete_my_account">Delete my account</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="this_action_will_delete_your_account_and_all_your_data_and_you_will_no_longer_be_able_to_access_your_account_this_action_cannot_be_undone">This action will delete your account and all your data and you will no longer be able to access your account. This action cannot be undone.</string>
+    <string name="save">Save</string>
+    <string name="push_notifications">Push Notifications</string>
+    <string name="notifications_will_help_you_be_updated_of_your_posted_ads_and_other_important_information_nturn_the_switch_on_to_receive_push_notifications">Notifications will help you be updated of your posted ads and other important information.\nTurn the switch on to receive push notifications.</string>
+    <string name="receive_push_notifications">Receive push notifications</string>
+    <string name="account_details">Account Details</string>
 
     <array name="category">
         <item>Agriculture and Food</item>
@@ -341,5 +354,18 @@
         <item>App Version : 1.0</item>
         <item>Logout</item>
     </string-array>
+
+    <string-array name="themes">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System Default</item>
+
+    </string-array>
+    <string-array name="languages">
+        <item>English</item>
+        <item>French</item>
+        <item>System Default</item>
+    </string-array>
+
 
 </resources>

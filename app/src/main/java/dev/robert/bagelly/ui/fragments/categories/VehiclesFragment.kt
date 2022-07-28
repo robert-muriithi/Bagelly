@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentVehiclesBinding
@@ -34,6 +35,7 @@ class VehiclesFragment : Fragment() {
         binding.vehiclesFragmentListView.onItemClickListener =
             AdapterView.OnItemClickListener { _, _, position, _ ->
                 val value = adapter.getItem(position)
+                findNavController().navigate(R.id.action_vehiclesFragment_to_vehicleItemsFragment)
                 Toast.makeText(
                     requireContext(),
                     value,

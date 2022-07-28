@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.6'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.2.1'
-    implementation 'com.google.firebase:firebase-bom:30.3.0'
+    implementation 'com.google.firebase:firebase-bom:30.3.1'
 
     //Navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
@@ -70,6 +70,9 @@ dependencies {
     //hilt dagger
     implementation 'com.google.dagger:hilt-android:2.41'
     kapt 'com.google.dagger:hilt-android-compiler:2.40.5'
+
+    //Kenyan Counties Lib
+    implementation 'com.github.JoelKanyi:KenyanCounties:1.0.0'
 
 
 }

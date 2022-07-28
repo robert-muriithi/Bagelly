@@ -30,29 +30,29 @@ class ProfileFragment : Fragment() {
         //(activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         (activity as AppCompatActivity).supportActionBar?.title = "Profile"
 
-
-        binding.manageAccountLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_myAccountFragment)
-        }
-        binding.settingLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_settingsFragment)
-        }
-
-        binding.feedbackLayout.setOnClickListener {
-            //start gmail
-            val intent = Intent(Intent.ACTION_SENDTO)
-            intent.data = Uri.parse("mailto:" + "robertmuriithi390@gmail.com" ) // only email apps should handle this
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback")
-            if (intent.resolveActivity(requireActivity().packageManager) != null) {
-                startActivity(intent)
+        binding.apply {
+            manageAccountLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_myAccountFragment)
+            }
+            settingLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_settingsFragment)
+            }
+            feedbackLayout.setOnClickListener {
+                //start gmail
+                val intent = Intent(Intent.ACTION_SENDTO)
+                intent.data = Uri.parse("mailto:" + "robertmuriithi390@gmail.com" ) // only email apps should handle this
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Feedback")
+                if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                    startActivity(intent)
+                }
+            }
+            notificationsLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_notificationsSettingsFragment)
+            }
+            detailsLayout.setOnClickListener {
+                findNavController().navigate(R.id.action_profileFragment_to_deactivateAccountFragment)
             }
         }
-        binding.notificationsLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_notificationsSettingsFragment)
-        }
-
-
-
 
         return view
     }
