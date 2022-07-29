@@ -35,6 +35,7 @@ class SellFragment2 : Fragment() {
     var imageUrl1: String? = null
     var imageUrl2: String? = null
     var imageUrl3: String? = null
+    var id : String = "id"
 
 
     @SuppressLint("SetTextI18n")
@@ -63,7 +64,7 @@ class SellFragment2 : Fragment() {
             val description = binding.descriptionInputLayout.editText?.text.toString()
             val price = binding.priceInputLayout.editText?.text.toString()
             val sellCategory = SellCategory(category, subCategory, imagesList)
-            val sell = Sell(itemName, location, condition, description, price, sellCategory)
+            val sell = Sell(id ,itemName, location, condition, description, price, sellCategory)
 
             when {
                 itemName.trim().isEmpty() -> {

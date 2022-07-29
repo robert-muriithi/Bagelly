@@ -377,5 +377,21 @@
         <item>System Default</item>
     </string-array>
 
+    <string-array name="stores">
+        <item>Accommodation and travel services</item>
+        <item>Automotive services</item>
+        <item>Beauty and personal care</item>
+        <item>Books, music, and video</item>
+        <item>Clothing and accessories</item>
+        <item>Electronics and computer</item>
+        <item>Food and drink</item>
+        <item>Farm inputs Stores</item>
+        <item>Fashion and accessories store</item>
+        <item>Mobile phone and tablets Store</item>
+        <item>Office supplies and stationery stores</item>
+        <item>Vehicle dealers</item>
+        <item>Other stores</item>
+    </string-array>
+
 
 </resources>

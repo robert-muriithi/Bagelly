@@ -2,7 +2,10 @@ package dev.robert.bagelly.di
 
 import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,8 +23,16 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(database: FirebaseFirestore): MainRepository {
-        return MainRepositoryImpl(database)
+    fun provideRepository(
+        database: FirebaseFirestore,
+        storageReference: StorageReference,
+        collectionReference: CollectionReference
+    ): MainRepository {
+        return MainRepositoryImpl(
+            database,
+            storageReference,
+            collectionReference
+        )
     }
 
     @Provides
@@ -46,9 +57,18 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideCollectionReference(db: FirebaseFirestore): CollectionReference {
+        return db.collection("images")
+    }
+
+    @Provides
+    @Singleton
     @ApplicationContext
     fun provideApplicationContext(@ApplicationContext app: Application): Application = app
 
-
+    @Provides
+    @Singleton
+    fun provideStorageReference(): StorageReference =
+        FirebaseStorage.getInstance().reference
 
 }
