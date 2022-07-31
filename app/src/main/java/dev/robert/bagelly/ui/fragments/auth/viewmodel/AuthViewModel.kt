@@ -31,4 +31,19 @@ class AuthViewModel
                 _register.value = Resource.Error(e.message.toString())
             }
         }
+
+    private val _login = MutableLiveData<Resource<AuthResult>>()
+    val login : LiveData<Resource<AuthResult>> = _login
+
+    suspend fun login(email: String, password: String){
+        _login.value = Resource.Loading
+
+        try {
+            val result = repository.login(email, password)
+            _login.value = result
+            Resource.Success(result)
+        }catch (e : Exception){
+            _login.value = Resource.Error(e.message.toString())
+        }
+    }
 }

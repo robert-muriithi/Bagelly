@@ -44,18 +44,20 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_spinner_down.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_vehicle.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_warning.xml" value="0.1665" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_web.xml" value="0.1665" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/spinner_bg.xml" value="0.184" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout-v26/fragment_shops.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/drop_down_item.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/exclusive_shops_item_layout.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/favorite_item_layout.xml" value="0.2" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_account.xml" value="0.25" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_agriculture_and_food_items.xml" value="0.12972972972972974" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_agriculture_and_foods.xml" value="0.12972972972972974" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_animals_and_pets.xml" value="0.12972972972972974" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_animals_and_pets_items.xml" value="0.12972972972972974" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_blank.xml" value="0.2" />
-        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_create_shop.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_create_shop.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_deactivate_account.xml" value="0.25" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_edit_profile.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_electronics.xml" value="0.12972972972972974" />

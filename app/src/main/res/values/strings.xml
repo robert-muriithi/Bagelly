@@ -73,6 +73,16 @@
     <string name="notifications_will_help_you_be_updated_of_your_posted_ads_and_other_important_information_nturn_the_switch_on_to_receive_push_notifications">Notifications will help you be updated of your posted ads and other important information.\nTurn the switch on to receive push notifications.</string>
     <string name="receive_push_notifications">Receive push notifications</string>
     <string name="account_details">Account Details</string>
+    <string name="shop_category">Shop Category</string>
+    <string name="step_1_of_2">Step 1 of 2</string>
+    <string name="shop_details">Shop Details</string>
+    <string name="shop_name">Shop name</string>
+    <string name="shop_description">Shop Description</string>
+    <string name="shop_website">Website(optional)</string>
+    <string name="phone_number_optional">Phone Number (Optional)</string>
+    <string name="location">Location</string>
+    <string name="upload_business_logo">Upload Business Logo</string>
+    <string name="create_shop">Create Shop</string>
 
     <array name="category">
         <item>Agriculture and Food</item>
@@ -365,6 +375,22 @@
         <item>English</item>
         <item>French</item>
         <item>System Default</item>
+    </string-array>
+
+    <string-array name="stores">
+        <item>Accommodation and travel services</item>
+        <item>Automotive services</item>
+        <item>Beauty and personal care</item>
+        <item>Books, music, and video</item>
+        <item>Clothing and accessories</item>
+        <item>Electronics and computer</item>
+        <item>Food and drink</item>
+        <item>Farm inputs Stores</item>
+        <item>Fashion and accessories store</item>
+        <item>Mobile phone and tablets Store</item>
+        <item>Office supplies and stationery stores</item>
+        <item>Vehicle dealers</item>
+        <item>Other stores</item>
     </string-array>
 
 

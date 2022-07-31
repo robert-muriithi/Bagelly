@@ -39,11 +39,12 @@
         android:hint="@string/name"
         app:boxStrokeColor="@color/light_grey"
         app:endIconMode="clear_text"
-        app:hintTextColor="@color/black"
+        app:hintTextColor="@color/light_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:startIconDrawable="@drawable/ic_person">
+        app:startIconDrawable="@drawable/ic_person"
+        app:startIconTint="@color/light_grey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailEditText"
@@ -62,13 +63,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:hint="@string/email_address"
-        app:hintTextColor="@color/black"
+        app:hintTextColor="@color/light_grey"
         app:boxStrokeColor="@color/light_grey"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameInputLayout"
-        app:startIconDrawable="@drawable/ic_mail">
+        app:startIconDrawable="@drawable/ic_mail"
+        app:startIconTint="@color/light_grey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/mailEditText"
@@ -87,13 +89,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:hint="@string/phone_number"
-        app:hintTextColor="@color/black"
+        app:hintTextColor="@color/light_grey"
         app:boxStrokeColor="@color/light_grey"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailInputLayout"
-        app:startIconDrawable="@drawable/ic_phone">
+        app:startIconDrawable="@drawable/ic_phone"
+        app:startIconTint="@color/light_grey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/phoneNumberEditText"
@@ -113,12 +116,13 @@
         android:layout_marginEnd="32dp"
         android:hint="@string/password"
         app:endIconMode="password_toggle"
-        app:hintTextColor="@color/black"
+        app:hintTextColor="@color/light_grey"
         app:boxStrokeColor="@color/light_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneNumberInputLayout"
-        app:startIconDrawable="@drawable/ic_lock">
+        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconTint="@color/light_grey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passEditText"
@@ -137,12 +141,13 @@
         android:layout_marginEnd="32dp"
         android:hint="@string/confirm_password"
         app:endIconMode="password_toggle"
-        app:hintTextColor="@color/black"
+        app:hintTextColor="@color/light_grey"
         app:boxStrokeColor="@color/light_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passInputLayout"
-        app:startIconDrawable="@drawable/ic_lock">
+        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconTint="@color/light_grey">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/confPassEditText"

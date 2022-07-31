@@ -13,17 +13,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ServerValue
+import com.google.firebase.firestore.ServerTimestamp
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.databinding.FragmentSell2Binding
 import dev.robert.bagelly.model.Sell
-import dev.robert.bagelly.model.SellCategory
 import dev.robert.bagelly.ui.fragments.sell.viewmodel.SellViewModel
 import dev.robert.bagelly.utils.CheckInternet
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class SellFragment2 : Fragment() {
@@ -32,9 +33,10 @@ class SellFragment2 : Fragment() {
     private val viewModel: SellViewModel by viewModels()
     private val imagesUrls: ArrayList<String> = ArrayList()
     private var imagesList: ArrayList<Uri> = ArrayList()
-    var imageUrl1: String? = null
-    var imageUrl2: String? = null
-    var imageUrl3: String? = null
+    private var imageUrl1: String? = null
+    private var imageUrl2: String? = null
+    private var imageUrl3: String? = null
+    private lateinit var id: String
 
 
     @SuppressLint("SetTextI18n")
@@ -45,8 +47,9 @@ class SellFragment2 : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentSell2Binding.inflate(inflater, container, false)
         val view = binding.root
+        id = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
-        imagesList = args.sellCategory.images!!
+        imagesList = args.sellArgs.images!!
         imagesList.forEach {
             imagesUrls.add(it.toString())
         }
@@ -55,15 +58,32 @@ class SellFragment2 : Fragment() {
         imageUrl3 = imagesUrls[2]
 
         binding.finishButton.setOnClickListener {
-            val category = args.sellCategory.category
-            val subCategory = args.sellCategory.subCategory
+            val category = args.sellArgs.category
+            val subCategory = args.sellArgs.subCategory
             val itemName = binding.nameInputLayout.editText?.text.toString()
             val location = binding.locationInputLayout.editText?.text.toString()
             val condition = binding.conditionInputLayout.editText?.text.toString()
             val description = binding.descriptionInputLayout.editText?.text.toString()
             val price = binding.priceInputLayout.editText?.text.toString()
-            val sellCategory = SellCategory(category, subCategory, imagesList)
-            val sell = Sell(itemName, location, condition, description, price, sellCategory)
+            val uniqueItemId = UUID.randomUUID().toString()
+            val datePosted = ServerValue.TIMESTAMP.toString()
+
+            val sell = Sell(
+                uniqueItemId,
+                id,
+                itemName,
+                location,
+                condition,
+                description,
+                price,
+                category,
+                subCategory,
+                imagesList,
+                datePosted,
+                imageUrl1,
+                imageUrl2,
+                imageUrl3
+            )
 
             when {
                 itemName.trim().isEmpty() -> {
@@ -119,8 +139,11 @@ class SellFragment2 : Fragment() {
                             }
                         }
                     } else {
-                        //show snackbar
-                        Snackbar.make(requireView(), "Connect to internet and try again", Snackbar.LENGTH_LONG)
+                        Snackbar.make(
+                            requireView(),
+                            "Connect to internet and try again",
+                            Snackbar.LENGTH_LONG
+                        )
                             .setAction("CLOSE") { }
                             .setActionTextColor(resources.getColor(android.R.color.holo_red_light))
                             .show()

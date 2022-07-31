@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.fragments.home.AccountFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="80dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="8dp"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Name :"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/circleImageView3"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Robert Muriithi"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView24"
+        app:layout_constraintStart_toEndOf="@+id/textView24"
+        app:layout_constraintTop_toTopOf="@+id/textView24" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Email :"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textView24"
+        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+
+    <TextView
+        android:id="@+id/userEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/forexample_gmail_com"
+        app:layout_constraintBottom_toBottomOf="@+id/textView25"
+        app:layout_constraintStart_toEndOf="@+id/textView25"
+        app:layout_constraintTop_toTopOf="@+id/textView25" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Phone :"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/textView25"
+        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="0790027948"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView26"
+        app:layout_constraintStart_toEndOf="@+id/textView26"
+        app:layout_constraintTop_toTopOf="@+id/textView26" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp"
+        android:text="Edit Profile"
+        android:textAllCaps="false"
+        android:paddingRight="40dp"
+        android:paddingLeft="40dp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circleImageView3" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Posts"
+        android:textAllCaps="false"
+        android:backgroundTint="#F3F3"
+        android:paddingRight="40dp"
+        android:paddingLeft="40dp"
+        app:cornerRadius="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/materialButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/materialButton"
+        app:layout_constraintTop_toTopOf="@+id/materialButton" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
