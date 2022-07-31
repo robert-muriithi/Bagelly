@@ -124,8 +124,8 @@
         android:label="fragment_sell2"
         tools:layout="@layout/fragment_sell2" >
         <argument
-            android:name="sell_category"
-            app:argType="dev.robert.bagelly.model.SellCategory" />
+            android:name="sellArgs"
+            app:argType="dev.robert.bagelly.model.Sell" />
     </fragment>
     <fragment
         android:id="@+id/myAccountFragment"
@@ -319,5 +319,9 @@
         android:id="@+id/accountFragment"
         android:name="dev.robert.bagelly.ui.fragments.home.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_myPostFragment"
+            app:destination="@id/myPostFragment" />
+    </dialog>
 </navigation>

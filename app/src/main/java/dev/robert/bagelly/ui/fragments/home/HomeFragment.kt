@@ -32,11 +32,11 @@ class HomeFragment  : Fragment() {
 
         binding.apply {
             accountImage.setOnClickListener {
-                if (auth.currentUser == null ){
-                    findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
+                if (auth.currentUser != null ){
+                    findNavController().navigate(R.id.action_homeFragment_to_accountFragment)
                 }
                 else{
-                    findNavController().navigate(R.id.action_homeFragment_to_accountFragment)
+                    findNavController().navigate(R.id.action_homeFragment_to_signInFragment)
                 }
             }
 

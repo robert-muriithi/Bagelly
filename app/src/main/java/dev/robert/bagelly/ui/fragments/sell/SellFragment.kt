@@ -17,7 +17,7 @@ import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentSellBinding
-import dev.robert.bagelly.model.SellCategory
+import dev.robert.bagelly.model.Sell
 
 @AndroidEntryPoint
 class SellFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -69,11 +69,8 @@ class SellFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     Toast.makeText(requireContext(), "Please add all photos", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    val sell = SellCategory(sellCategory, sellSubCategory,imagesArrayList)
-                    val action =
-                        SellFragmentDirections.actionSellFragmentToSellFragment2(
-                            sell
-                        )
+                    val sell = Sell(sellCategory, sellSubCategory, imagesArrayList)
+                    val action = SellFragmentDirections.actionSellFragmentToSellFragment2(sell)
                     findNavController().navigate(action)
                 }
             }
