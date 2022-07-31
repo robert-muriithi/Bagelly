@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_homeFragment_to_servicesFragment"
             app:destination="@id/servicesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopsFragment"
@@ -307,4 +310,14 @@
         android:name="dev.robert.bagelly.ui.fragments.account.DeactivateAccountFragment"
         android:label="fragment_deactivate_account"
         tools:layout="@layout/fragment_deactivate_account" />
+    <fragment
+        android:id="@+id/myPostFragment"
+        android:name="dev.robert.bagelly.ui.fragments.posts.MyPostFragment"
+        android:label="fragment_my_post"
+        tools:layout="@layout/fragment_my_post" />
+    <dialog
+        android:id="@+id/accountFragment"
+        android:name="dev.robert.bagelly.ui.fragments.home.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>

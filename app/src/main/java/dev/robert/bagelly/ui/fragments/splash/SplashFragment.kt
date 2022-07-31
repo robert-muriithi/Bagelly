@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentSplashBinding
 @AndroidEntryPoint
-class SplashFragment : Fragment() {
+class SplashFragment  : Fragment() {
     private lateinit var binding: FragmentSplashBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
