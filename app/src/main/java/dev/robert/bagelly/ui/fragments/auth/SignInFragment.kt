@@ -64,6 +64,7 @@ class SignInFragment : BottomSheetDialogFragment() {
                                     is Resource.Success -> {
                                         binding.progressBar3.isVisible = false
                                         Toast.makeText(requireContext(), "Login successful", Toast.LENGTH_SHORT).show()
+                                        dismiss()
                                     }
 
                                     is Resource.Error -> {

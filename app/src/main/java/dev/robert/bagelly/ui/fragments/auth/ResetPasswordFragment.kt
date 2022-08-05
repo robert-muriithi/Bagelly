@@ -8,14 +8,23 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
+import dev.robert.bagelly.databinding.FragmentResetPasswordBinding
+
 @AndroidEntryPoint
 class ResetPasswordFragment : DialogFragment() {
+    private lateinit var binding: FragmentResetPasswordBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reset_password, container, false)
+        binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+
+
+
+        return view
     }
 }

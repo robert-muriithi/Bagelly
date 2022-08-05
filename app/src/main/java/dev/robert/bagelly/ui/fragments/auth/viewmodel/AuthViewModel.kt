@@ -4,9 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.FirebaseException
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.robert.bagelly.data.repository.AuthenticationRepository
+import dev.robert.bagelly.model.Users
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -15,35 +18,57 @@ import javax.inject.Inject
 class AuthViewModel
 @Inject constructor(
     private val repository: AuthenticationRepository
-    ) : ViewModel() {
+) : ViewModel() {
 
-        private val _register = MutableLiveData<Resource<AuthResult>>()
-        val register : LiveData<Resource<AuthResult>> = _register
+    private val _register = MutableLiveData<Resource<String>>()
+    val register: LiveData<Resource<String>> = _register
 
-        suspend fun register(name: String, email: String, phoneNumber: String, password: String){
-            _register.value = Resource.Loading
-            try {
-               val result = repository.register(name, email, phoneNumber, password)
-                _register.value = result
-                Resource.Success(result)
+    private val _login = MutableLiveData<Resource<String>>()
+    val login: LiveData<Resource<String>> = _login
 
-            }catch (e: Exception){
-                _register.value = Resource.Error(e.message.toString())
+    private val forgotPassword = MutableLiveData<Resource<String>>()
+    val _forgotPassword: LiveData<Resource<String>> = forgotPassword
+
+    suspend fun registerUser(email: String, password: String, users: Users) {
+        _register.value = Resource.Loading
+        try {
+            val result = repository.registerUser(email, password, users) {
+                _register.value = it
             }
+            Resource.Success(result)
+        }
+        catch (e : Exception){
+            _register.value = Resource.Error(e.message.toString())
+        }
+        catch (e: FirebaseException){
+            _register.value = Resource.Error(e.message.toString())
         }
 
-    private val _login = MutableLiveData<Resource<AuthResult>>()
-    val login : LiveData<Resource<AuthResult>> = _login
+    }
 
-    suspend fun login(email: String, password: String){
+    suspend fun login(email: String, password: String) {
         _login.value = Resource.Loading
-
         try {
-            val result = repository.login(email, password)
-            _login.value = result
+            val result = repository.loginUser(email, password){
+                _login.value = it
+            }
             Resource.Success(result)
-        }catch (e : Exception){
+        } catch (e: Exception) {
             _login.value = Resource.Error(e.message.toString())
+        }
+        catch (e : FirebaseAuthInvalidCredentialsException){
+            _login.value = Resource.Error(e.message.toString())
+        }
+    }
+
+    suspend fun forgotPassword(email: String) {
+        forgotPassword.value = Resource.Loading
+        try {
+            repository.forgotPassword(email) {
+                forgotPassword.value = it
+            }
+        } catch (e: Exception) {
+            forgotPassword.value = Resource.Error(e.message.toString())
         }
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -18,6 +19,7 @@ import dev.robert.bagelly.ui.fragments.auth.viewmodel.AuthViewModel
 import dev.robert.bagelly.utils.CheckInternet
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class SignUpFragment : BottomSheetDialogFragment() {
@@ -38,9 +40,9 @@ class SignUpFragment : BottomSheetDialogFragment() {
         }
 
         binding.btnRegister.setOnClickListener {
-            val name = binding.nameInputLayout.editText?.text.toString()
-            val email = binding.emailInputLayout.editText?.text.toString()
-            val phoneNumber = binding.phoneNumberInputLayout.editText?.text.toString()
+            val name = binding.nameInputLayout.editText?.text.toString().trim()
+            val email = binding.emailInputLayout.editText?.text.toString().trim()
+            val phoneNumber = binding.phoneNumberInputLayout.editText?.text.toString().trim()
             val password = binding.passInputLayout.editText?.text.toString().trim()
             val confirmPassword = binding.confPassInputLayout.editText?.text.toString().trim()
 
@@ -78,10 +80,11 @@ class SignUpFragment : BottomSheetDialogFragment() {
                     binding.passInputLayout.isErrorEnabled = false
                     binding.confPassInputLayout.isErrorEnabled = false
                     binding.btnRegister.isEnabled = false
+                    val users = Users(UUID.randomUUID().toString(), name, email, phoneNumber)
 
                     if (CheckInternet.isConnected(requireContext())){
                         lifecycleScope.launch {
-                            viewModel.register(name, email, phoneNumber, password)
+                            viewModel.registerUser(email, password, users)
                         }
                         viewModel.register.observe(viewLifecycleOwner){ authResult ->
                             when(authResult){
@@ -92,13 +95,13 @@ class SignUpFragment : BottomSheetDialogFragment() {
                                 is Resource.Success -> {
                                     binding.progressBar2.isVisible = false
                                     binding.btnRegister.isEnabled = true
-                                    Snackbar.make(view, "Registration successful", Snackbar.LENGTH_LONG).show()
+                                    Toast.makeText(requireContext(), "Registration Successful\n Verification Email has been sent. Verify and login", Toast.LENGTH_SHORT).show()
                                     dismiss()
                                 }
                                 is Resource.Error -> {
                                     binding.progressBar2.isVisible = false
                                     binding.btnRegister.isEnabled = true
-                                    Snackbar.make(view, authResult.string, Snackbar.LENGTH_LONG).show()
+                                    Toast.makeText(requireContext(), authResult.string, Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }
