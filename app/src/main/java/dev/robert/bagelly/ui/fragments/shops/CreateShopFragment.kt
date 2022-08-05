@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
@@ -31,7 +32,7 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var listItem: Array<String>
     private var imageUrl = ""
     private var imageUri: Uri? = null
-    private val IMAGE_PICK_CODE = 1000
+    private val IMAGE_PICK_CODE = 5
     private val viewModel: ShopsViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -130,9 +131,7 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
 
             addLogo.setOnClickListener {
-                val intent = Intent(Intent.ACTION_GET_CONTENT)
-                intent.type = "image/*"
-                startActivityForResult(intent, IMAGE_PICK_CODE)
+                openFileChooser(IMAGE_PICK_CODE)
             }
         }
 
@@ -140,11 +139,24 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
         return view
     }
 
+    private fun openFileChooser(requestCode: Int) {
+        ImagePicker.with(requireActivity())
+            .crop(0.5f, 0.5f)                    //Crop image(Optional),Crop ratio : 1:1(Optional)
+            .compress(1024)                 //Final image size will be less than 1 MB(Optional)
+            .maxResultSize(
+                1080,
+                1080
+            )                               //Final image resolution will be less than 1080 x 1080(Optional)
+            .start(requestCode)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
-            imageUri = data?.data
-            binding.addLogo.setImageURI(imageUri)
+        when {
+            requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK -> {
+                imageUri = data?.data
+                binding.addLogo.setImageURI(imageUri)
+            }
         }
     }
 

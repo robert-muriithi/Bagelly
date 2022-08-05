@@ -51,20 +51,23 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //Firebase
-    implementation 'com.google.firebase:firebase-auth-ktx:21.0.6'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.7'
     implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
-    implementation 'com.google.firebase:firebase-firestore-ktx:24.2.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.2.2'
     implementation 'com.google.firebase:firebase-bom:30.3.1'
 
     //Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.1'
 
     //circle image view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
+
+    implementation "androidx.activity:activity-ktx:1.5.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.1"
 
 
     //hilt dagger
@@ -74,5 +77,7 @@ dependencies {
     //Kenyan Counties Lib
     implementation 'com.github.JoelKanyi:KenyanCounties:1.0.0'
 
+    //image picker
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 
 }
