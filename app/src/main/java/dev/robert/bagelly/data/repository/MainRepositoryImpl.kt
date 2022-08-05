@@ -1,14 +1,20 @@
 package dev.robert.bagelly.data.repository
 
 import android.net.Uri
+import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
 import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.model.Shop
 import dev.robert.bagelly.utils.Resource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
@@ -49,70 +55,32 @@ class MainRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun addImageToFirebaseStorage(
-        imageUri: Uri,
-        result: (Flow<Resource<Uri>>) -> Unit
+    override suspend fun addMultipleImages(
+        imagesUri: List<Uri>,
+        result: (Resource<List<Uri>>) -> Unit
     ) {
-        val imageRef = storageReference.child("images/${imageUri.lastPathSegment}")
-        imageRef.putFile(imageUri)
-            .addOnSuccessListener {
-                imageRef.downloadUrl.addOnSuccessListener {
-                    result.invoke(
-                        flow {
-                            emit(Resource.Success(it))
-                        }
-                    )
-                }
-            }
-            .addOnFailureListener {
-                result.invoke(
-                    flow {
-                        emit(Resource.Error(it.message.toString()))
+        try {
+            val uris = withContext(Dispatchers.IO) {
+                imagesUri.map { uri ->
+                    async {
+                        storageReference.child(uri.lastPathSegment!!)
+                            .putFile(uri)
+                            .await()
+                            .storage.downloadUrl.await()
                     }
-                )
+                }.awaitAll()
             }
-    }
-
-    override suspend fun addImageToFirestore(
-        downloadUrl: Uri,
-        result: (Flow<Resource<Boolean>>) -> Unit
-    ) {
-        db.collection("images")
-            .add(downloadUrl)
-            .addOnSuccessListener {
-                result.invoke(
-                    flow {
-                        emit(Resource.Success(true))
-                    }
-                )
-            }
-            .addOnFailureListener {
-                result.invoke(
-                    flow {
-                        emit(Resource.Error(it.message.toString()))
-                    }
-                )
-            }
-    }
-
-    override suspend fun getImageFromFirestore(result: (Flow<Resource<String>>) -> Unit) {
-        db.collection("images")
-            .get()
-            .addOnSuccessListener {
-                result.invoke(
-                    flow {
-                        it.documents.forEach {
-                            emit(Resource.Success(it.id))
-                        }
-                    }
-                )
-            }
-            .addOnFailureListener {
-                result.invoke(
-                    flow {
-                        emit(Resource.Error(it.message.toString()))
-                    }
-                )
-            }
+            result.invoke(
+                Resource.Success(uris)
+            )
+        } catch (e: Exception) {
+            result.invoke(
+                Resource.Error(e.message.toString())
+            )
+        } catch (e: FirebaseException) {
+            result.invoke(
+                Resource.Error(e.message.toString())
+            )
+        }
     }
 }

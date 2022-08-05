@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.robert.bagelly.data.repository.MainRepository
@@ -11,6 +12,7 @@ import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.ui.fragments.sell.SellFragment2Args
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,20 +36,12 @@ class SellViewModel
         }
     }
 
-
-    private val _uploadImages = MutableLiveData<Resource<Uri>>()
-    val uploadImage : LiveData<Resource<Uri>> = _uploadImages
-
-    suspend fun upload(imageUri : Uri, result:  (Flow<Resource<Uri>>) -> Unit){
-        _uploadImages.value = Resource.Loading
-        try {
-            repository.addImageToFirebaseStorage(imageUri, result)
-            _uploadImages.value = Resource.Success(imageUri)
-        }
-        catch (e : Exception){
-            _uploadImages.value = Resource.Error(e.message.toString())
-
+    fun uploadImages(imageUri : List<Uri>, result: (Resource<List<Uri>>) -> Unit){
+        result.invoke(Resource.Loading)
+        viewModelScope.launch {
+            repository.addMultipleImages(imageUri){
+                result.invoke(it)
+            }
         }
     }
-
 }
