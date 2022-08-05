@@ -32,7 +32,7 @@ class HomeFragment  : Fragment() {
 
         binding.apply {
             accountImage.setOnClickListener {
-                if (auth.currentUser != null ){
+                if (auth.currentUser != null && auth.currentUser?.isEmailVerified!!) {
                     findNavController().navigate(R.id.action_homeFragment_to_accountFragment)
                 }
                 else{

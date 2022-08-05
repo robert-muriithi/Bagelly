@@ -58,8 +58,6 @@ class SellFragment2 : Fragment() {
             imageUrl2 = imagesList[1].toString()
             imageUrl3 = imagesList[2].toString()
         }
-        Log.d(TAG, "ImagesList:$imagesList")
-        Log.d(TAG, "Images Urls:$imageUrl1,$imageUrl2,$imageUrl3")
 
         binding.finishButton.setOnClickListener {
             val category = args.sellArgs.category
@@ -70,23 +68,22 @@ class SellFragment2 : Fragment() {
             val description = binding.descriptionInputLayout.editText?.text.toString()
             val price = binding.priceInputLayout.editText?.text.toString()
             val uniqueItemId = UUID.randomUUID().toString()
-            val datePosted = DateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
+            val datePosted : String = DateFormat.getDateTimeInstance().format(Calendar.getInstance().time).toString()
 
             val sell = Sell(
-                uniqueItemId,
-                id,
-                itemName,
+               uniqueItemId,
+               id,
+               itemName,
                 location,
                 condition,
                 description,
                 price,
-                category,
-                subCategory,
-                imagesList,
+                category.toString(),
+                subCategory.toString(),
                 datePosted,
-                imageUrl1,
-                imageUrl2,
-                imageUrl3
+                imageUrl1.toString(),
+                imageUrl2.toString(),
+                imageUrl3.toString()
             )
 
             when {
@@ -112,7 +109,6 @@ class SellFragment2 : Fragment() {
                     binding.priceInputLayout.isErrorEnabled = true
                 }
                 else -> {
-                    //Upload images and details to firestore and cloud storage
 
                     binding.nameInputLayout.isErrorEnabled = false
                     binding.locationInputLayout.isErrorEnabled = false
