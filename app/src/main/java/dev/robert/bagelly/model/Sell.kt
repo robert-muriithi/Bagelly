@@ -21,6 +21,10 @@ data class Sell(
     var image2 : String? = "",
     var image3 : String? = "",
 ) : Parcelable {
-    constructor(category: String?, subCategory: String?, images: ArrayList<Uri>?) : this()
+    constructor(category: String?, subCategory: String?, images: ArrayList<Uri>? /* = java.util.ArrayList<android.net.Uri>? */) : this() {
+        this.category = category
+        this.subCategory = subCategory
+        this.images = images
+    }
 }
 

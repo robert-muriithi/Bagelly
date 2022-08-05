@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.github.dhaval2404.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentSellBinding
@@ -70,6 +71,7 @@ class SellFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 }
                 else -> {
                     val sell = Sell(sellCategory, sellSubCategory, imagesArrayList)
+                    Toast.makeText(requireContext(), "${imagesArrayList.size}", Toast.LENGTH_SHORT).show()
                     val action = SellFragmentDirections.actionSellFragmentToSellFragment2(sell)
                     findNavController().navigate(action)
                 }

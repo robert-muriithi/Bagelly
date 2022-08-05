@@ -3,6 +3,7 @@ package dev.robert.bagelly.ui.fragments.sell
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,6 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ServerValue
-import com.google.firebase.firestore.ServerTimestamp
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.databinding.FragmentSell2Binding
 import dev.robert.bagelly.model.Sell
@@ -23,11 +23,12 @@ import dev.robert.bagelly.ui.fragments.sell.viewmodel.SellViewModel
 import dev.robert.bagelly.utils.CheckInternet
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.launch
+import java.text.DateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class SellFragment2 : Fragment() {
+    private  val TAG = "SellFragment2"
     private lateinit var binding: FragmentSell2Binding
     private val args: SellFragment2Args by navArgs()
     private val viewModel: SellViewModel by viewModels()
@@ -50,12 +51,15 @@ class SellFragment2 : Fragment() {
         id = FirebaseAuth.getInstance().currentUser?.uid.toString()
 
         imagesList = args.sellArgs.images!!
-        imagesList.forEach {
-            imagesUrls.add(it.toString())
+
+        for (i in 0 until imagesList.size) {
+            imagesUrls.add(imagesList[i].toString())
+            imageUrl1 = imagesList[0].toString()
+            imageUrl2 = imagesList[1].toString()
+            imageUrl3 = imagesList[2].toString()
         }
-        imageUrl1 = imagesUrls[0]
-        imageUrl2 = imagesUrls[1]
-        imageUrl3 = imagesUrls[2]
+        Log.d(TAG, "ImagesList:$imagesList")
+        Log.d(TAG, "Images Urls:$imageUrl1,$imageUrl2,$imageUrl3")
 
         binding.finishButton.setOnClickListener {
             val category = args.sellArgs.category
@@ -66,7 +70,7 @@ class SellFragment2 : Fragment() {
             val description = binding.descriptionInputLayout.editText?.text.toString()
             val price = binding.priceInputLayout.editText?.text.toString()
             val uniqueItemId = UUID.randomUUID().toString()
-            val datePosted = ServerValue.TIMESTAMP.toString()
+            val datePosted = DateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
 
             val sell = Sell(
                 uniqueItemId,
@@ -108,6 +112,8 @@ class SellFragment2 : Fragment() {
                     binding.priceInputLayout.isErrorEnabled = true
                 }
                 else -> {
+                    //Upload images and details to firestore and cloud storage
+
                     binding.nameInputLayout.isErrorEnabled = false
                     binding.locationInputLayout.isErrorEnabled = false
                     binding.conditionInputLayout.isErrorEnabled = false
@@ -131,6 +137,7 @@ class SellFragment2 : Fragment() {
                                         "${it.data} has been uploaded successfully",
                                         Toast.LENGTH_SHORT
                                     ).show()
+                                    //requireActivity().onBackPressed()
                                 }
                                 is Resource.Error -> {
                                     binding.progressBar.isVisible = false
