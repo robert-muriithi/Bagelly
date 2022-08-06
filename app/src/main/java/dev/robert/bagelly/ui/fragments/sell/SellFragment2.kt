@@ -28,7 +28,6 @@ import java.util.*
 
 @AndroidEntryPoint
 class SellFragment2 : Fragment() {
-    private  val TAG = "SellFragment2"
     private lateinit var binding: FragmentSell2Binding
     private val args: SellFragment2Args by navArgs()
     private val viewModel: SellViewModel by viewModels()

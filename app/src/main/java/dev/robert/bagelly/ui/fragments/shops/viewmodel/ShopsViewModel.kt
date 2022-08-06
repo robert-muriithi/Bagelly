@@ -17,36 +17,19 @@ class ShopsViewModel
         private val repository: MainRepository
     ): ViewModel(){
 
-        private val _shops = MutableLiveData<Resource<List<Shop>>>()
-        val shops: LiveData<Resource<List<Shop>>>
-            get() = _shops
+        private val _createShop = MutableLiveData<Resource<List<Shop>>>()
+        val createShop: LiveData<Resource<List<Shop>>>
+            get() = _createShop
 
-      suspend fun createShop(shop: Shop){
-          _shops.value = Resource.Loading
-          try{
-                repository.createShop(shop){
-                    _shops.value = it
-                }
-          }
-          catch (e: Exception){
-              _shops.value = Resource.Error(e.message.toString())
-          }
-      }
-        private val _uploadImage = MutableLiveData<Resource<String>>()
-        val uploadImage: LiveData<Resource<String>>
-            get() = _uploadImage
-
-        /*suspend fun uploadImage(image: Uri) = flow {
-            _uploadImage.value = Resource.Loading
+        suspend fun createStore(shop: Shop, uri: Uri){
+            _createShop.value = Resource.Loading
             try{
-                val imageUrl = repository.addImageToFirebaseStorage(image){
-                    emit(it)
+                repository.createStore(shop, uri){
+                    _createShop.value = it
                 }
-                 emit(Resource.Success(imageUrl))
             }
             catch (e: Exception){
-                _uploadImage.value = Resource.Error(e.message.toString())
+                _createShop.value = Resource.Error(e.message.toString())
             }
-        }*/
-
+        }
 }

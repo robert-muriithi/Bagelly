@@ -26,12 +26,12 @@ object AppModule {
     fun provideRepository(
         database: FirebaseFirestore,
         storageReference: StorageReference,
-        collectionReference: CollectionReference
+        storage: FirebaseStorage
     ): MainRepository {
         return MainRepositoryImpl(
             database,
             storageReference,
-            collectionReference
+            storage
         )
     }
 
@@ -57,12 +57,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCollectionReference(db: FirebaseFirestore): CollectionReference {
-        return db.collection("images")
-    }
-
-    @Provides
-    @Singleton
     @ApplicationContext
     fun provideApplicationContext(@ApplicationContext app: Application): Application = app
 
@@ -70,5 +64,10 @@ object AppModule {
     @Singleton
     fun provideStorageReference(): StorageReference =
         FirebaseStorage.getInstance().reference
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage =
+        FirebaseStorage.getInstance()
 
 }
