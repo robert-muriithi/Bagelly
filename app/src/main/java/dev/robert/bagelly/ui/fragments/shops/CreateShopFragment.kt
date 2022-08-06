@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,7 +65,7 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 val shopWebsite = binding.shopWebsite.editText?.text.toString()
                 val shopPhone = binding.shopPhone.editText?.text.toString()
                 val shopLocation = binding.shopLocation.editText?.text.toString()
-                val imageUrl: String? = null
+                val imageUrl: String? = imageUri?.toString()
 
                 val shop = Shop(
                     ownerId,
@@ -96,9 +97,9 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     else -> {
                         if (CheckInternet.isConnected(requireContext())) {
                             viewLifecycleOwner.lifecycleScope.launch {
-                                viewModel.createShop(shop)
+                                viewModel.createStore(shop, imageUri!!)
                             }
-                            viewModel.shops.observe(viewLifecycleOwner) {
+                            viewModel.createShop.observe(viewLifecycleOwner) {
                                 when (it) {
                                     is Resource.Error -> {
                                         binding.createShopProgress.isVisible = false
@@ -140,14 +141,10 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     private fun openFileChooser(requestCode: Int) {
-        ImagePicker.with(requireActivity())
-            .crop(0.5f, 0.5f)                    //Crop image(Optional),Crop ratio : 1:1(Optional)
-            .compress(1024)                 //Final image size will be less than 1 MB(Optional)
-            .maxResultSize(
-                1080,
-                1080
-            )                               //Final image resolution will be less than 1080 x 1080(Optional)
-            .start(requestCode)
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, requestCode)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -155,7 +152,12 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
         when {
             requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK -> {
                 imageUri = data?.data
-                binding.addLogo.setImageURI(imageUri)
+                //binding.addLogo.setImageURI(imageUri)
+                Glide.with(this@CreateShopFragment)
+                    .load(imageUri)
+                    .circleCrop()
+                    .into(binding.logoImageView)
+                binding.addLogo.isVisible = false
             }
         }
     }

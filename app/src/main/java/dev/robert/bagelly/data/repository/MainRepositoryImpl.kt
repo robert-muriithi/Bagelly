@@ -4,6 +4,7 @@ import android.net.Uri
 import com.google.firebase.FirebaseException
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.model.Shop
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class MainRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore,
     private val storageReference: StorageReference,
-    private val collectionReference: CollectionReference
+    private val storage: FirebaseStorage
 ) :
     MainRepository {
 
@@ -31,21 +32,6 @@ class MainRepositoryImpl @Inject constructor(
             .addOnSuccessListener {
                 result.invoke(
                     Resource.Success(arrayListOf(sell))
-                )
-            }
-            .addOnFailureListener {
-                result.invoke(
-                    Resource.Error(it.message.toString())
-                )
-            }
-    }
-
-    override suspend fun createShop(shop: Shop, result: (Resource<List<Shop>>) -> Unit) {
-        db.collection("shops")
-            .add(shop)
-            .addOnSuccessListener {
-                result.invoke(
-                    Resource.Success(arrayListOf(shop))
                 )
             }
             .addOnFailureListener {
@@ -82,5 +68,37 @@ class MainRepositoryImpl @Inject constructor(
                 Resource.Error(e.message.toString())
             )
         }
+    }
+
+    override suspend fun createStore(
+        shop: Shop,
+        iconImage: Uri,
+        result: (Resource<List<Shop>>) -> Unit
+    ) {
+         val uris =withContext(Dispatchers.IO) {
+            async {
+                storageReference.child("stores/${System.currentTimeMillis()}")
+                    .putFile(iconImage)
+                    .addOnSuccessListener {
+                        db.collection("stores")
+                            .add(shop)
+                            .addOnSuccessListener {
+                                result.invoke(
+                                    Resource.Success(arrayListOf(shop))
+                                )
+                            }
+                            .addOnFailureListener {
+                                result.invoke(
+                                    Resource.Error(it.message.toString())
+                                )
+                            }
+                    }
+                    .await()
+                    .storage
+                    .downloadUrl
+                    .await()
+            }
+        }
+        shop.shopImage = uris.toString()
     }
 }

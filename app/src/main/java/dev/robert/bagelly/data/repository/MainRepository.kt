@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
     suspend fun sell(sell: Sell, result: (Resource<List<Sell>>) -> Unit)
-    suspend fun createShop(shop: Shop, result: (Resource<List<Shop>>) -> Unit)
     suspend fun addMultipleImages(imagesUri: List<Uri>, result: (Resource<List<Uri>>) -> Unit)
+    suspend fun createStore(shop: Shop, iconImage : Uri, result: (Resource<List<Shop>>) -> Unit)
 }

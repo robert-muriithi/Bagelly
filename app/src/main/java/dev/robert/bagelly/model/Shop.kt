@@ -2,12 +2,12 @@ package dev.robert.bagelly.model
 
 
 data class Shop(
-    val ownerId : String? = "",
-    val shopName : String? = "",
-    val shopCategory : String? = "",
-    val shopDescription : String? = "",
-    val shopWebsite : String? = "",
-    val shopPhone : String? = "",
-    val shopLocation: String? = "",
-    val shopImage : String? = "",
+    var ownerId : String? = "",
+    var shopName : String? = "",
+    var shopCategory : String? = "",
+    var shopDescription : String? = "",
+    var shopWebsite : String? = "",
+    var shopPhone : String? = "",
+    var shopLocation: String? = "",
+    var shopImage : String? = "",
 )
