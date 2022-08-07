@@ -24,24 +24,15 @@ class SellViewModel
     private val _sell = MutableLiveData<Resource<List<Sell>>>()
     val sell: LiveData<Resource<List<Sell>>> = _sell
 
-    suspend fun sell(sell: Sell){
+    suspend fun sell(sell: Sell, imagesUri: List<Uri>) {
         _sell.value = Resource.Loading
         try{
-            repository.sell(sell){
+            repository.sell(sell, imagesUri){
                 _sell.value = it
             }
         }
         catch (e: Exception){
             _sell.value = Resource.Error(e.message.toString())
-        }
-    }
-
-    fun uploadImages(imageUri : List<Uri>, result: (Resource<List<Uri>>) -> Unit){
-        result.invoke(Resource.Loading)
-        viewModelScope.launch {
-            repository.addMultipleImages(imageUri){
-                result.invoke(it)
-            }
         }
     }
 }

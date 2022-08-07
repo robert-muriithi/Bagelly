@@ -41,5 +41,17 @@ data class Sell(
         this.image2 = image2
         this.image3 = image3
     }
+    constructor(itemUniqueId: String?, sellerId: String?, itemName: String?, location: String?, condition: String?, description: String?, price: String?,category: String?,subCategory: String?,datePosted: String?) : this() {
+        this.itemUniqueId = itemUniqueId!!
+        this.sellerId = sellerId!!
+        this.itemName = itemName
+        this.location = location
+        this.condition = condition
+        this.description = description
+        this.price = price
+        this.category = category
+        this.subCategory = subCategory
+        this.datePosted = datePosted
+    }
 }
 
