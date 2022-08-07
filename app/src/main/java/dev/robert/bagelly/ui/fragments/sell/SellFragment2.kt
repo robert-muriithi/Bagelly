@@ -79,10 +79,7 @@ class SellFragment2 : Fragment() {
                 price,
                 category.toString(),
                 subCategory.toString(),
-                datePosted,
-                imageUrl1.toString(),
-                imageUrl2.toString(),
-                imageUrl3.toString()
+                datePosted
             )
 
             when {
@@ -116,7 +113,7 @@ class SellFragment2 : Fragment() {
                     binding.priceInputLayout.isErrorEnabled = false
                     if (CheckInternet.isConnected(requireContext())) {
                         viewLifecycleOwner.lifecycleScope.launch {
-                            viewModel.sell(sell)
+                            viewModel.sell(sell, imagesList)
                         }
                         viewModel.sell.observe(viewLifecycleOwner) {
                             when (it) {

@@ -8,7 +8,9 @@ import com.google.firebase.storage.StorageReference
 import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.model.Shop
 import dev.robert.bagelly.utils.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
@@ -24,10 +26,9 @@ class MainRepositoryImpl @Inject constructor(
         imagesUri: List<Uri>,
         result: (Resource<List<Sell>>) -> Unit
     ) {
-        val ref = storageReference.child("sell/${System.currentTimeMillis()}")
-        //loop imageList
-        imagesUri.forEach { it ->
-            val uploadTask = ref.child(it.lastPathSegment!!).putFile(it)
+        val ref = storageReference.child("sell/${System.currentTimeMillis()}/${sell.sellerId}")
+        /*imagesUri.map {
+            val uploadTask = ref.putFile(it)
             uploadTask.addOnSuccessListener {
                 Log.d(TAG, "Upload Success")
             }
@@ -40,11 +41,14 @@ class MainRepositoryImpl @Inject constructor(
                         throw it
                     }
                 }
-                ref.child(it.lastPathSegment!!).downloadUrl
+                ref.downloadUrl
             }.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val downloadUri = task.result
                     sell.images?.add(downloadUri)
+                    sell.image1 = sell.images?.get(0).toString()
+                    sell.image2 = sell.images?.add(downloadUri).toString()
+                    sell.image3 = sell.images?.add(downloadUri).toString()
                     db.collection("sell")
                         .add(sell)
                         .addOnSuccessListener {
@@ -62,7 +66,42 @@ class MainRepositoryImpl @Inject constructor(
                 }
             }
             task.await()
+        }*/
+        withContext(Dispatchers.IO){
+            try {
+                imagesUri.forEach {
+                    val uploadTask = ref.putFile(it)
+                    uploadTask
+                        .await()
+                }
+                val downloadUri = ref.downloadUrl.await()
+                sell.images?.add(downloadUri)
+                sell.image1 = downloadUri.toString()
+                sell.image2 = downloadUri.toString()
+                sell.image3 = downloadUri.toString()
+                db.collection("sell")
+                    .add(sell)
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(arrayListOf(sell))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
         }
+
+
 
     }
 
