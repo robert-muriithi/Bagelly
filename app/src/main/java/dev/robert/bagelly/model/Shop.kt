@@ -3,6 +3,7 @@ package dev.robert.bagelly.model
 
 data class Shop(
     var ownerId : String? = "",
+    var shopId: String? ="",
     var shopName : String? = "",
     var shopCategory : String? = "",
     var shopDescription : String? = "",

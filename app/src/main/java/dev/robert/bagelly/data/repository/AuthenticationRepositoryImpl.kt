@@ -1,6 +1,7 @@
 package dev.robert.bagelly.data.repository
 
 import android.app.Application
+import android.widget.Toast
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,52 +17,6 @@ class AuthenticationRepositoryImpl
     private val db: FirebaseFirestore,
     @ApplicationContext private val application: Application
 ) : AuthenticationRepository {
-    /*override suspend fun register(
-        name: String,
-        email: String,
-        phoneNothing: String,
-        password: String
-    ): Resource<AuthResult> {
-        return try {
-            val result = auth.createUserWithEmailAndPassword(email, password)
-            result.addOnCompleteListener {
-                if (it.isSuccessful){
-                    val user = auth.currentUser
-                    user?.sendEmailVerification()
-                    val uid = user?.uid
-                    val userData = Users(uid, name, email, phoneNothing)
-                    db.collection("users").document(uid!!).set(userData)
-                }
-                else{
-                    Toast.makeText(application, it.exception?.message, Toast.LENGTH_LONG).show()
-                }
-            }
-            Resource.Success(result.result)
-        } catch (e: Exception) {
-            Toast.makeText(application, "${e.message}", Toast.LENGTH_SHORT).show()
-            Resource.Error(e.message.toString())
-        }
-    }
-
-    override suspend fun login(email: String, password: String): Resource<AuthResult> {
-        return try {
-            val result = auth.signInWithEmailAndPassword(email, password)
-            Resource.Success(result.result)
-        } catch (e: Exception) {
-            Toast.makeText(application, "${e.message}", Toast.LENGTH_SHORT).show()
-            Resource.Error(e.message!!)
-        }
-    }
-
-    override suspend fun forgotPassword(email: String): Resource<Any> {
-        return try {
-            auth.sendPasswordResetEmail(email)
-            Resource.Success(Any())
-        } catch (e: Exception) {
-            Toast.makeText(application, "${e.message}", Toast.LENGTH_SHORT).show()
-            Resource.Error(e.message!!)
-        }
-    }*/
     override suspend fun registerUser(
         email: String,
         password: String,
@@ -75,8 +30,9 @@ class AuthenticationRepositoryImpl
                     user?.sendEmailVerification()
                     val uid = user?.uid
                     users.id = uid
-                    db.collection("users").document(uid!!).set(users)
+                    db.collection(FirestoreCollections.UserCollection).document(uid!!).set(users)
                     result(Resource.Success("Success"))
+                    Toast.makeText(application.applicationContext, "User created sucessfully", Toast.LENGTH_SHORT).show()
                 } else {
                     result(Resource.Error(it.exception?.message.toString()))
                 }
@@ -102,6 +58,7 @@ class AuthenticationRepositoryImpl
                         result(Resource.Success("Success"))
                     } else {
                         result(Resource.Error("Please verify your email"))
+                        Toast.makeText(application.applicationContext, "Please verify your email", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     result(
@@ -121,10 +78,11 @@ class AuthenticationRepositoryImpl
     }
 
     override suspend fun updateUser(users: Users, result: (Resource<String>) -> Unit) {
-        val document = db.collection("users").document(users.id!!)
+        val document = db.collection(FirestoreCollections.UserCollection).document(users.id!!)
         document
             .set(users)
             .addOnSuccessListener {
+                Toast.makeText(application.applicationContext, "Details Updated Successfully", Toast.LENGTH_SHORT).show()
                 result.invoke(
                     Resource.Success("Details Updated Successfully")
                 )
@@ -140,6 +98,8 @@ class AuthenticationRepositoryImpl
         auth.sendPasswordResetEmail(email)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
+                    Toast.makeText(application.applicationContext, "Email Sent", Toast.LENGTH_SHORT).show()
+
                     result(
                         Resource.Success("Email Sent")
                     )
