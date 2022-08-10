@@ -11,15 +11,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentSettingsBinding
+import dev.robert.bagelly.ui.fragments.settings.viewmodel.SettingsViewModel
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingsBinding
     private lateinit var listItem: Array<String>
+    private val viewModel by viewModels<SettingsViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,21 +85,31 @@ class SettingsFragment : Fragment() {
                         .setMessage("This will log you out of the app")
                         .setIcon(R.drawable.ic_warning)
                         .setPositiveButton("Yes"){ _, i ->
-                            Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
+                            try {
+                                val isLoggedOut = viewLifecycleOwner.lifecycleScope.launch {
+                                    viewModel.logout()
+                                }
+                                if (isLoggedOut.isActive){
+                                    isLoggedOut.cancel()
+                                }
+                                else{
+                                    Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            catch (e: Exception){
+                                Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
+                            }
+
                         }
                         .setNegativeButton("No"){ _, i ->
-                            Toast.makeText(requireContext(), "No", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "Cancelled", Toast.LENGTH_SHORT).show()
                         }.create()
                     alertDialog.show()
                 }
-                Toast.makeText(
-                    requireContext(),
-                    value,
-                    Toast.LENGTH_SHORT
-                ).show()
             }
 
         return view
     }
+
 
 }

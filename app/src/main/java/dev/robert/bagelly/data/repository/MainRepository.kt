@@ -18,4 +18,5 @@ interface MainRepository {
     suspend fun getMotorcycleAndVehicleDealers(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getServiceProvidersShops(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getFarmInputStores(result: (Resource<List<Shop>>) -> Unit)
+
 }
