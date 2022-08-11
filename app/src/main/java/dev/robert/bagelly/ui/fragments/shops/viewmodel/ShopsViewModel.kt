@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.robert.bagelly.data.repository.MainRepository
+import dev.robert.bagelly.model.Post
 import dev.robert.bagelly.model.Shop
 import dev.robert.bagelly.utils.Resource
 import javax.inject.Inject
@@ -46,6 +47,12 @@ class ShopsViewModel
        private val _getOtherStores = MutableLiveData<Resource<List<Shop>>>()
         val getOtherStores: LiveData<Resource<List<Shop>>>
             get() = _getOtherStores
+        private val _getPosts = MutableLiveData<Resource<List<Post>>>()
+        val getPosts: LiveData<Resource<List<Post>>>
+            get() = _getPosts
+        private val _postAd = MutableLiveData<Resource<List<Post>>>()
+        val postAd: LiveData<Resource<List<Post>>>
+            get() = _postAd
 
         suspend fun createStore(shop: Shop, uri: Uri){
             _createShop.value = Resource.Loading
@@ -156,6 +163,29 @@ class ShopsViewModel
             }
             catch (e: Exception){
                 _getOtherStores.value = Resource.Error(e.message.toString())
+            }
+        }
+        suspend fun postAd(post: Post, image: Uri){
+            _postAd.value = Resource.Loading
+            try{
+                repository.postAd(post, image){
+                    _postAd.value = it
+                }
+            }
+            catch (e: Exception){
+                _postAd.value = Resource.Error(e.message.toString())
+            }
+        }
+
+        suspend fun getPosts(){
+            _getPosts.value = Resource.Loading
+            try{
+                repository.getPosts{
+                    _getPosts.value = it
+                }
+            }
+            catch (e: Exception){
+                _getPosts.value = Resource.Error(e.message.toString())
             }
         }
 

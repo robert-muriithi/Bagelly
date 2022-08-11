@@ -6,11 +6,14 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import dev.robert.bagelly.R
+import dev.robert.bagelly.model.Post
 import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.model.Shop
+import dev.robert.bagelly.model.Users
 import dev.robert.bagelly.utils.FirestoreCollections
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +37,33 @@ class MainRepositoryImpl @Inject constructor(
         db.firestoreSettings = firestoreSettings
     }
     private val TAG = "MainRepositoryImpl"
+
+    override suspend fun getUsers(result: (Resource<List<Users>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.UserCollection)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                           Resource.Success(
+                                    it.toObjects(Users::class.java)
+                                )
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
     override suspend fun sell(
         sell: Sell,
         imagesUri: ArrayList<Uri>,
@@ -95,8 +125,7 @@ class MainRepositoryImpl @Inject constructor(
                         result.invoke(
                             Resource.Error(it.message.toString())
                         )
-                    }.await()
-
+                    }
             } catch (e: Exception) {
                 Log.d(TAG, "exception ${e.message}")
 
@@ -316,6 +345,64 @@ class MainRepositoryImpl @Inject constructor(
                     .addOnSuccessListener {
                         result.invoke(
                             Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun postAd(
+        post: Post,
+        postImage: Uri,
+        result: (Resource<List<Post>>) -> Unit
+    ) {
+        withContext(Dispatchers.IO){
+            try {
+                val postId = db.collection(FirestoreCollections.PostCollection).document().id
+                val storageReference = FirebaseStorage.getInstance().reference.child("post_images/$postId")
+                val uploadTask = storageReference.putFile(postImage)
+                uploadTask.addOnSuccessListener {
+                    storageReference.downloadUrl.addOnSuccessListener {
+                        post.postImage = it.toString()
+                        db.collection(FirestoreCollections.PostCollection).document(postId).set(post)
+                            .addOnSuccessListener {
+                                result.invoke(Resource.Success(listOf(post)))
+                            }
+                            .addOnFailureListener {
+                                result.invoke(Resource.Error(it.message.toString()))
+                            }
+                    }
+                }
+                    .addOnFailureListener {
+                        result.invoke(Resource.Error(it.message.toString()))
+                    }
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getPosts(result: (Resource<List<Post>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.PostCollection)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Post::class.java))
                         )
                     }
                     .addOnFailureListener {

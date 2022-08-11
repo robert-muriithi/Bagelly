@@ -335,5 +335,37 @@
         <argument
             android:name="shopDetails"
             app:argType="dev.robert.bagelly.model.Shop" />
+        <action
+            android:id="@+id/action_viewShopFragment_to_shopsAddPostFragment"
+            app:destination="@id/shopsAddPostFragment" />
+        <action
+            android:id="@+id/action_viewShopFragment_to_editShopFragment"
+            app:destination="@id/editShopFragment" />
+        <action
+            android:id="@+id/action_viewShopFragment_to_viewPostFragment"
+            app:destination="@id/viewPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shopsAddPostFragment"
+        android:name="dev.robert.bagelly.ui.fragments.shops.ShopsAddPostFragment"
+        android:label="fragment_shops_add_post"
+        tools:layout="@layout/fragment_shops_add_post" />
+    <fragment
+        android:id="@+id/editShopFragment"
+        android:name="dev.robert.bagelly.ui.fragments.shops.EditShopFragment"
+        android:label="fragment_edit_shop"
+        tools:layout="@layout/fragment_edit_shop" >
+        <argument
+            android:name="shopDetail"
+            app:argType="dev.robert.bagelly.model.Shop" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPostFragment"
+        android:name="dev.robert.bagelly.ui.fragments.shops.ViewPostFragment"
+        android:label="fragment_view_post"
+        tools:layout="@layout/fragment_view_post" >
+        <argument
+            android:name="postDetails"
+            app:argType="dev.robert.bagelly.model.Post" />
     </fragment>
 </navigation>
