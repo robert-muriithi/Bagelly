@@ -2,11 +2,13 @@ package dev.robert.bagelly.data.repository
 
 import android.net.Uri
 import android.util.Log
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import dev.robert.bagelly.R
 import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.model.Shop
 import dev.robert.bagelly.utils.FirestoreCollections
@@ -329,5 +331,4 @@ class MainRepositoryImpl @Inject constructor(
             }
         }
     }
-
 }

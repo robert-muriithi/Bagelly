@@ -75,6 +75,9 @@
         <action
             android:id="@+id/action_shopsFragment_to_createShopFragment"
             app:destination="@id/createShopFragment" />
+        <action
+            android:id="@+id/action_shopsFragment_to_viewShopFragment"
+            app:destination="@id/viewShopFragment" />
     </fragment>
     <fragment
         android:id="@+id/sellFragment"
@@ -324,4 +327,13 @@
             android:id="@+id/action_accountFragment_to_myPostFragment"
             app:destination="@id/myPostFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/viewShopFragment"
+        android:name="dev.robert.bagelly.ui.fragments.shops.ViewShopFragment"
+        android:label="fragment_view_shop"
+        tools:layout="@layout/fragment_view_shop" >
+        <argument
+            android:name="shopDetails"
+            app:argType="dev.robert.bagelly.model.Shop" />
+    </fragment>
 </navigation>

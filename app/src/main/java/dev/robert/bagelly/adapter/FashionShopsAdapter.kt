@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ import com.bumptech.glide.request.target.Target
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.ExclusiveShopsItemLayoutBinding
 import dev.robert.bagelly.model.Shop
+import dev.robert.bagelly.ui.fragments.shops.ShopsFragmentDirections
 
 class FashionShopsAdapter : ListAdapter<Shop, FashionShopsAdapter.ShopsViewHolder>(ShopsComparator) {
     class ShopsViewHolder(private val binding: ExclusiveShopsItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
@@ -72,7 +74,8 @@ class FashionShopsAdapter : ListAdapter<Shop, FashionShopsAdapter.ShopsViewHolde
     override fun onBindViewHolder(holder: ShopsViewHolder, position: Int) {
         val sell = getItem(position)
         holder.itemView.setOnClickListener {
-            Toast.makeText(it.context, "${sell.shopName}", Toast.LENGTH_SHORT).show()
+            val action = ShopsFragmentDirections.actionShopsFragmentToViewShopFragment(sell)
+            it.findNavController().navigate(action)
         }
         holder.bind(sell)
     }

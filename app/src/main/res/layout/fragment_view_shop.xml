@@ -1,14 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.shops.ViewShopFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/viewShopAppBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/light_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/viewShopToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:navigationIcon="@drawable/ic_arrow_back_white"
+                app:title="Shop Details"
+                app:titleTextColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/editShopImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_edit_white"
+                android:visibility="invisible"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/viewShopImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:elevation="8dp"
+        android:src="@drawable/artis"
+        app:layout_constraintBottom_toBottomOf="@+id/viewShopAppBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewShopAppBar" />
+
+
+    <TextView
+        android:id="@+id/viewShopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Kilimall Kenya"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewShopImage" />
+
+    <TextView
+        android:id="@+id/numberOfPostsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/textView33"
+        app:layout_constraintTop_toBottomOf="@+id/viewShopAppBar" />
+
+    <TextView
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Posts"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/numberOfPostsTv"
+        app:layout_constraintStart_toStartOf="@+id/numberOfPostsTv"
+        app:layout_constraintTop_toBottomOf="@+id/numberOfPostsTv" />
+
+    <TextView
+        android:id="@+id/followersTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/textView32"
+        app:layout_constraintTop_toBottomOf="@+id/viewShopAppBar" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Followers"
+        app:layout_constraintEnd_toEndOf="@+id/followersTv"
+        app:layout_constraintStart_toStartOf="@+id/followersTv"
+        app:layout_constraintTop_toBottomOf="@+id/followersTv" />
+
+    <TextView
+        android:id="@+id/followingTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewShopAppBar" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Following"
+        app:layout_constraintEnd_toEndOf="@+id/followingTv"
+        app:layout_constraintStart_toStartOf="@+id/followingTv"
+        app:layout_constraintTop_toBottomOf="@+id/followingTv" />
+
+    <TextView
+        android:id="@+id/viewShopLoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/location"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/viewShopName"
+        app:layout_constraintTop_toBottomOf="@+id/viewShopName" />
+
+    <TextView
+        android:id="@+id/viewShopWebsite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Website"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/viewShopLoc"
+        app:layout_constraintTop_toBottomOf="@+id/viewShopLoc" />
+
+    <TextView
+        android:id="@+id/shopDescriptionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="jhjhf"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/viewShopWebsite"
+        app:layout_constraintTop_toBottomOf="@+id/viewShopWebsite" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/followBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/white"
+        android:text="Follow"
+        android:textAllCaps="false"
+        android:paddingRight="40dp"
+        android:paddingLeft="40dp"
+        app:layout_constraintEnd_toStartOf="@+id/messageBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shopDescriptionTv" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/messageBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/white"
+        android:text="Message"
+        android:textAllCaps="false"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/followBtn"
+        app:layout_constraintEnd_toStartOf="@+id/addPostBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/followBtn"
+        app:layout_constraintTop_toTopOf="@+id/followBtn" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/addPostBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/white"
+        android:text="Add Post"
+        android:textAllCaps="false"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/messageBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/messageBtn"
+        app:layout_constraintTop_toTopOf="@+id/messageBtn" />
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="#D3D3D3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/followBtn" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shopPostsRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view7"
+        app:spanCount="2"
+        tools:listitem="@layout/favorite_item_layout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

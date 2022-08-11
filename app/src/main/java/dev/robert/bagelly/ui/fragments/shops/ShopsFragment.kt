@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.facebook.shimmer.Shimmer
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.adapter.*
@@ -307,5 +308,10 @@ class ShopsFragment : Fragment() {
         getFarmInputStores()
         getOtherStores()
     }
+    
+    /*override fun onResume() {
+        super.onResume()
+        fetchShops()
+    }*/
 
 }

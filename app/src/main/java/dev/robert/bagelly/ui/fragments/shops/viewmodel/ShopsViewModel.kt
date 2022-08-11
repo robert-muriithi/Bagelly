@@ -158,4 +158,5 @@ class ShopsViewModel
                 _getOtherStores.value = Resource.Error(e.message.toString())
             }
         }
+
 }

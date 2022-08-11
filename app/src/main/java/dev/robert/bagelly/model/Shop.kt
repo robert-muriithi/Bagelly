@@ -1,6 +1,9 @@
 package dev.robert.bagelly.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Shop(
     var ownerId : String? = "",
     var shopId: String? ="",
@@ -11,4 +14,4 @@ data class Shop(
     var shopPhone : String? = "",
     var shopLocation: String? = "",
     var shopImage : String? = "",
-)
+) : Parcelable
