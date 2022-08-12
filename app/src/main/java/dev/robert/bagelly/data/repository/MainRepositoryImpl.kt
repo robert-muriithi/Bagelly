@@ -398,6 +398,7 @@ class MainRepositoryImpl @Inject constructor(
     override suspend fun getPosts(result: (Resource<List<Post>>) -> Unit) {
         withContext(Dispatchers.IO){
             try {
+                val shopId = db.collection(FirestoreCollections.PostCollection).document().id
                 db.collection(FirestoreCollections.PostCollection)
                     .get()
                     .addOnSuccessListener {
@@ -409,6 +410,26 @@ class MainRepositoryImpl @Inject constructor(
                         result.invoke(
                             Resource.Error(it.message.toString())
                         )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun deleteSinglePost(post: Post, result: (Resource<Post>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                val postId = db.collection(FirestoreCollections.PostCollection).document().id
+                db.collection(FirestoreCollections.PostCollection).document(postId).delete()
+                    .addOnSuccessListener {
+                        result.invoke(Resource.Success(post))
+                    }
+                    .addOnFailureListener {
+                        result.invoke(Resource.Error(it.message.toString()))
                     }.await()
             } catch (e: Exception) {
                 Log.d(TAG, "exception ${e.message}")

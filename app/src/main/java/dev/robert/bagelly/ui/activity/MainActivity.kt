@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 in listOf(
                     R.id.splashFragment,
-                    R.id.searchFragment,
                     R.id.myAccountFragment,
                     R.id.editProfileFragment,
                     R.id.settingsFragment,

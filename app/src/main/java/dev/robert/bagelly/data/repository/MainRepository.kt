@@ -23,5 +23,6 @@ interface MainRepository {
     suspend fun getFarmInputStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun postAd(post: Post, postImage : Uri, result: (Resource<List<Post>>) -> Unit)
     suspend fun getPosts(result: (Resource<List<Post>>) -> Unit)
+    suspend fun deleteSinglePost(post: Post, result: (Resource<Post>) -> Unit)
 
 }

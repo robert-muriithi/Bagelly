@@ -25,6 +25,13 @@ class ShopPostAdapter :  ListAdapter<Post, ShopPostAdapter.PostViewHolder>(PostD
         }
     }
 
+    fun removeItem(item: Post){
+        val position = currentList.indexOf(item)
+        if (position != -1){
+            currentList.removeAt(position)
+            notifyItemRemoved(position)
+        }
+    }
     object PostDiffUtil : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
             return oldItem.postId == newItem.postId

@@ -97,6 +97,8 @@
     <string name="specific_location">Specific Location</string>
     <string name="item_description">Item description</string>
     <string name="price">Price</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search</string>
 
     <array name="category">
         <item>Agriculture and Food</item>

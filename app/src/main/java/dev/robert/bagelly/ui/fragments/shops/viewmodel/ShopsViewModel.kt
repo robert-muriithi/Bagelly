@@ -53,6 +53,9 @@ class ShopsViewModel
         private val _postAd = MutableLiveData<Resource<List<Post>>>()
         val postAd: LiveData<Resource<List<Post>>>
             get() = _postAd
+        private val _deletePost = MutableLiveData<Resource<Post>>()
+        val deletePost: LiveData<Resource<Post>>
+            get() = _deletePost
 
         suspend fun createStore(shop: Shop, uri: Uri){
             _createShop.value = Resource.Loading
@@ -186,6 +189,18 @@ class ShopsViewModel
             }
             catch (e: Exception){
                 _getPosts.value = Resource.Error(e.message.toString())
+            }
+        }
+
+        suspend fun deletePost(post: Post){
+            _deletePost.value = Resource.Loading
+            try{
+                repository.deleteSinglePost(post){
+                    _deletePost.value = it
+                }
+            }
+            catch (e: Exception){
+                _deletePost.value = Resource.Error(e.message.toString())
             }
         }
 
