@@ -7,18 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
+import dev.robert.bagelly.adapter.RecentUploadsAdapter
 import dev.robert.bagelly.databinding.FragmentHomeBinding
 import dev.robert.bagelly.ui.fragments.auth.SignInFragment
+import dev.robert.bagelly.ui.fragments.home.viewmodel.HomeViewModel
+import dev.robert.bagelly.utils.Resource
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment  : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var auth  : FirebaseAuth
+    private val viewModel : HomeViewModel by viewModels()
+    private val adapter by lazy { RecentUploadsAdapter() }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,6 +35,8 @@ class HomeFragment  : Fragment() {
         val view = binding.root
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
+        binding.recentlyUploadedItemsRecyclerView.adapter = adapter
+        fetchRecentUploads()
 
         auth = FirebaseAuth.getInstance()
 
@@ -83,9 +92,38 @@ class HomeFragment  : Fragment() {
         return view
     }
 
-    override fun onResume() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
-        super.onResume()
+    private fun fetchRecentUploads() {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.getSells()
+        }
+        viewModel.sell.observe(viewLifecycleOwner) {
+            when(it){
+                is Resource.Loading -> {
+                    binding.progressBar.isVisible = true
+                }
+                is Resource.Success -> {
+                    binding.progressBar.isVisible = false
+                    adapter.submitList(it.data)
+                }
+                is Resource.Error -> {
+                    binding.progressBar.isVisible = false
+                    /*it.message?.let { message ->
+                        binding.homeErrorTextView.text = message
+                        binding.homeErrorTextView.isVisible = true
+                    }*/
+                }
+            }
+        }
     }
+
+    /*override fun onResume() {
+        if (auth.currentUser != null && auth.currentUser?.isEmailVerified!!) {
+            binding.accountImage.isVisible = true
+        }
+        else{
+            binding.accountImage.isVisible = false
+        }
+    super.onResume()
+    }*/
 
 }

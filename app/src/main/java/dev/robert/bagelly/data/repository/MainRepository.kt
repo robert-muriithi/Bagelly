@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface MainRepository {
     suspend fun getUsers(result: (Resource<List<Users>>) -> Unit)
     suspend fun sell(sell: Sell, imagesUri: ArrayList<Uri>, result: (Resource<List<Sell>>) -> Unit)
+    suspend fun getSells(result: (Resource<List<Sell>>) -> Unit)
     suspend fun createStore(shop: Shop, iconImage : Uri, result: (Resource<List<Shop>>) -> Unit)
     suspend fun getElectronicStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getHomeAndLivingStores(result: (Resource<List<Shop>>) -> Unit)

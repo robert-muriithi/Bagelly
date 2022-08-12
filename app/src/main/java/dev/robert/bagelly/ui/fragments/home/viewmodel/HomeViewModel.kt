@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.robert.bagelly.data.repository.MainRepository
+import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.model.Users
 import dev.robert.bagelly.utils.Resource
 import javax.inject.Inject
@@ -18,6 +19,9 @@ class HomeViewModel
     : ViewModel(){
         private val _user = MutableLiveData<Resource<List<Users>>>()
         val user = _user as LiveData<Resource<List<Users>>>
+        private val _sell = MutableLiveData<Resource<List<Sell>>>()
+        val sell = _sell as LiveData<Resource<List<Sell>>>
+
 
         suspend fun getUser(){
             _user.value = Resource.Loading
@@ -29,4 +33,15 @@ class HomeViewModel
                 _user.value = Resource.Error(e.message.toString())
             }
         }
+        suspend fun getSells(){
+            _sell.value = Resource.Loading
+            try {
+                repository.getSells {
+                    _sell.value = it
+                }
+            }catch (e : Exception){
+                _sell.value = Resource.Error(e.message.toString())
+            }
+        }
+
 }
