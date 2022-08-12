@@ -2,14 +2,10 @@ package dev.robert.bagelly.data.repository
 
 import android.net.Uri
 import android.util.Log
-import com.bumptech.glide.Glide
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import dev.robert.bagelly.R
 import dev.robert.bagelly.model.Post
 import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.model.Shop
@@ -18,10 +14,15 @@ import dev.robert.bagelly.utils.FirestoreCollections
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import android.widget.Toast
+
+import android.content.Intent
+
+
+
 
 class MainRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore,
@@ -69,10 +70,10 @@ class MainRepositoryImpl @Inject constructor(
         imagesUri: ArrayList<Uri>,
         result: (Resource<List<Sell>>) -> Unit
     ) {
-        val ref = storageReference.child("sell/${System.currentTimeMillis()}/${sell.sellerId}")
+        //val ref = storageReference.child("sell/${System.currentTimeMillis()}/${sell.sellerId}")
         withContext(Dispatchers.IO){
             try {
-                imagesUri.map {
+                /*imagesUri.map {
                     ref.putFile(it).await()
                     val downloadUri = ref.downloadUrl.await()
                     async {
@@ -80,7 +81,7 @@ class MainRepositoryImpl @Inject constructor(
                         sell.image1 = downloadUri.toString()
                         sell.image2 = downloadUri.toString()
                         sell.image3 = downloadUri.toString()
-                        db.collection(FirestoreCollections.StoreCollection)
+                        db.collection(FirestoreCollections.SellCollection)
                             .add(sell)
                             .addOnSuccessListener {
                                 result.invoke(
@@ -91,9 +92,49 @@ class MainRepositoryImpl @Inject constructor(
                                 result.invoke(
                                     Resource.Error(it.message.toString())
                                 )
-                            }.await()
+                            }
                     }
-                }.awaitAll()
+                }*/
+                val sellId = db.collection(FirestoreCollections.SellCollection).document().id
+                val storageReference = FirebaseStorage.getInstance().reference.child("sell/$sellId")
+                var i = 0
+                while (i < imagesUri.size) {
+                    val uploadTask = storageReference.putFile(imagesUri[i])
+                    uploadTask.addOnSuccessListener {
+                      val task =   storageReference.downloadUrl
+                        task.addOnSuccessListener {
+                            sell.images?.add(it)
+                            when (i) {
+                                0 -> {
+                                    sell.image1 = it.toString()
+                                }
+                                1 -> {
+                                    sell.image2 = it.toString()
+                                }
+                                2 -> {
+                                    sell.image3 = it.toString()
+                                }
+                            }
+                            i++
+                            if (i == imagesUri.size) {
+                                db.collection(FirestoreCollections.SellCollection)
+                                    .add(sell)
+                                    .addOnSuccessListener {
+                                        result.invoke(
+                                            Resource.Success(arrayListOf(sell))
+                                        )
+                                    }
+                                    .addOnFailureListener {
+                                        result.invoke(
+                                            Resource.Error(it.message.toString())
+                                        )
+                                    }
+                            }
+                        }
+
+                    }
+                }
+
             } catch (e: Exception) {
                 Log.d(TAG, "exception ${e.message}")
 
@@ -439,4 +480,6 @@ class MainRepositoryImpl @Inject constructor(
             }
         }
     }
+
 }
+

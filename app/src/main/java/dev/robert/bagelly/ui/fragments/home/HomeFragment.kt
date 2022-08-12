@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +32,7 @@ class HomeFragment  : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         binding.apply {
+
             accountImage.setOnClickListener {
                 if (auth.currentUser != null && auth.currentUser?.isEmailVerified!!) {
                     findNavController().navigate(R.id.action_homeFragment_to_accountFragment)
