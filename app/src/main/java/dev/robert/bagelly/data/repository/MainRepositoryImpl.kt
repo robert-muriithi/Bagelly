@@ -2,88 +2,52 @@ package dev.robert.bagelly.data.repository
 
 import android.net.Uri
 import android.util.Log
+import com.bumptech.glide.Glide
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import dev.robert.bagelly.R
+import dev.robert.bagelly.model.Post
 import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.model.Shop
+import dev.robert.bagelly.model.Users
+import dev.robert.bagelly.utils.FirestoreCollections
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore,
-    private val storageReference: StorageReference,
-    private val storage: FirebaseStorage
+    private val storageReference: StorageReference
 ) :
     MainRepository {
-
+    companion object{
+        val firestoreSettings = FirebaseFirestoreSettings.Builder()
+            .setPersistenceEnabled(true)
+            .build()
+    }
+    init {
+        db.firestoreSettings = firestoreSettings
+    }
     private val TAG = "MainRepositoryImpl"
-    override suspend fun sell(
-        sell: Sell,
-        imagesUri: List<Uri>,
-        result: (Resource<List<Sell>>) -> Unit
-    ) {
-        val ref = storageReference.child("sell/${System.currentTimeMillis()}/${sell.sellerId}")
-        /*imagesUri.map {
-            val uploadTask = ref.putFile(it)
-            uploadTask.addOnSuccessListener {
-                Log.d(TAG, "Upload Success")
-            }
-                .addOnFailureListener {
-                    Log.d(TAG, "exception ${it.message}")
-                }
-            val task = uploadTask.continueWithTask { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
-                    }
-                }
-                ref.downloadUrl
-            }.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val downloadUri = task.result
-                    sell.images?.add(downloadUri)
-                    sell.image1 = sell.images?.get(0).toString()
-                    sell.image2 = sell.images?.add(downloadUri).toString()
-                    sell.image3 = sell.images?.add(downloadUri).toString()
-                    db.collection("sell")
-                        .add(sell)
-                        .addOnSuccessListener {
-                            result.invoke(
-                                Resource.Success(arrayListOf(sell))
-                            )
-                        }
-                        .addOnFailureListener {
-                            result.invoke(
-                                Resource.Error(it.message.toString())
-                            )
-                        }
-                } else {
-                    Log.d(TAG, "exception ${task.exception?.message}")
-                }
-            }
-            task.await()
-        }*/
+
+    override suspend fun getUsers(result: (Resource<List<Users>>) -> Unit) {
         withContext(Dispatchers.IO){
             try {
-                imagesUri.forEach {
-                    val uploadTask = ref.putFile(it)
-                    uploadTask
-                        .await()
-                }
-                val downloadUri = ref.downloadUrl.await()
-                sell.images?.add(downloadUri)
-                sell.image1 = downloadUri.toString()
-                sell.image2 = downloadUri.toString()
-                sell.image3 = downloadUri.toString()
-                db.collection("sell")
-                    .add(sell)
+                db.collection(FirestoreCollections.UserCollection)
+                    .get()
                     .addOnSuccessListener {
                         result.invoke(
-                            Resource.Success(arrayListOf(sell))
+                           Resource.Success(
+                                    it.toObjects(Users::class.java)
+                                )
                         )
                     }
                     .addOnFailureListener {
@@ -91,7 +55,45 @@ class MainRepositoryImpl @Inject constructor(
                             Resource.Error(it.message.toString())
                         )
                     }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
 
+    override suspend fun sell(
+        sell: Sell,
+        imagesUri: ArrayList<Uri>,
+        result: (Resource<List<Sell>>) -> Unit
+    ) {
+        val ref = storageReference.child("sell/${System.currentTimeMillis()}/${sell.sellerId}")
+        withContext(Dispatchers.IO){
+            try {
+                imagesUri.map {
+                    ref.putFile(it).await()
+                    val downloadUri = ref.downloadUrl.await()
+                    async {
+                        sell.images?.add(downloadUri)
+                        sell.image1 = downloadUri.toString()
+                        sell.image2 = downloadUri.toString()
+                        sell.image3 = downloadUri.toString()
+                        db.collection(FirestoreCollections.StoreCollection)
+                            .add(sell)
+                            .addOnSuccessListener {
+                                result.invoke(
+                                    Resource.Success(arrayListOf(sell))
+                                )
+                            }
+                            .addOnFailureListener {
+                                result.invoke(
+                                    Resource.Error(it.message.toString())
+                                )
+                            }.await()
+                    }
+                }.awaitAll()
             } catch (e: Exception) {
                 Log.d(TAG, "exception ${e.message}")
 
@@ -100,93 +102,19 @@ class MainRepositoryImpl @Inject constructor(
                 result.invoke(Resource.Error(e.message.toString()))
             }
         }
-
-
-
     }
-
-    /*override suspend fun addMultipleImages(
-        imagesUri: List<Uri>,
-        result: (Resource<List<Uri>>) -> Unit
-    ) {
-        try {
-            val uris = withContext(Dispatchers.IO) {
-                imagesUri.map { uri ->
-                    async {
-                        storageReference.child(uri.lastPathSegment!!)
-                            .putFile(uri)
-                            .await()
-                            .storage.downloadUrl.await()
-                    }
-                }.awaitAll()
-            }
-            result.invoke(
-                Resource.Success(uris)
-            )
-        } catch (e: Exception) {
-            result.invoke(
-                Resource.Error(e.message.toString())
-            )
-        } catch (e: FirebaseException) {
-            result.invoke(
-                Resource.Error(e.message.toString())
-            )
-        }
-    }*/
 
     override suspend fun createStore(
         shop: Shop,
         iconImage: Uri,
-        result: (Resource<List<Shop>>) -> Unit
-    ) {
-        /*CoroutineScope(Dispatchers.IO).launch {
-            storageReference.child("stores/${System.currentTimeMillis()}")
-                .putFile(iconImage)
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        if (it.isComplete){
-                            val iconImageUrl = it.result?.storage?.downloadUrl?.toString()
-                            shop.shopImage = iconImageUrl
-                            db.collection("stores")
-                                .add(shop)
-                                .addOnSuccessListener {
-                                    result.invoke(
-                                        Resource.Success(arrayListOf(shop))
-                                    )
-                                }
-                                .addOnFailureListener {
-                                    result.invoke(
-                                        Resource.Error(it.message.toString())
-                                    )
-                                }
-                        }
-                    } else {
-                        result.invoke(
-                            Resource.Error(it.exception?.message.toString())
-                        )
-                    }
-                }.await()
-        }*/
+        result: (Resource<List<Shop>>) -> Unit) {
         val ref = storageReference.child("stores/${System.currentTimeMillis()}")
-        val uploadTask = ref.putFile(iconImage)
-        uploadTask.addOnSuccessListener {
-            Log.d(TAG, "image Uploaded Successfully: ")
-        }.addOnFailureListener {
-            Log.d(TAG, "Exception: ${it.message}")
-        }
-
-        val task = uploadTask.continueWithTask { task ->
-            if (!task.isSuccessful) {
-                task.exception?.let {
-                    throw it
-                }
-            }
-            ref.downloadUrl
-        }.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val downloadUri = task.result
+        withContext(Dispatchers.IO){
+            try {
+                ref.putFile(iconImage).await()
+                val downloadUri = ref.downloadUrl.await()
                 shop.shopImage = downloadUri.toString()
-                db.collection("stores")
+                db.collection(FirestoreCollections.StoreCollection)
                     .add(shop)
                     .addOnSuccessListener {
                         result.invoke(
@@ -198,12 +126,296 @@ class MainRepositoryImpl @Inject constructor(
                             Resource.Error(it.message.toString())
                         )
                     }
-            } else {
-                result.invoke(
-                    Resource.Error(task.exception?.message.toString())
-                )
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
             }
         }
-        task.await()
+    }
+
+    override suspend fun getElectronicStores(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","Electronics and Electrical Shops")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getHomeAndLivingStores(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","Home and Living Stores")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getMobilePhonesStores(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","Mobile Phones Shops")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getFashionShops(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","Fashion shops and Stores")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getGeneralStores(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","General Stores")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getOtherStores(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","Other stores")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getMotorcycleAndVehicleDealers(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","Motorcycle and Vehicle Dealers")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getServiceProvidersShops(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","Service Providers")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getFarmInputStores(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory","Farm inputs Stores")
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun postAd(
+        post: Post,
+        postImage: Uri,
+        result: (Resource<List<Post>>) -> Unit
+    ) {
+        withContext(Dispatchers.IO){
+            try {
+                val postId = db.collection(FirestoreCollections.PostCollection).document().id
+                val storageReference = FirebaseStorage.getInstance().reference.child("post_images/$postId")
+                val uploadTask = storageReference.putFile(postImage)
+                uploadTask.addOnSuccessListener {
+                    storageReference.downloadUrl.addOnSuccessListener {
+                        post.postImage = it.toString()
+                        db.collection(FirestoreCollections.PostCollection).document(postId).set(post)
+                            .addOnSuccessListener {
+                                result.invoke(Resource.Success(listOf(post)))
+                            }
+                            .addOnFailureListener {
+                                result.invoke(Resource.Error(it.message.toString()))
+                            }
+                    }
+                }
+                    .addOnFailureListener {
+                        result.invoke(Resource.Error(it.message.toString()))
+                    }
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getPosts(result: (Resource<List<Post>>) -> Unit) {
+        withContext(Dispatchers.IO){
+            try {
+                db.collection(FirestoreCollections.PostCollection)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Post::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            }
+            catch (e : Exception){
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
     }
 }

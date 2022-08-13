@@ -81,4 +81,10 @@ dependencies {
     //image picker
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
+    //material search bar
+    implementation 'com.github.mancj:MaterialSearchBar:0.8.5'
+
+    //facebook shimmer layout
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
 }

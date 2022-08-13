@@ -26,12 +26,12 @@ import dev.robert.bagelly.ui.fragments.shops.viewmodel.ShopsViewModel
 import dev.robert.bagelly.utils.CheckInternet
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: FragmentCreateShopBinding
     private lateinit var listItem: Array<String>
-    private var imageUrl = ""
     private var imageUri: Uri? = null
     private val IMAGE_PICK_CODE = 5
     private val viewModel: ShopsViewModel by viewModels()
@@ -66,15 +66,17 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 val shopPhone = binding.shopPhone.editText?.text.toString()
                 val shopLocation = binding.shopLocation.editText?.text.toString()
                 val imageUrl: String? = imageUri?.toString()
+                val shopId = UUID.randomUUID().toString()
 
                 val shop = Shop(
                     ownerId,
-                    shopCategory,
+                    shopId,
                     shopName,
+                    shopCategory,
                     shopDesc,
                     shopWebsite,
                     shopPhone,
-                    shopLocation,
+                    "$shopLocation, Kenya",
                     imageUrl
                 )
 
@@ -152,7 +154,6 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
         when {
             requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK -> {
                 imageUri = data?.data
-                //binding.addLogo.setImageURI(imageUri)
                 Glide.with(this@CreateShopFragment)
                     .load(imageUri)
                     .circleCrop()
@@ -164,45 +165,7 @@ class CreateShopFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         when (p0?.getItemAtPosition(p2).toString()) {
-            "Accommodation and travel services" -> {
-                binding.shopCategorySpinner.setSelection(0)
-            }
-            "Automotive services" -> {
-                binding.shopCategorySpinner.setSelection(1)
-            }
-            "Beauty and personal care" -> {
-                binding.shopCategorySpinner.setSelection(2)
-            }
-            "Books, music, and video" -> {
-                binding.shopCategorySpinner.setSelection(3)
-            }
-            "Clothing and accessories" -> {
-                binding.shopCategorySpinner.setSelection(4)
-            }
-            "Electronics and computer" -> {
-                binding.shopCategorySpinner.setSelection(5)
-            }
-            "Food and drink" -> {
-                binding.shopCategorySpinner.setSelection(6)
-            }
-            "Farm inputs Stores" -> {
-                binding.shopCategorySpinner.setSelection(7)
-            }
-            "Fashion and accessories store" -> {
-                binding.shopCategorySpinner.setSelection(8)
-            }
-            "Mobile phone and tablets Store" -> {
-                binding.shopCategorySpinner.setSelection(9)
-            }
-            "Office supplies and stationery stores" -> {
-                binding.shopCategorySpinner.setSelection(10)
-            }
-            "Vehicle dealers" -> {
-                binding.shopCategorySpinner.setSelection(11)
-            }
-            "Other stores" -> {
-                binding.shopCategorySpinner.setSelection(12)
-            }
+
         }
     }
 

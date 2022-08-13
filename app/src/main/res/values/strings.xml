@@ -83,6 +83,20 @@
     <string name="location">Location</string>
     <string name="upload_business_logo">Upload Business Logo</string>
     <string name="create_shop">Create Shop</string>
+    <string name="farm_inputs_stores">Farm inputs stores</string>
+    <string name="other_stores">Other Stores</string>
+    <string name="view_all">View all</string>
+    <string name="share">Share</string>
+    <string name="edit">Edit</string>
+    <string name="add_details">Add Details</string>
+    <string name="post_ad">Post Ad</string>
+    <string name="ad_details">Ad Details</string>
+    <string name="add_post_image">Add post image</string>
+    <string name="ad_title">Ad Name</string>
+    <string name="ad_type">Type</string>
+    <string name="specific_location">Specific Location</string>
+    <string name="item_description">Item description</string>
+    <string name="price">Price</string>
 
     <array name="category">
         <item>Agriculture and Food</item>
@@ -378,18 +392,14 @@
     </string-array>
 
     <string-array name="stores">
-        <item>Accommodation and travel services</item>
-        <item>Automotive services</item>
-        <item>Beauty and personal care</item>
-        <item>Books, music, and video</item>
-        <item>Clothing and accessories</item>
-        <item>Electronics and computer</item>
-        <item>Food and drink</item>
+        <item>Electronics and Electrical Shops</item>
+        <item>Home and Living Stores</item>
+        <item>Mobile Phones Shops</item>
+        <item>Fashion shops and Stores</item>
+        <item>Motorcycle and Vehicle Dealers</item>
+        <item>General Stores</item>
+        <item>Service Providers</item>
         <item>Farm inputs Stores</item>
-        <item>Fashion and accessories store</item>
-        <item>Mobile phone and tablets Store</item>
-        <item>Office supplies and stationery stores</item>
-        <item>Vehicle dealers</item>
         <item>Other stores</item>
     </string-array>
 
