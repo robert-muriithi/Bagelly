@@ -25,13 +25,13 @@ class AccountFragment : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
         binding = FragmentAccountBinding.inflate(inflater, container, false)
         val view = binding.root
-        fetchAccountDetails()
+        //fetchAccountDetails()
 
 
         return view
     }
 
-    private fun fetchAccountDetails() {
+    /*private fun fetchAccountDetails() {
         binding.userEmail.text = FirebaseAuth.getInstance().currentUser?.email
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.getUser()
@@ -39,6 +39,6 @@ class AccountFragment : BottomSheetDialogFragment() {
         viewModel.user.observe(viewLifecycleOwner) {
             binding.userName.text
         }
-    }
+    }*/
 
 }

@@ -32,7 +32,7 @@ class AuthenticationRepositoryImpl
                     users.id = uid
                     db.collection(FirestoreCollections.UserCollection).document(uid!!).set(users)
                     result(Resource.Success("Success"))
-                    Toast.makeText(application.applicationContext, "User created sucessfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(application.applicationContext, "User created Successfully", Toast.LENGTH_SHORT).show()
                 } else {
                     result(Resource.Error(it.exception?.message.toString()))
                 }

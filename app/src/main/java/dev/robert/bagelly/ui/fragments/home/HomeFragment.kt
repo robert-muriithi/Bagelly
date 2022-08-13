@@ -36,7 +36,7 @@ class HomeFragment  : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
         binding.recentlyUploadedItemsRecyclerView.adapter = adapter
-        fetchRecentUploads()
+        //fetchRecentUploads()
 
         auth = FirebaseAuth.getInstance()
 
@@ -99,13 +99,16 @@ class HomeFragment  : Fragment() {
         viewModel.sell.observe(viewLifecycleOwner) {
             when(it){
                 is Resource.Loading -> {
+                    hideViews()
                     binding.progressBar.isVisible = true
                 }
                 is Resource.Success -> {
+                    showViews()
                     binding.progressBar.isVisible = false
                     adapter.submitList(it.data)
                 }
                 is Resource.Error -> {
+                    showViews()
                     binding.progressBar.isVisible = false
                     /*it.message?.let { message ->
                         binding.homeErrorTextView.text = message
@@ -125,5 +128,28 @@ class HomeFragment  : Fragment() {
         }
     super.onResume()
     }*/
+    private fun hideViews(){
+        binding.textView9.isVisible = false
+        binding.textView7.isVisible = false
+        binding.imageView12.isVisible = false
+        binding.textView12.isVisible = false
+        binding.textView13.isVisible = false
+        binding.imageView13.isVisible = false
+        binding.tv14.isVisible = false
+        binding.textView6.isVisible = false
+        binding.imageView15.isVisible = false
+    }
+    private fun showViews(){
+        binding.textView9.isVisible = true
+        binding.textView7.isVisible = true
+        binding.imageView12.isVisible = true
+        binding.textView12.isVisible = true
+        binding.textView13.isVisible = true
+        binding.imageView13.isVisible = true
+        binding.tv14.isVisible = true
+        binding.textView6.isVisible = true
+        binding.imageView15.isVisible = true
+    }
+
 
 }

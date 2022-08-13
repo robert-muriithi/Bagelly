@@ -9,7 +9,9 @@ import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
-    suspend fun getUsers(result: (Resource<List<Users>>) -> Unit)
+    //suspend fun getUser(userId : String) : Resource<Users>
+    suspend fun updateUser(userId: String, userProfile: Uri, user : Users, result: (Resource<Users>) -> Unit)
+    suspend fun getSingleUser(userId : String, result : (Resource<Users>) -> Unit ) : Resource<Users>
     suspend fun sell(sell: Sell, imagesUri: ArrayList<Uri>, result: (Resource<List<Sell>>) -> Unit)
     suspend fun getSells(result: (Resource<List<Sell>>) -> Unit)
     suspend fun createStore(shop: Shop, iconImage : Uri, result: (Resource<List<Shop>>) -> Unit)

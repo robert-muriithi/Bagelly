@@ -17,22 +17,12 @@ class HomeViewModel
         private val repository: MainRepository
     )
     : ViewModel(){
-        private val _user = MutableLiveData<Resource<List<Users>>>()
-        val user = _user as LiveData<Resource<List<Users>>>
+
         private val _sell = MutableLiveData<Resource<List<Sell>>>()
         val sell = _sell as LiveData<Resource<List<Sell>>>
 
 
-        suspend fun getUser(){
-            _user.value = Resource.Loading
-            try {
-                repository.getUsers {
-                    _user.value = it
-                }
-            }catch (e : Exception){
-                _user.value = Resource.Error(e.message.toString())
-            }
-        }
+
         suspend fun getSells(){
             _sell.value = Resource.Loading
             try {
