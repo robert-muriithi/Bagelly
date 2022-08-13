@@ -22,7 +22,6 @@ class HomeViewModel
         val sell = _sell as LiveData<Resource<List<Sell>>>
 
 
-
         suspend fun getSells(){
             _sell.value = Resource.Loading
             try {

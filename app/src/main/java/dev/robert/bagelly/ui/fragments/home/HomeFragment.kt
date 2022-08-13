@@ -1,12 +1,12 @@
 package dev.robert.bagelly.ui.fragments.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,10 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.adapter.RecentUploadsAdapter
 import dev.robert.bagelly.databinding.FragmentHomeBinding
-import dev.robert.bagelly.ui.fragments.auth.SignInFragment
 import dev.robert.bagelly.ui.fragments.home.viewmodel.HomeViewModel
 import dev.robert.bagelly.utils.Resource
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment  : Fragment() {

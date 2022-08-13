@@ -51,8 +51,11 @@ class MainRepositoryImpl @Inject constructor(
     ): Resource<Users> {
         return withContext(Dispatchers.IO) {
             return@withContext try {
-                val user = db.collection(FirestoreCollections.UserCollection).document(userId).get()
-                    .await()
+                val user = db.collection(FirestoreCollections.UserCollection).document(userId).get().await()
+                withContext(Dispatchers.Main) {
+                    Log.d(TAG, "getSingleUser: ${user.data}")
+                    result(Resource.Success(user.toObject(Users::class.java)!!))
+                }
                 Resource.Success(user.toObject(Users::class.java)!!)
             } catch (e: Exception) {
                 Resource.Error(e.message!!)
@@ -486,6 +489,48 @@ class MainRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 db.collection(FirestoreCollections.SellCollection)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun addToFavourite(sell: Sell, result: (Resource<Sell>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                val sellId = db.collection(FirestoreCollections.SellCollection).document().id
+                db.collection(FirestoreCollections.FavoriteCollection).document(sellId).set(sell)
+                    .addOnSuccessListener {
+                        result.invoke(Resource.Success(sell))
+                    }
+                    .addOnFailureListener {
+                        result.invoke(Resource.Error(it.message.toString()))
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getFavouriteItems(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.FavoriteCollection)
                     .get()
                     .addOnSuccessListener {
                         result.invoke(
