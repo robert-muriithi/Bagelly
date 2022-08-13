@@ -10,8 +10,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout13"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:layout_height="70dp"
+        android:backgroundTint="@color/light_grey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,144 +20,41 @@
             android:id="@+id/searchFragmentToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <com.mancj.materialsearchbar.MaterialSearchBar
-                android:id="@+id/searchBar"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                android:paddingTop="2dp"
+                android:paddingEnd="16dp">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:id="@+id/searchFragmentTextInputLayout"
+                    app:startIconTint="@color/light_grey"
+                    app:startIconDrawable="@drawable/ic_search"
+                    app:hintTextColor="@color/light_grey"
+                    app:endIconMode="clear_text"
+                    app:placeholderText="Search something..."
+                    app:placeholderTextColor="@color/light_grey"
+                    app:endIconTint="@color/light_grey"
+                    android:textColorHint="@color/light_grey"
+
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:inputType="text"
+                        android:imeOptions="actionSearch"
+                        android:background="@color/white"
+                        android:id="@+id/searchFragmentET"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
         </androidx.appcompat.widget.Toolbar>
 
+
     </com.google.android.material.appbar.AppBarLayout>
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout13">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <include
-                android:id="@+id/include"
-                layout="@layout/shops_shimmer_item_layout_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <include
-                android:id="@+id/include3"
-                layout="@layout/shops_shimmer_item_layout_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/include"
-                app:layout_constraintStart_toEndOf="@+id/include" />
-
-            <include
-                android:id="@+id/include2"
-                layout="@layout/shops_shimmer_item_layout_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include" />
-
-            <include
-                android:id="@+id/include4"
-                layout="@layout/shops_shimmer_item_layout_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/include2"
-                app:layout_constraintStart_toEndOf="@+id/include2" />
-
-            <include
-                android:id="@+id/include5"
-                layout="@layout/shops_shimmer_item_layout_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include2" />
-
-            <include
-                android:id="@+id/include6"
-                layout="@layout/shops_shimmer_item_layout_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="36dp"
-                app:layout_constraintStart_toEndOf="@+id/include5"
-                app:layout_constraintTop_toBottomOf="@+id/include4" />
-
-            <include
-                android:id="@+id/include7"
-                layout="@layout/shops_shimmer_item_layout_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include5" />
-
-            <include
-                layout="@layout/shops_shimmer_item_layout_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/include7"
-                app:layout_constraintStart_toEndOf="@+id/include7" />
-
-            <include
-                android:id="@+id/include8"
-                layout="@layout/shops_shimmer_item_layout_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include7" />
-
-            <include
-                android:id="@+id/include9"
-                layout="@layout/shops_shimmer_item_layout_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/include8"
-                app:layout_constraintStart_toEndOf="@+id/include8" />
-
-            <include
-                android:id="@+id/include10"
-                layout="@layout/shops_shimmer_item_layout_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include8" />
-
-            <include
-                layout="@layout/shops_shimmer_item_layout_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/include10"
-                app:layout_constraintStart_toEndOf="@+id/include10" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

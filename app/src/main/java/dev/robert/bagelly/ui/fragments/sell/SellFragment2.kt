@@ -126,7 +126,7 @@ class SellFragment2 : Fragment() {
                                     binding.finishButton.text = "Finish"
                                     Toast.makeText(
                                         requireContext(),
-                                        "${it.data} has been uploaded successfully",
+                                        "Item has been uploaded successfully",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     //requireActivity().onBackPressed()

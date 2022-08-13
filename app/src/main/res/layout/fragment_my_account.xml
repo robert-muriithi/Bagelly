@@ -21,7 +21,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:title="My Account"
-            app:titleTextColor="@color/light_grey" />
+            app:titleTextColor="@color/light_grey" >
+            <ProgressBar
+                android:id="@+id/myAccountFragmentProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_gravity="end"
+                android:indeterminate="true"
+                android:visibility="gone"
+                android:indeterminateDrawable="@drawable/custom_progress"
+                />
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -82,7 +96,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/first_name"
+                android:hint="@string/name"
                 app:boxStrokeColor="@color/light_grey"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
-                    android:text="@string/robert" />
+                     />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -105,17 +119,18 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/last_name"
+                android:hint="@string/email_address"
                 app:endIconMode="clear_text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="text"
-                    android:text="@string/muriithi" />
+                     />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,11 +149,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/lNameInputLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneNumber"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:inputType="number"
                     android:minEms="10"
-                    android:text="070000000"/>
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 

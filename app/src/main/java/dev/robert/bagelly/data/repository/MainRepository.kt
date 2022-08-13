@@ -9,8 +9,11 @@ import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
-    suspend fun getUsers(result: (Resource<List<Users>>) -> Unit)
+    //suspend fun getUser(userId : String) : Resource<Users>
+    suspend fun updateUser(userId: String, userProfile: Uri, user : Users, result: (Resource<Users>) -> Unit)
+    suspend fun getSingleUser(userId : String, result : (Resource<Users>) -> Unit ) : Resource<Users>
     suspend fun sell(sell: Sell, imagesUri: ArrayList<Uri>, result: (Resource<List<Sell>>) -> Unit)
+    suspend fun getSells(result: (Resource<List<Sell>>) -> Unit)
     suspend fun createStore(shop: Shop, iconImage : Uri, result: (Resource<List<Shop>>) -> Unit)
     suspend fun getElectronicStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getHomeAndLivingStores(result: (Resource<List<Shop>>) -> Unit)
@@ -23,5 +26,6 @@ interface MainRepository {
     suspend fun getFarmInputStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun postAd(post: Post, postImage : Uri, result: (Resource<List<Post>>) -> Unit)
     suspend fun getPosts(result: (Resource<List<Post>>) -> Unit)
+    suspend fun deleteSinglePost(post: Post, result: (Resource<Post>) -> Unit)
 
 }
