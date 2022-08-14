@@ -13,25 +13,24 @@ import dev.robert.bagelly.model.Users
 import dev.robert.bagelly.utils.FirestoreCollections
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import android.widget.Toast
-
-import android.content.Intent
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.Source
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+
 
 
 class MainRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore,
-    private val storageReference: StorageReference
+    private val storageReference: StorageReference,
+    //private val dao: AppDao
 ) :
     MainRepository {
+    private val TAG = "MainRepositoryImpl"
+
     companion object {
         val firestoreSettings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
@@ -41,22 +40,23 @@ class MainRepositoryImpl @Inject constructor(
     init {
         db.firestoreSettings = firestoreSettings
     }
-
-    private val TAG = "MainRepositoryImpl"
-
-
+    val source = Source.CACHE
     override suspend fun getSingleUser(
         userId: String,
         result: (Resource<Users>) -> Unit
     ): Resource<Users> {
+
         return withContext(Dispatchers.IO) {
             return@withContext try {
+
                 val user = db.collection(FirestoreCollections.UserCollection).document(userId).get().await()
                 withContext(Dispatchers.Main) {
                     Log.d(TAG, "getSingleUser: ${user.data}")
-                    result(Resource.Success(user.toObject(Users::class.java)!!))
+                   result(Resource.Success(user.toObject(Users::class.java)!!))
                 }
+
                 Resource.Success(user.toObject(Users::class.java)!!)
+
             } catch (e: Exception) {
                 Resource.Error(e.message!!)
             } catch (e: FirebaseException) {

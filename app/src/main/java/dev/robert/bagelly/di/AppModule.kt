@@ -1,6 +1,7 @@
 package dev.robert.bagelly.di
 
 import android.app.Application
+import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -62,4 +63,13 @@ object AppModule {
     @Singleton
     fun provideStorageReference(): StorageReference =
         FirebaseStorage.getInstance().reference
+
+    /*@Provides
+    @Singleton
+    fun provideDatabase(application: Application) =
+        Room.databaseBuilder(
+            application,
+            AppDatabase::class.java,
+            "bagellydb.db"
+        )*/
 }

@@ -2,9 +2,9 @@ package dev.robert.bagelly.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+/*
 @Entity(tableName = "user_table")
-data class User(
+data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int? ,
     var name: String? = "",
@@ -12,4 +12,4 @@ data class User(
     var phoneNumber : String? = "",
     var profileImageUrl : String? = "",
     var location : String? = "",
-)
+)*/
