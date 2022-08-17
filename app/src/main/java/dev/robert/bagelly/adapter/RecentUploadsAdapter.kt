@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,12 +18,13 @@ import dev.robert.bagelly.R
 import dev.robert.bagelly.data.repository.MainRepository
 import dev.robert.bagelly.databinding.RecentlyUploadedItemLayoutBinding
 import dev.robert.bagelly.model.Sell
+import dev.robert.bagelly.utils.Resource
 import javax.inject.Inject
 
 
 class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHolder>(ShopsComparator) {
+    @Inject lateinit var repository : MainRepository
     class ShopsViewHolder(private val binding: RecentlyUploadedItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
-        @Inject lateinit var repository : MainRepository
         @SuppressLint("SetTextI18n")
         fun bind(sell: Sell?){
             binding.itemName.text = sell?.itemName
@@ -83,7 +86,20 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
 
     override fun onBindViewHolder(holder: ShopsViewHolder, position: Int) {
         val sell = getItem(position)
-        holder.itemView.setOnClickListener {
+        val fav = holder.itemView.findViewById<ImageView>(R.id.favIcon)
+        /*var counter = 0
+        while (counter < repository.favourites.size){
+            if (sell?.itemUniqueId == repository.favourites[counter].itemUniqueId){
+                fav.setImageResource(R.drawable.ic_fav_filled)
+                break
+            }else{
+                fav.setImageResource(R.drawable.ic_fav_empty)
+            }
+            counter++
+        }*/
+
+        fav.setOnClickListener {
+            fav.setImageResource(R.drawable.ic_favorite_filled)
 
         }
         holder.bind(sell)

@@ -12,8 +12,7 @@ interface MainRepository {
     //suspend fun getUser(userId : String) : Resource<Users>
     suspend fun updateUser(userId: String, userProfile: Uri, user : Users, result: (Resource<Users>) -> Unit)
     suspend fun getSingleUser(userId : String, result : (Resource<Users>) -> Unit ) : Resource<Users>
-    suspend fun sell(sell: Sell, imageList : ArrayList<Uri>, result: (Resource<List<Sell>>) -> Unit)
-    suspend fun getSells(result: (Resource<List<Sell>>) -> Unit)
+    suspend fun sell(sell: Sell, imageList : ArrayList<String>, result: (Resource<List<Sell>>) -> Unit)
     suspend fun getRecentSells(result: (Resource<List<Sell>>) -> Unit)
     suspend fun createStore(shop: Shop, iconImage : Uri, result: (Resource<List<Shop>>) -> Unit)
     suspend fun getElectronicStores(result: (Resource<List<Shop>>) -> Unit)
@@ -29,7 +28,10 @@ interface MainRepository {
     suspend fun getPosts(result: (Resource<List<Post>>) -> Unit)
     suspend fun deleteSinglePost(post: Post, result: (Resource<Post>) -> Unit)
     suspend fun addToFavourite(sell: Sell, result: (Resource<Sell>) -> Unit)
+    suspend fun removeFromFavourite(sell: Sell, result: (Resource<Sell>) -> Unit)
     suspend fun getFavouriteItems(result: (Resource<List<Sell>>) -> Unit)
+    suspend fun getExclusiveStores(result: (Resource<List<Shop>>) -> Unit)
+    suspend fun getRecommendedSells(result: (Resource<List<Sell>>) -> Unit)
 
 
 }

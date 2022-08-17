@@ -28,7 +28,7 @@ class SellFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private var IMAGE_REQUEST_CODE_2 = 2
     private var IMAGE_REQUEST_CODE_3 = 3
 
-    private val imagesArrayList: ArrayList<Uri> = ArrayList()
+    private val imagesArrayList: ArrayList<String> = ArrayList()
     private var imageURI1: Uri? = null
     private var imageURI2: Uri? = null
     private var imageURI3: Uri? = null
@@ -192,19 +192,19 @@ class SellFragment : Fragment(), AdapterView.OnItemSelectedListener {
         when {
             requestCode == IMAGE_REQUEST_CODE_1 && resultCode == RESULT_OK && data != null && data.data != null -> {
                 imageURI1 = data.data
-                imageURI1?.let { imagesArrayList.add(it) }
+                imageURI1?.let { imagesArrayList.add(it.toString()) }
                 binding.photoOne.setImageURI(imageURI1)
                 binding.addPhotoOne.isVisible = false
             }
             requestCode == IMAGE_REQUEST_CODE_2 && resultCode == RESULT_OK && data != null && data.data != null -> {
                 imageURI2 = data.data
-                imageURI2?.let { imagesArrayList.add(it) }
+                imageURI2?.let { imagesArrayList.add(it.toString()) }
                 binding.photoTwo.setImageURI(imageURI2)
                 binding.addPhotoTwo.isVisible = false
             }
             requestCode == IMAGE_REQUEST_CODE_3 && resultCode == RESULT_OK && data != null && data.data != null -> {
                 imageURI3 = data.data
-                imageURI3?.let { imagesArrayList.add(it) }
+                imageURI3?.let { imagesArrayList.add(it.toString()) }
                 binding.photoThree.setImageURI(imageURI3)
                 binding.addPhotoThree.isVisible = false
             }

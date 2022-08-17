@@ -79,19 +79,17 @@ class ShopsFragment : Fragment() {
         viewModel.getElectronicShops.observe(viewLifecycleOwner){ result ->
             when(result){
                 is Resource.Loading -> {
-                    hideViews()
-                    startShimmer()
+                    isLoading(true)
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     electronicShopsAdapter.submitList(result.data)
-                    showViews()
-                    stopShimmer()
+                    
                 }
                 is Resource.Error -> {
                     //binding.shopsProgress.isVisible = false
-                    hideViews()
-                    stopShimmer()
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${result.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -99,14 +97,17 @@ class ShopsFragment : Fragment() {
         viewModel.getHomeAndLivingStores.observe(viewLifecycleOwner){
             when(it){
                 is Resource.Loading -> {
+                    isLoading(true)
                     //binding.shopsProgress.isVisible = true
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     homeAndLivingShopAdapter.submitList(it.data)
                 }
                 is Resource.Error -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${it.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -114,14 +115,17 @@ class ShopsFragment : Fragment() {
         viewModel.getMobilePhoneShops.observe(viewLifecycleOwner){
             when(it){
                 is Resource.Loading -> {
+                    isLoading(true)
                     //binding.shopsProgress.isVisible = true
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     mobilePhoneShopsAdapter.submitList(it.data)
                 }
                 is Resource.Error -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${it.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -130,13 +134,16 @@ class ShopsFragment : Fragment() {
             when(it){
                 is Resource.Loading -> {
                     //binding.shopsProgress.isVisible = true
+                    isLoading(true)
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     fashionShopsAdapter.submitList(it.data)
                 }
                 is Resource.Error -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${it.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -145,13 +152,16 @@ class ShopsFragment : Fragment() {
             when(it){
                 is Resource.Loading -> {
                     //binding.shopsProgress.isVisible = true
+                    isLoading(true)
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     motorShopsAdapter.submitList(it.data)
                 }
                 is Resource.Error -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${it.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -160,13 +170,16 @@ class ShopsFragment : Fragment() {
             when(it){
                 is Resource.Loading -> {
                    // binding.shopsProgress.isVisible = true
+                    isLoading(true)
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     generalStoresAdapter.submitList(it.data)
                 }
                 is Resource.Error -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${it.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -175,13 +188,16 @@ class ShopsFragment : Fragment() {
             when(it){
                 is Resource.Loading -> {
                     //binding.shopsProgress.isVisible = true
+                    isLoading(true)
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     serviceProvidersAdapter.submitList(it.data)
                 }
                 is Resource.Error -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${it.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -190,13 +206,16 @@ class ShopsFragment : Fragment() {
             when(it){
                 is Resource.Loading -> {
                     //binding.shopsProgress.isVisible = true
+                    isLoading(true)
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     farmInputStoresAdapter.submitList(it.data)
                 }
                 is Resource.Error -> {
                    // binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${it.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -204,14 +223,17 @@ class ShopsFragment : Fragment() {
         viewModel.getOtherStores.observe(viewLifecycleOwner){
             when(it){
                 is Resource.Loading -> {
+                    isLoading(true)
                     //binding.shopsProgress.isVisible = true
                 }
                 is Resource.Success -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                    otherStoresAdapter.submitList(it.data)
                 }
                 is Resource.Error -> {
                     //binding.shopsProgress.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), "${it.copy()}", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -308,7 +330,24 @@ class ShopsFragment : Fragment() {
         getFarmInputStores()
         getOtherStores()
     }
-    
+
+    private fun isLoading(isLoading : Boolean){
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.isLoading(isLoading)
+        }
+        if(isLoading){
+            viewModel.isLoading.observe(viewLifecycleOwner){
+                if(it){
+                    hideViews()
+                    startShimmer()
+                }
+                else{
+                    showViews()
+                    stopShimmer()
+                }
+            }
+        }
+    }
     /*override fun onResume() {
         super.onResume()
         fetchShops()

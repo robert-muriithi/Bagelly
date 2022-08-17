@@ -14,7 +14,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
+import dev.robert.bagelly.adapter.ExclusiveShopsAdapter
 import dev.robert.bagelly.adapter.RecentUploadsAdapter
+import dev.robert.bagelly.adapter.RecommendationsAdapter
 import dev.robert.bagelly.databinding.FragmentHomeBinding
 import dev.robert.bagelly.ui.fragments.home.viewmodel.HomeViewModel
 import dev.robert.bagelly.utils.Resource
@@ -25,6 +27,8 @@ class HomeFragment  : Fragment() {
     private lateinit var auth  : FirebaseAuth
     private val viewModel : HomeViewModel by viewModels()
     private val adapter by lazy { RecentUploadsAdapter() }
+    private val exclusiveShopsAdapter by lazy { ExclusiveShopsAdapter() }
+    private val recommendationsAdapter by lazy { RecommendationsAdapter() }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,8 +39,12 @@ class HomeFragment  : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
         binding.recentlyUploadedItemsRecyclerView.adapter = adapter
+        binding.exclusiveShopsRecyclerView.adapter = exclusiveShopsAdapter
+        binding.recommendedForYouRecyclerView.adapter = recommendationsAdapter
         //fetchRecentUploads()
         fetchRecentUploads()
+        fetchExclusiveShops()
+        fetchRecommendedSells()
         observeViewModel()
 
         auth = FirebaseAuth.getInstance()
@@ -97,18 +105,46 @@ class HomeFragment  : Fragment() {
         viewModel.recentSell.observe(viewLifecycleOwner){
             when(it){
                 is Resource.Loading -> {
-                    hideViews()
+                    isLoading(true)
                     binding.progressBar.isVisible = true
                 }
                 is Resource.Error -> {
-                    showViews()
-                    binding.progressBar.isVisible = false
+                    isLoading(false)
                     Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
-                    showViews()
-                    binding.progressBar.isVisible = false
+                    isLoading(false)
                     adapter.submitList(it.data)
+                }
+            }
+        }
+        viewModel.exclusiveShops.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Loading ->{
+                    isLoading(true)
+                }
+                is Resource.Error ->{
+                    isLoading(false)
+                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Success -> {
+                    isLoading(false)
+                    exclusiveShopsAdapter.submitList(it.data)
+                }
+            }
+        }
+        viewModel.recommendedSells.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Loading -> {
+                    isLoading(true)
+                }
+                is Resource.Error -> {
+                    isLoading(false)
+                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Success -> {
+                    isLoading(false)
+                    recommendationsAdapter.submitList(it.data)
                 }
             }
         }
@@ -118,18 +154,19 @@ class HomeFragment  : Fragment() {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             viewModel.getRecentSells()
         }
+
+    }
+    private fun fetchExclusiveShops(){
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.getExclusiveShops()
+        }
+    }
+    private fun fetchRecommendedSells(){
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.getRecommendedSells()
+        }
     }
 
-
-    /*override fun onResume() {
-        if (auth.currentUser != null && auth.currentUser?.isEmailVerified!!) {
-            binding.accountImage.isVisible = true
-        }
-        else{
-            binding.accountImage.isVisible = false
-        }
-    super.onResume()
-    }*/
     private fun hideViews(){
         binding.textView9.isVisible = false
         binding.textView7.isVisible = false
@@ -152,6 +189,25 @@ class HomeFragment  : Fragment() {
         binding.textView6.isVisible = true
         binding.imageView15.isVisible = true
     }
+
+    private fun isLoading(isLoading: Boolean){
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.isLoading(isLoading)
+        }
+        if(isLoading){
+            viewModel.isLoading.observe(viewLifecycleOwner){
+                if(it){
+                    hideViews()
+                    binding.progressBar.isVisible = true
+                }
+                else{
+                    showViews()
+                    binding.progressBar.isVisible = false
+                }
+            }
+        }
+    }
+
 
 
 }
