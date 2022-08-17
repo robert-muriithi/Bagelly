@@ -2,8 +2,7 @@ package dev.robert.bagelly.data.repository
 
 import android.net.Uri
 import android.util.Log
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
+import androidx.core.net.toUri
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import dev.robert.bagelly.model.Post
@@ -17,8 +16,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import com.google.firebase.FirebaseException
-import com.google.firebase.firestore.SetOptions
-import com.google.firebase.firestore.Source
+import com.google.firebase.firestore.*
 import kotlinx.coroutines.flow.Flow
 
 
@@ -105,16 +103,17 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun sell(
         sell: Sell,
-        imagesUri: ArrayList<Uri>,
+        imageList : ArrayList<Uri>,
         result: (Resource<List<Sell>>) -> Unit
     ) {
         withContext(Dispatchers.IO) {
             try {
                 val sellId = db.collection(FirestoreCollections.SellCollection).document().id
                 val storageReference = FirebaseStorage.getInstance().reference.child("sell/$sellId")
+
                 var i = 0
-                while (i < imagesUri.size) {
-                    val uploadTask = storageReference.putFile(imagesUri[i])
+                while (i  < imageList.size) {
+                    val uploadTask = storageReference.putFile(imageList[i])
                     uploadTask.addOnSuccessListener {
                         val task = storageReference.downloadUrl
                         task.addOnSuccessListener {
@@ -130,8 +129,8 @@ class MainRepositoryImpl @Inject constructor(
                                     sell.image3 = it.toString()
                                 }
                             }
-                            i++
-                            if (i == imagesUri.size) {
+                            i += 1
+                            if (i == imageList.size) {
                                 db.collection(FirestoreCollections.SellCollection)
                                     .add(sell)
                                     .addOnSuccessListener {
@@ -148,6 +147,7 @@ class MainRepositoryImpl @Inject constructor(
                         }
 
                     }
+
                 }
 
             } catch (e: Exception) {
@@ -504,6 +504,33 @@ class MainRepositoryImpl @Inject constructor(
                 Log.d(TAG, "exception ${e.message}")
             } catch (e: Exception) {
                 result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getRecentSells(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.SellCollection)
+                    .orderBy("datePosted", Query.Direction.DESCENDING)
+                    .limit(10)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: FirebaseException) {
+                result.invoke(Resource.Error(e.message.toString()))
+                Log.d(TAG, "exception ${e.message}")
             }
         }
     }

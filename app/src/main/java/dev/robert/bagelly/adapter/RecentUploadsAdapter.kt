@@ -13,18 +13,22 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import dev.robert.bagelly.R
+import dev.robert.bagelly.data.repository.MainRepository
 import dev.robert.bagelly.databinding.RecentlyUploadedItemLayoutBinding
 import dev.robert.bagelly.model.Sell
+import javax.inject.Inject
 
 
 class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHolder>(ShopsComparator) {
     class ShopsViewHolder(private val binding: RecentlyUploadedItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
+        @Inject lateinit var repository : MainRepository
         @SuppressLint("SetTextI18n")
         fun bind(sell: Sell?){
             binding.itemName.text = sell?.itemName
             binding.recentTv.text = "Recent"
             binding.sellPrice.text = "Ksh "+sell?.price
             binding.sellLocation.text = sell?.location
+
             Glide.with(binding.root.context)
                 .load(sell?.images?.get(0))
                 .placeholder(R.drawable.avatar)

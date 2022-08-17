@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
+    id "com.google.protobuf" version "0.8.12"
 }
 
 android {
@@ -87,9 +88,9 @@ dependencies {
     //facebook shimmer layout
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-    //Room
-    implementation 'androidx.room:room-runtime:2.4.3'
-    kapt 'androidx.room:room-compiler:2.4.3'
-    implementation 'androidx.room:room-ktx:2.4.3'
+
+    //Datastore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "com.google.protobuf:protobuf-javalite:3.19.2"
 
 }

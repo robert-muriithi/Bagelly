@@ -24,10 +24,10 @@ class SellViewModel
     private val _sell = MutableLiveData<Resource<List<Sell>>>()
     val sell: LiveData<Resource<List<Sell>>> = _sell
 
-    suspend fun sell(sell: Sell, imagesUri: ArrayList<Uri>) {
+    suspend fun sell(sell: Sell, imageList : ArrayList<Uri>) {
         _sell.value = Resource.Loading
         try{
-            repository.sell(sell, imagesUri){
+            repository.sell(sell, imageList){
                 _sell.value = it
             }
         }

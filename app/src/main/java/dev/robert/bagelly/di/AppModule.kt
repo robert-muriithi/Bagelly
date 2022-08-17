@@ -1,7 +1,6 @@
 package dev.robert.bagelly.di
 
 import android.app.Application
-import androidx.room.Room
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore

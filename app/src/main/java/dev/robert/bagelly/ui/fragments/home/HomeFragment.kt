@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -35,6 +36,8 @@ class HomeFragment  : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(binding.homeToolbar)
         binding.recentlyUploadedItemsRecyclerView.adapter = adapter
         //fetchRecentUploads()
+        fetchRecentUploads()
+        observeViewModel()
 
         auth = FirebaseAuth.getInstance()
 
@@ -90,32 +93,33 @@ class HomeFragment  : Fragment() {
         return view
     }
 
-    private fun fetchRecentUploads() {
-        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.getSells()
-        }
-        viewModel.sell.observe(viewLifecycleOwner) {
+    private fun observeViewModel() {
+        viewModel.recentSell.observe(viewLifecycleOwner){
             when(it){
                 is Resource.Loading -> {
                     hideViews()
                     binding.progressBar.isVisible = true
+                }
+                is Resource.Error -> {
+                    showViews()
+                    binding.progressBar.isVisible = false
+                    Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
                     showViews()
                     binding.progressBar.isVisible = false
                     adapter.submitList(it.data)
                 }
-                is Resource.Error -> {
-                    showViews()
-                    binding.progressBar.isVisible = false
-                    /*it.message?.let { message ->
-                        binding.homeErrorTextView.text = message
-                        binding.homeErrorTextView.isVisible = true
-                    }*/
-                }
             }
         }
     }
+
+    private fun fetchRecentUploads() {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.getRecentSells()
+        }
+    }
+
 
     /*override fun onResume() {
         if (auth.currentUser != null && auth.currentUser?.isEmailVerified!!) {
