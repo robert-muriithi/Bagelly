@@ -90,9 +90,9 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
     }
 
     override fun onBindViewHolder(holder: ShopsViewHolder, position: Int) {
+        val sell = getItem(position)
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val storageReference = FirebaseStorage.getInstance().reference
-        val sell = getItem(position)
         val checkBox = holder.itemView.findViewById<CheckBox>(R.id.favIcon)
         val itemId = sell.itemUniqueId
         MainRepositoryImpl.getInstance(db, storageReference).isItemFavourite(itemId) {

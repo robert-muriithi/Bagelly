@@ -642,6 +642,32 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun deleteAllFavouriteItems(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.FavoriteCollection)
+                    .get()
+                    .addOnSuccessListener {
+                        it.documents.forEach {
+                            it.reference.delete()
+                        }
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
     override suspend fun getExclusiveStores(result: (Resource<List<Shop>>) -> Unit) {
         withContext(Dispatchers.IO) {
             try {

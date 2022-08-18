@@ -30,6 +30,7 @@ interface MainRepository {
     suspend fun getFavouriteItems(result: (Resource<List<Sell>>) -> Unit)
     suspend fun getExclusiveStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getRecommendedSells(result: (Resource<List<Sell>>) -> Unit)
+    suspend fun deleteAllFavouriteItems(result: (Resource<List<Sell>>) -> Unit)
 
 
 }
