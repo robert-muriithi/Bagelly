@@ -95,12 +95,13 @@
             app:layout_constraintStart_toEndOf="@+id/imageView14"
             app:layout_constraintTop_toTopOf="@+id/imageView14" />
 
-        <ImageView
+        <CheckBox
             android:id="@+id/favIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_favorite_border"
+            android:button="@drawable/checkbox_list_item"
+            app:useMaterialThemeColors="false"
             app:layout_constraintBottom_toBottomOf="@+id/sellLocation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/sellLocation" />

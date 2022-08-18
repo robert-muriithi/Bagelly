@@ -27,8 +27,6 @@ interface MainRepository {
     suspend fun postAd(post: Post, postImage : Uri, result: (Resource<List<Post>>) -> Unit)
     suspend fun getPosts(result: (Resource<List<Post>>) -> Unit)
     suspend fun deleteSinglePost(post: Post, result: (Resource<Post>) -> Unit)
-    suspend fun addToFavourite(sell: Sell, result: (Resource<Sell>) -> Unit)
-    suspend fun removeFromFavourite(sell: Sell, result: (Resource<Sell>) -> Unit)
     suspend fun getFavouriteItems(result: (Resource<List<Sell>>) -> Unit)
     suspend fun getExclusiveStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getRecommendedSells(result: (Resource<List<Sell>>) -> Unit)

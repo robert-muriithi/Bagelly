@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
@@ -14,8 +15,12 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import dev.robert.bagelly.R
 import dev.robert.bagelly.data.repository.MainRepository
+import dev.robert.bagelly.data.repository.MainRepositoryImpl
 import dev.robert.bagelly.databinding.RecentlyUploadedItemLayoutBinding
 import dev.robert.bagelly.model.Sell
 import dev.robert.bagelly.utils.Resource
@@ -23,7 +28,7 @@ import javax.inject.Inject
 
 
 class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHolder>(ShopsComparator) {
-    @Inject lateinit var repository : MainRepository
+
     class ShopsViewHolder(private val binding: RecentlyUploadedItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         @SuppressLint("SetTextI18n")
         fun bind(sell: Sell?){
@@ -85,23 +90,111 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
     }
 
     override fun onBindViewHolder(holder: ShopsViewHolder, position: Int) {
+        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        val storageReference = FirebaseStorage.getInstance().reference
         val sell = getItem(position)
-        val fav = holder.itemView.findViewById<ImageView>(R.id.favIcon)
-        /*var counter = 0
-        while (counter < repository.favourites.size){
-            if (sell?.itemUniqueId == repository.favourites[counter].itemUniqueId){
-                fav.setImageResource(R.drawable.ic_fav_filled)
-                break
-            }else{
-                fav.setImageResource(R.drawable.ic_fav_empty)
+        val checkBox = holder.itemView.findViewById<CheckBox>(R.id.favIcon)
+        val itemId = sell.itemUniqueId
+        MainRepositoryImpl.getInstance(db, storageReference).isItemFavourite(itemId) {
+            when (it) {
+                is Resource.Success -> {
+                    if (it.data) {
+                        checkBox.isChecked = true
+                    }
+                }
+                is Resource.Error -> {
+                    Toast.makeText(holder.itemView.context, it.string, Toast.LENGTH_SHORT).show()
+                }
+                else -> {
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "Something went wrong",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
-            counter++
-        }*/
+        }
+        checkBox.setOnClickListener {
+            val isChecked = checkBox.isChecked
+            if (isChecked) {
+                MainRepositoryImpl.getInstance(db, storageReference).addToFavourite(sell) {
+                    when (it) {
+                        is Resource.Success -> {
+                            Toast.makeText(holder.itemView.context, "Added to favourites", Toast.LENGTH_SHORT).show()
+                        }
+                        is Resource.Error -> {
+                            Toast.makeText(holder.itemView.context, it.string, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(
+                                holder.itemView.context,
+                                "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            } else {
+                MainRepositoryImpl.getInstance(db, storageReference).removeFromFavourite(sell) {
+                    when (it) {
+                        is Resource.Success -> {
+                            Toast.makeText(holder.itemView.context, "Removed from favourites", Toast.LENGTH_SHORT).show()
+                        }
+                        is Resource.Error -> {
+                            Toast.makeText(holder.itemView.context, it.string, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(
+                                holder.itemView.context,
+                                "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            }
+            /*checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                MainRepositoryImpl.getInstance(db, storageReference).addToFavourite(sell){
+                    when(it){
+                        is Resource.Success -> {
+                            it.data.let {
+                                Toast.makeText(buttonView.context, "Added to favourites", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        is Resource.Error -> {
+                            Toast.makeText(buttonView.context, it.string, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(buttonView.context, "Something went wrong", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
 
-        fav.setOnClickListener {
-            fav.setImageResource(R.drawable.ic_favorite_filled)
+            } else {
+                MainRepositoryImpl.getInstance(db, storageReference).removeFromFavourite(sell) {
+                    when (it) {
+                        is Resource.Success -> {
+                            Toast.makeText(
+                                buttonView.context,
+                                "Removed from favourites",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        is Resource.Error -> {
+                            Toast.makeText(buttonView.context, it.string, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(buttonView.context, "Something went wrong", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+
+                }
+            }
+        }*/
 
         }
         holder.bind(sell)
     }
+
 }

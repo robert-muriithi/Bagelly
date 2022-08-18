@@ -20,8 +20,7 @@ import javax.inject.Inject
 
 class RecommendationsAdapter : ListAdapter<Sell, RecommendationsAdapter.ShopsViewHolder>(ShopsComparator) {
     class ShopsViewHolder(private val binding: RecentlyUploadedItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
-        @Inject
-        lateinit var repository : MainRepository
+        @Inject lateinit var repository : MainRepository
         @SuppressLint("SetTextI18n")
         fun bind(sell: Sell?){
             binding.itemName.text = sell?.itemName
