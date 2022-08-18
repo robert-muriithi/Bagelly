@@ -2,8 +2,7 @@ package dev.robert.bagelly.data.repository
 
 import android.net.Uri
 import android.util.Log
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreSettings
+import androidx.core.net.toUri
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import dev.robert.bagelly.model.Post
@@ -13,26 +12,36 @@ import dev.robert.bagelly.model.Users
 import dev.robert.bagelly.utils.FirestoreCollections
 import dev.robert.bagelly.utils.Resource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import android.widget.Toast
-
-import android.content.Intent
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.SetOptions
+import com.google.firebase.firestore.*
+import dev.robert.bagelly.data.repository.AuthenticationRepositoryImpl.Companion.firestoreSettings
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+
 
 
 class MainRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore,
-    private val storageReference: StorageReference
+    private val storageReference: StorageReference,
+    //private val dao: AppDao
 ) :
     MainRepository {
+    private val TAG = "MainRepositoryImpl"
+
+    //get instance of MainRepositoryImpl
+
     companion object {
+        @Volatile
+        private var instance: MainRepositoryImpl? = null
+        fun getInstance(
+            db: FirebaseFirestore,
+            storageReference: StorageReference
+        ) = instance ?: synchronized(this) {
+            instance ?: MainRepositoryImpl(db, storageReference).also { instance = it }
+        }
+
         val firestoreSettings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
             .build()
@@ -41,19 +50,22 @@ class MainRepositoryImpl @Inject constructor(
     init {
         db.firestoreSettings = firestoreSettings
     }
-
-    private val TAG = "MainRepositoryImpl"
-
-
     override suspend fun getSingleUser(
         userId: String,
         result: (Resource<Users>) -> Unit
     ): Resource<Users> {
+
         return withContext(Dispatchers.IO) {
             return@withContext try {
-                val user = db.collection(FirestoreCollections.UserCollection).document(userId).get()
-                    .await()
+
+                val user = db.collection(FirestoreCollections.UserCollection).document(userId).get().await()
+                withContext(Dispatchers.Main) {
+                    Log.d(TAG, "getSingleUser: ${user.data}")
+                   result(Resource.Success(user.toObject(Users::class.java)!!))
+                }
+
                 Resource.Success(user.toObject(Users::class.java)!!)
+
             } catch (e: Exception) {
                 Resource.Error(e.message!!)
             } catch (e: FirebaseException) {
@@ -102,20 +114,21 @@ class MainRepositoryImpl @Inject constructor(
 
     override suspend fun sell(
         sell: Sell,
-        imagesUri: ArrayList<Uri>,
+        imageList : ArrayList<String>,
         result: (Resource<List<Sell>>) -> Unit
     ) {
         withContext(Dispatchers.IO) {
             try {
                 val sellId = db.collection(FirestoreCollections.SellCollection).document().id
                 val storageReference = FirebaseStorage.getInstance().reference.child("sell/$sellId")
+
                 var i = 0
-                while (i < imagesUri.size) {
-                    val uploadTask = storageReference.putFile(imagesUri[i])
+                while (i  < imageList.size) {
+                    val uploadTask = storageReference.putFile(imageList[i].toUri())
                     uploadTask.addOnSuccessListener {
                         val task = storageReference.downloadUrl
                         task.addOnSuccessListener {
-                            sell.images?.add(it)
+                            sell.images?.add(it.toString())
                             when (i) {
                                 0 -> {
                                     sell.image1 = it.toString()
@@ -127,8 +140,8 @@ class MainRepositoryImpl @Inject constructor(
                                     sell.image3 = it.toString()
                                 }
                             }
-                            i++
-                            if (i == imagesUri.size) {
+                            i += 1
+                            if (i == imageList.size) {
                                 db.collection(FirestoreCollections.SellCollection)
                                     .add(sell)
                                     .addOnSuccessListener {
@@ -145,6 +158,7 @@ class MainRepositoryImpl @Inject constructor(
                         }
 
                     }
+
                 }
 
             } catch (e: Exception) {
@@ -482,10 +496,209 @@ class MainRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getSells(result: (Resource<List<Sell>>) -> Unit) {
+    override suspend fun getRecentSells(result: (Resource<List<Sell>>) -> Unit) {
         withContext(Dispatchers.IO) {
             try {
                 db.collection(FirestoreCollections.SellCollection)
+                    .orderBy("datePosted", Query.Direction.DESCENDING)
+                    .limit(4)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: FirebaseException) {
+                result.invoke(Resource.Error(e.message.toString()))
+                Log.d(TAG, "exception ${e.message}")
+            }
+        }
+    }
+
+    fun addToFavourite(sell: Sell, result: (Resource<Sell>) -> Unit) {
+        try {
+            val sellId = db.collection(FirestoreCollections.FavoriteCollection).document().id
+            db.collection(FirestoreCollections.FavoriteCollection).document(sellId).set(sell)
+                .addOnSuccessListener {
+                    result.invoke(Resource.Success(sell))
+                }
+                .addOnFailureListener {
+                    result.invoke(Resource.Error(it.message.toString()))
+
+                }
+        }catch (e: Exception) {
+            result.invoke(Resource.Error(e.message.toString()))
+            Log.d(TAG, "exception ${e.message}")
+        } catch (e: FirebaseException) {
+            result.invoke(Resource.Error(e.message.toString()))
+            Log.d(TAG, "exception ${e.message}")
+        }
+    }
+
+     fun removeFromFavourite(sell: Sell, result: (Resource<Sell>) -> Unit) {
+        try {
+            db.collection(FirestoreCollections.FavoriteCollection).whereEqualTo("itemUniqueId", sell.itemUniqueId)
+                .get()
+                .addOnSuccessListener {
+                    it.documents.forEach {
+                        it.reference.delete()
+                    }
+                    result.invoke(Resource.Success(sell))
+                }
+                .addOnFailureListener {
+                    result.invoke(Resource.Error(it.message.toString()))
+                }
+        }catch (e: Exception) {
+            result.invoke(Resource.Error(e.message.toString()))
+            Log.d(TAG, "exception ${e.message}")
+        } catch (e: FirebaseException) {
+            result.invoke(Resource.Error(e.message.toString()))
+            Log.d(TAG, "exception ${e.message}")
+        }
+    }
+    fun isItemFavourite(itemUniqueId: String, result: (Resource<Boolean>) -> Unit) {
+        try {
+            db.collection(FirestoreCollections.FavoriteCollection)
+                .whereEqualTo("itemUniqueId", itemUniqueId)
+                .get()
+                .addOnSuccessListener {
+                    if (it.documents.isNotEmpty()) {
+                        result.invoke(Resource.Success(true))
+                    } else {
+                        result.invoke(Resource.Success(false))
+                    }
+                }
+                .addOnFailureListener {
+                    result.invoke(Resource.Error(it.message.toString()))
+                }
+        }catch (e: Exception) {
+            result.invoke(Resource.Error(e.message.toString()))
+            Log.d(TAG, "exception ${e.message}")
+        } catch (e: FirebaseException) {
+            result.invoke(Resource.Error(e.message.toString()))
+            Log.d(TAG, "exception ${e.message}")
+        }
+    }
+    /*override suspend fun removeFromFavourite(sell: Sell, result: (Resource<Sell>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.FavoriteCollection)
+                    .whereEqualTo("itemUniqueId", sell.itemUniqueId)
+                    .get()
+                    .addOnSuccessListener {
+                        if (it.isEmpty) {
+                            result.invoke(Resource.Error("No such sell found"))
+                        } else {
+                            it.documents.forEach {
+                                it.reference.delete()
+                                    .addOnSuccessListener {
+                                        result.invoke(Resource.Success(sell))
+                                    }
+                                    .addOnFailureListener {
+                                        result.invoke(Resource.Error(it.message.toString()))
+                                    }
+                            }
+                        }
+                    }
+                    .addOnFailureListener {
+                        result.invoke(Resource.Error(it.message.toString()))
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }*/
+
+    override suspend fun getFavouriteItems(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.FavoriteCollection)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun deleteAllFavouriteItems(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.FavoriteCollection)
+                    .get()
+                    .addOnSuccessListener {
+                        it.documents.forEach {
+                            it.reference.delete()
+                        }
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getExclusiveStores(result: (Resource<List<Shop>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.StoreCollection)
+                    .whereEqualTo("shopCategory", "Mobile Phones Shops")
+                    .limit(4)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Shop::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getRecommendedSells(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.SellCollection)
+                    .orderBy("datePosted", Query.Direction.DESCENDING)
+                    .limit(6)
                     .get()
                     .addOnSuccessListener {
                         result.invoke(

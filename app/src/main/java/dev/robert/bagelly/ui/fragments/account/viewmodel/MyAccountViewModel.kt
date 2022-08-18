@@ -1,6 +1,7 @@
 package dev.robert.bagelly.ui.fragments.account.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +16,7 @@ class MyAccountViewModel
     @Inject constructor(
         private val repository: MainRepository
     ): ViewModel() {
+    private  val TAG = "MyAccountViewModel"
 
     private val _user = MutableLiveData<Resource<Users>>()
     val user = _user as LiveData<Resource<Users>>
@@ -27,6 +29,7 @@ class MyAccountViewModel
              repository.getSingleUser(userId){
                 _user.value = it
             }
+            Log.d(TAG, "getSingleUser: ${_user.value}")
 
         } catch (e: Exception) {
             _user.value = (Resource.Error(e.message ?: "Something went wrong"))

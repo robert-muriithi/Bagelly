@@ -32,7 +32,7 @@ class SellFragment2 : Fragment() {
     private val args: SellFragment2Args by navArgs()
     private val viewModel: SellViewModel by viewModels()
     private val imagesUrls: ArrayList<String> = ArrayList()
-    private var imagesList: ArrayList<Uri> = ArrayList()
+    private var imagesList: ArrayList<String> = ArrayList()
     private var imageUrl1: String? = null
     private var imageUrl2: String? = null
     private var imageUrl3: String? = null
@@ -52,11 +52,11 @@ class SellFragment2 : Fragment() {
         imagesList = args.sellArgs.images!!
 
         for (i in 0 until imagesList.size) {
-            imagesUrls.add(imagesList[i].toString())
-            imageUrl1 = imagesList[0].toString()
-            imageUrl2 = imagesList[1].toString()
-            imageUrl3 = imagesList[2].toString()
+            imagesUrls.add(imagesList[i])
         }
+        imageUrl1 = imagesList[0]
+        imageUrl2 = imagesList[1]
+        imageUrl3 = imagesList[2]
 
         binding.finishButton.setOnClickListener {
             val category = args.sellArgs.category

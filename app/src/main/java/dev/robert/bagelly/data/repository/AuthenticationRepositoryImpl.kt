@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.robert.bagelly.model.Users
 import dev.robert.bagelly.utils.FirestoreCollections
@@ -17,6 +18,15 @@ class AuthenticationRepositoryImpl
     private val db: FirebaseFirestore,
     @ApplicationContext private val application: Application
 ) : AuthenticationRepository {
+    companion object {
+        val firestoreSettings = FirebaseFirestoreSettings.Builder()
+            .setPersistenceEnabled(true)
+            .build()
+    }
+
+    init {
+        db.firestoreSettings = firestoreSettings
+    }
     override suspend fun registerUser(
         email: String,
         password: String,
