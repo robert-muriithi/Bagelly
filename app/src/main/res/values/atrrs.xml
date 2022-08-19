@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="daynight">
+        <attr name="background_color" format="color"/>
+        <attr name="text_color" format="color"/>
+        <attr name="button_color" format="color"/>
+        <attr name="button_text_color" format="color"/>
+        <attr name="card_background_color" format="color"/>
+        <attr name="bottom_nav_color" format="color"/>
+        <attr name="bottom_nav_text_color" format="color"/>
+        <attr name="bottom_nav_text_color_selected" format="color"/>
+        <attr name="bottom_nav_icon_color_selected" format="color"/>
+        <attr name="bottom_nav_icon_color" format="color"/>
+   </declare-styleable>
+</resources>

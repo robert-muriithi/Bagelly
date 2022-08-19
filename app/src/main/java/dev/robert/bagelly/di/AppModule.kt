@@ -63,12 +63,4 @@ object AppModule {
     fun provideStorageReference(): StorageReference =
         FirebaseStorage.getInstance().reference
 
-    /*@Provides
-    @Singleton
-    fun provideDatabase(application: Application) =
-        Room.databaseBuilder(
-            application,
-            AppDatabase::class.java,
-            "bagellydb.db"
-        )*/
 }

@@ -632,6 +632,7 @@ class MainRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 db.collection(FirestoreCollections.FavoriteCollection)
+                    .whereEqualTo("sellerId", FirebaseAuth.getInstance().currentUser?.uid)
                     .get()
                     .addOnSuccessListener {
                         result.invoke(
