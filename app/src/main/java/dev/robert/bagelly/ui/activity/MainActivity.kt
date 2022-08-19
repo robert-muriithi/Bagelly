@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
                 in listOf(
                     R.id.splashFragment,
                     R.id.myAccountFragment,
-                    R.id.editProfileFragment,
                     R.id.settingsFragment,
                     R.id.notificationsSettingsFragment,
                     R.id.notificationsFragment,

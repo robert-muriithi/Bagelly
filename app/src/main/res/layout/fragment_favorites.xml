@@ -37,4 +37,82 @@
         app:spanCount="2"
         tools:listitem="@layout/favorite_item_layout"/>
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:animateLayoutChanges="true"
+        android:animationCache="true"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/favoritesRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar"
+        app:shimmer_direction="left_to_right"
+        app:shimmer_repeat_mode="restart">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/include13"
+                layout="@layout/fav_item_shimmer_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/include15"
+                layout="@layout/fav_item_shimmer_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/include13"
+                app:layout_constraintStart_toEndOf="@+id/include13"
+                app:layout_constraintTop_toTopOf="@+id/include13" />
+
+            <include
+                android:id="@+id/include14"
+                layout="@layout/fav_item_shimmer_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/include13"
+                app:layout_constraintTop_toBottomOf="@+id/include13" />
+
+            <include
+                android:id="@+id/include17"
+                layout="@layout/fav_item_shimmer_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                app:layout_constraintBottom_toBottomOf="@+id/include14"
+                app:layout_constraintStart_toStartOf="@+id/include15"
+                app:layout_constraintTop_toTopOf="@+id/include14" />
+
+            <include
+                android:id="@+id/include16"
+                layout="@layout/fav_item_shimmer_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/include14"
+                app:layout_constraintTop_toBottomOf="@+id/include14" />
+
+            <include
+                layout="@layout/fav_item_shimmer_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="260dp"
+                app:layout_constraintStart_toStartOf="@+id/include17"
+                app:layout_constraintTop_toTopOf="@+id/include16" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

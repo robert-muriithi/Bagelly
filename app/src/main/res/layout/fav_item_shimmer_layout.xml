@@ -8,7 +8,6 @@
     android:layout_marginEnd="8dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="2dp"
-    android:id="@+id/favoriteCardView"
     android:layout_height="260dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,17 +19,17 @@
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:src="@drawable/avatar"
+            android:background="@drawable/circular_image_view_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/sellerName"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/robert_muriithi"
+            android:background="@drawable/tv_background"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,10 +38,10 @@
 
         <TextView
             android:id="@+id/recentTv"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/recent"
+            android:background="@drawable/tv_background"
             app:layout_constraintStart_toStartOf="@+id/sellerName"
             app:layout_constraintTop_toBottomOf="@+id/sellerName" />
 
@@ -51,56 +50,56 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="5dp"
-            android:src="@drawable/jbl"
+            android:background="#D3D3D3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recentTv" />
 
         <TextView
             android:id="@+id/itemName"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="JBL Tune 215TWS"
+            android:background="@drawable/tv_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemImage" />
 
         <TextView
             android:id="@+id/sellPrice"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="KSh 9,200"
+            android:background="@drawable/tv_background"
             android:textColor="@color/main"
             app:layout_constraintStart_toStartOf="@+id/itemName"
             app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
         <ImageView
             android:id="@+id/imageView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_location"
+            android:background="#D3D3D3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/sellPrice" />
 
         <TextView
             android:id="@+id/sellLocation"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="Nyali"
+            android:background="@drawable/tv_background"
             app:layout_constraintBottom_toBottomOf="@+id/imageView14"
             app:layout_constraintStart_toEndOf="@+id/imageView14"
             app:layout_constraintTop_toTopOf="@+id/imageView14" />
 
         <ImageView
             android:id="@+id/deleteIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_delete"
+            android:background="#d3d3d3"
             app:layout_constraintBottom_toBottomOf="@+id/sellLocation"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/sellLocation" />

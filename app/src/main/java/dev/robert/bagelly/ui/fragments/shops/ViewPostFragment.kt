@@ -49,7 +49,7 @@ class ViewPostFragment : Fragment() {
         binding.tvPostPrice.text = args.postDetails.postItemPrice
         binding.tvPostLocation.text = args.postDetails.postSpecificLoc
         binding.tvPostCondition.text = args.postDetails.postCondition
-        binding.tvPostType.text = args.postDetails.postType
+        //binding.tvPostType.text = args.postDetails.postType
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

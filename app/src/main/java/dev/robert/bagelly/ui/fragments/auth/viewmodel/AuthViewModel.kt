@@ -29,21 +29,22 @@ class AuthViewModel
     private val forgotPassword = MutableLiveData<Resource<String>>()
     val _forgotPassword: LiveData<Resource<String>> = forgotPassword
 
-    suspend fun registerUser(email: String, password: String, users: Users) {
-        _register.value = Resource.Loading
-        try {
-            val result = repository.registerUser(email, password, users) {
-                _register.value = it
-            }
-            Resource.Success(result)
-        }
-        catch (e : Exception){
-            _register.value = Resource.Error(e.message.toString())
-        }
-        catch (e: FirebaseException){
-            _register.value = Resource.Error(e.message.toString())
-        }
-
+    fun registerUser(email: String, password: String, users: Users) {
+       viewModelScope.launch {
+           _register.value = Resource.Loading
+           try {
+               val result = repository.registerUser(email, password, users) {
+                   _register.value = it
+               }
+               Resource.Success(result)
+           }
+           catch (e : Exception){
+               _register.value = Resource.Error(e.message.toString())
+           }
+           catch (e: FirebaseException){
+               _register.value = Resource.Error(e.message.toString())
+           }
+       }
     }
 
     suspend fun login(email: String, password: String) {

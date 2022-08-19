@@ -16,11 +16,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/postsToolbar"
+            android:id="@+id/itemViewToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="Create an Ad"
+            app:title=""
             app:titleTextColor="@color/light_grey" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -43,6 +43,7 @@
                 android:id="@+id/postImage"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:background="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -50,6 +51,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView2"
                 android:layout_width="0dp"
+                app:cardElevation="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_bg"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +154,7 @@
                 android:paddingLeft="60dp"
                 android:paddingRight="60dp"
                 android:text="Call"
-                android:backgroundTint="#03c04a"
+                android:backgroundTint="@color/light_grey"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/btnWhatsapp"
@@ -181,6 +183,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                app:cardElevation="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnCall">
@@ -209,6 +212,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                app:cardCornerRadius="10dp"
+                android:elevation="3dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView4">

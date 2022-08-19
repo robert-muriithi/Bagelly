@@ -41,6 +41,7 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_mail.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_mobile_phone.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_notification.xml" value="0.177" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_outline_thumb.xml" value="0.1655" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_person.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_phone.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_placeholder.xml" value="0.185" />
@@ -51,8 +52,11 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_search.xml" value="0.177" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_settings.xml" value="0.184" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_share.xml" value="0.185" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_share_dark.xml" value="0.1655" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_spinner_down.xml" value="0.177" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_thumb_filled.xml" value="0.1655" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_vehicle.xml" value="0.177" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_verified.xml" value="0.1655" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_warning.xml" value="0.1665" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/ic_web.xml" value="0.1665" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/drawable/spinner_bg.xml" value="0.184" />
@@ -63,6 +67,7 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/custom_search_view.xml" value="0.12972972972972974" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/drop_down_item.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/exclusive_shops_item_layout.xml" value="0.2" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fav_item_shimmer_layout.xml" value="0.25" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/favorite_item_layout.xml" value="0.2" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_account.xml" value="0.25" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_agriculture_and_food_items.xml" value="0.12972972972972974" />
@@ -97,6 +102,7 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_search.xml" value="0.3086816720257235" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell.xml" value="0.33" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell2.xml" value="0.25" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_sell_item_details.xml" value="0.25" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_services.xml" value="0.12972972972972974" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_services_items.xml" value="0.12060810810810811" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/layout/fragment_settings.xml" value="0.2" />
@@ -128,6 +134,8 @@
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/menu/notifications_settings.xml" value="0.12972972972972974" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/menu/search_menu.xml" value="0.16417272338606242" />
         <entry key="..\:/Users/murii/Bagelly/app/src/main/res/menu/shop_menu.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/menu/view_item_menu.xml" value="0.12972972972972974" />
+        <entry key="..\:/Users/murii/Bagelly/app/src/main/res/menu/view_item_menu_when_logged.xml" value="0.12972972972972974" />
       </map>
     </option>
   </component>

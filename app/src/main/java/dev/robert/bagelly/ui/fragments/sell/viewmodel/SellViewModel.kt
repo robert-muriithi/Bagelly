@@ -23,16 +23,48 @@ class SellViewModel
 
     private val _sell = MutableLiveData<Resource<List<Sell>>>()
     val sell: LiveData<Resource<List<Sell>>> = _sell
+    private val _deleteSell = MutableLiveData<Resource<Sell>>()
+    val deleteSell: LiveData<Resource<Sell>> = _deleteSell
 
-    suspend fun sell(sell: Sell, imageList : ArrayList<String>) {
-        _sell.value = Resource.Loading
-        try{
-            repository.sell(sell, imageList){
-                _sell.value = it
+    private val _getAllSells = MutableLiveData<Resource<List<Sell>>>()
+    val getAllSells = _getAllSells as LiveData<Resource<List<Sell>>>
+
+    fun getAllSells() {
+        viewModelScope.launch {
+            _sell.value = Resource.Loading
+            try {
+                repository.getAllSells {
+                    _getAllSells.value = it
+                }
+            } catch (e: Exception) {
+                _sell.value = Resource.Error(e.message ?: "Error Occurred!")
             }
         }
-        catch (e: Exception){
-            _sell.value = Resource.Error(e.message.toString())
+    }
+
+    fun deleteItem(sell: Sell){
+        viewModelScope.launch {
+            _deleteSell.value = Resource.Loading
+            try {
+                repository.deleteSellItem(sell) {
+                    _deleteSell.value = it
+                }
+            } catch (e: Exception) {
+                _deleteSell.value = Resource.Error(e.message ?: "Error Occurred!")
+            }
+        }
+    }
+
+    fun sell(sell: Sell, imageList : ArrayList<String>) {
+        viewModelScope.launch {
+            _sell.value = Resource.Loading
+            try {
+                repository.sell(sell, imageList) {
+                    _sell.value = it
+                }
+            } catch (e: Exception) {
+                _sell.value = Resource.Error(e.message ?: "Error Occurred!")
+            }
         }
     }
 }

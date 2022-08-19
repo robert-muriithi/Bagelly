@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +18,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -23,6 +27,7 @@ import dev.robert.bagelly.data.repository.MainRepository
 import dev.robert.bagelly.data.repository.MainRepositoryImpl
 import dev.robert.bagelly.databinding.RecentlyUploadedItemLayoutBinding
 import dev.robert.bagelly.model.Sell
+import dev.robert.bagelly.ui.fragments.home.HomeFragmentDirections
 import dev.robert.bagelly.utils.Resource
 import javax.inject.Inject
 
@@ -193,6 +198,11 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
             }
         }*/
 
+        }
+        val card = holder.itemView.findViewById<MaterialCardView>(R.id.itemCardView)
+        card.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToSellItemDetailsFragment(sell)
+            Navigation.findNavController(holder.itemView).navigate(action)
         }
         holder.bind(sell)
     }

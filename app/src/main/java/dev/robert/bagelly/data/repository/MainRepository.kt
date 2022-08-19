@@ -14,6 +14,7 @@ interface MainRepository {
     suspend fun getSingleUser(userId : String, result : (Resource<Users>) -> Unit ) : Resource<Users>
     suspend fun sell(sell: Sell, imageList : ArrayList<String>, result: (Resource<List<Sell>>) -> Unit)
     suspend fun getRecentSells(result: (Resource<List<Sell>>) -> Unit)
+    suspend fun getAllSells(result: (Resource<List<Sell>>) -> Unit)
     suspend fun createStore(shop: Shop, iconImage : Uri, result: (Resource<List<Shop>>) -> Unit)
     suspend fun getElectronicStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getHomeAndLivingStores(result: (Resource<List<Shop>>) -> Unit)
@@ -31,6 +32,9 @@ interface MainRepository {
     suspend fun getExclusiveStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getRecommendedSells(result: (Resource<List<Sell>>) -> Unit)
     suspend fun deleteAllFavouriteItems(result: (Resource<List<Sell>>) -> Unit)
+    suspend fun getCurrentUserSells(result: (Resource<List<Sell>>) -> Unit)
+    suspend fun storeUserDetails(user: Users)
+    suspend fun deleteSellItem(sell: Sell, result: (Resource<Sell>) -> Unit)
 
 
 }
