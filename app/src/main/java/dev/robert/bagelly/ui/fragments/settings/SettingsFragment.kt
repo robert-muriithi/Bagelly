@@ -34,7 +34,6 @@ class SettingsFragment : Fragment() {
         val view = binding.root
         (activity as AppCompatActivity).setSupportActionBar(binding.settingsToolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         listItem = resources.getStringArray(R.array.settings_list)
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(

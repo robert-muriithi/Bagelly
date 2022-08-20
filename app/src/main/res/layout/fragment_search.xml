@@ -11,7 +11,7 @@
         android:id="@+id/appBarLayout13"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:backgroundTint="@color/light_grey"
+        android:backgroundTint="?attr/search_toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

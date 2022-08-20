@@ -11,14 +11,14 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:background="?attr/toolbar_color">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/profileFragmentToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:title="Profile"
-                app:titleTextColor="@color/light_grey" />
+                app:titleTextColor="?attr/more_text" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/app_bar"
-        android:background="#F3F3F3">
+        android:background="?attr/light_grey">
 
         <TextView
             android:id="@+id/acc"
@@ -36,7 +36,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/my_account"
-            android:textColor="#000000"
+            android:textColor="?attr/text_color"
             android:textSize="14sp" />
 
         <RelativeLayout
@@ -48,7 +48,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/curved_bg"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="?attr/profile_card_color"
             app:elevation="10dp">
 
             <RelativeLayout
@@ -74,7 +74,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_toEndOf="@id/accountCircle"
                     android:text="@string/manage_my_account"
-                    android:textColor="#000000"
+                    android:textColor="?attr/text_color"
                     tools:ignore="RelativeOverlap" />
 
                 <ImageView
@@ -112,7 +112,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_toEndOf="@id/cartImage"
                     android:text="@string/my_advertisements"
-                    android:textColor="#000000" />
+                    android:textColor="?attr/text_color" />
 
                 <ImageView
                     android:id="@+id/cartForwardIcon"
@@ -151,7 +151,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_toEndOf="@id/notificationsImageIcon"
                     android:text="@string/notifications"
-                    android:textColor="#000000">
+                    android:textColor="?attr/text_color">
 
                 </TextView>
 
@@ -192,7 +192,7 @@
                     android:layout_marginTop="6dp"
                     android:layout_toEndOf="@id/feedbackIcon"
                     android:text="@string/feedback"
-                    android:textColor="#000000" />
+                    android:textColor="?attr/text_color" />
 
                 <ImageView
                     android:id="@+id/feedbackIconForward"
@@ -218,7 +218,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-medium"
             android:text="@string/my_settings"
-            android:textColor="@color/black"
+            android:textColor="?attr/text_color"
             android:textSize="14sp">
 
         </TextView>
@@ -232,7 +232,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/curved_bg"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="?attr/profile_card_color"
             app:elevation="10dp">
 
             <RelativeLayout
@@ -248,7 +248,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="6dp"
                     android:text="Deactivate Account"
-                    android:textColor="#000000">
+                    android:textColor="?attr/text_color">
 
                 </TextView>
 
@@ -279,7 +279,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="6dp"
                     android:text="@string/settings"
-                    android:textColor="#000000">
+                    android:textColor="?attr/text_color">
 
                 </TextView>
 

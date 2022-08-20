@@ -10,7 +10,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,9 +19,9 @@
             android:id="@+id/itemViewToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIcon="?attr/nav_icon"
             app:title=""
-            app:titleTextColor="@color/light_grey" />
+            app:titleTextColor="?attr/more_text" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,7 +29,7 @@
         android:id="@+id/nestedScrollView4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#F3F3F3"
+        android:background="?attr/light_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +52,7 @@
                 android:id="@+id/materialCardView2"
                 android:layout_width="0dp"
                 app:cardElevation="0dp"
+                app:cardCornerRadius="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_bg"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +70,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:text="Item name"
-                        android:textColor="@color/black"
+                        android:textColor="?attr/text_color"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -184,6 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:cardElevation="0dp"
+                app:cardCornerRadius="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnCall">
@@ -271,7 +273,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="Similar Posts"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView5" />
 

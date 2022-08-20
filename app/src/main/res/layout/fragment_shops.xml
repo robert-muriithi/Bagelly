@@ -10,7 +10,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:title="Shops"
-            app:titleTextColor="@color/light_grey" />
+            app:titleTextColor="?attr/more_text" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -46,7 +46,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/electronic_shops"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/view_all"
-                android:textColor="@color/light_grey"
+                android:textColor="?attr/more_text"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView17"
                 app:layout_constraintEnd_toStartOf="@+id/imageView17"
                 app:layout_constraintTop_toTopOf="@+id/imageView17" />
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_forwad"
+                android:src="?attr/forwad_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,7 +92,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/home_and_living_stores"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/electronicShopsRecyclerView" />
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/view_all"
-                android:textColor="@color/light_grey"
+                android:textColor="?attr/more_text"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView18"
                 app:layout_constraintEnd_toStartOf="@+id/imageView18"
                 app:layout_constraintTop_toTopOf="@+id/imageView18" />
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_forwad"
+                android:src="?attr/forwad_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/electronicShopsRecyclerView" />
 
@@ -138,7 +138,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/mobile_phones_shops"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/homeAndLivingStoresRecyclerView" />
@@ -164,7 +164,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/fashion_shops_amp_stores"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
@@ -190,7 +190,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/motocycle_amp_vehicle_dealers"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fashionStoresRecyclerView" />
@@ -216,7 +216,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/general_stores"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/motorsRecyclerView" />
@@ -242,7 +242,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/service_providers"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/generalStoresRecyclerView" />
@@ -273,7 +273,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/farm_inputs_stores"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/serviceProvidersRecyclerView" />
@@ -299,7 +299,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/other_stores"
-                android:textColor="@color/black"
+                android:textColor="?attr/text_color"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/farmInputsStoresRecyclerView" />

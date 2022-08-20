@@ -40,7 +40,7 @@ class MyAccountFragment : Fragment() {
         setHasOptionsMenu(true)
         (activity as AppCompatActivity).setSupportActionBar(binding.myAccountFragmentToolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+
 
         val arrayAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(requireContext(), R.layout.drop_down_item, Kenya.counties())

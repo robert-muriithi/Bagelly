@@ -8,7 +8,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
-        android:background="@color/white"
+        android:background="?attr/toolbar_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/sellFragmentToolbar"
             app:title="Post a new item"
-            app:titleTextColor="@color/light_grey"
+            app:titleTextColor="?attr/more_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

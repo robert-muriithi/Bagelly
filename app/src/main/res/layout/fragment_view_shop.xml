@@ -10,7 +10,7 @@
         android:id="@+id/viewShopAppBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/light_grey"
+        android:background="?attr/search_toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -62,7 +62,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:text="Kilimall Kenya"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +75,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
         android:text="0"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textView33"
@@ -99,7 +99,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
         android:text="0"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/textView32"
@@ -122,7 +122,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
         android:text="0"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +144,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/location"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         app:layout_constraintStart_toStartOf="@+id/viewShopName"
         app:layout_constraintTop_toBottomOf="@+id/viewShopName" />
 
@@ -154,7 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Website"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         app:layout_constraintStart_toStartOf="@+id/viewShopLoc"
         app:layout_constraintTop_toBottomOf="@+id/viewShopLoc" />
 
@@ -164,7 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="jhjhf"
-        android:textColor="@color/black"
+        android:textColor="?attr/text_color"
         app:layout_constraintStart_toStartOf="@+id/viewShopWebsite"
         app:layout_constraintTop_toBottomOf="@+id/viewShopWebsite" />
 
