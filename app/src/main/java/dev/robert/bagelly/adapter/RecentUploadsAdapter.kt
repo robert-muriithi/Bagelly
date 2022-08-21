@@ -1,6 +1,7 @@
 package dev.robert.bagelly.adapter
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -98,9 +99,10 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
         val sell = getItem(position)
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val storageReference = FirebaseStorage.getInstance().reference
+        val application = holder.itemView.context.applicationContext as Application
         val checkBox = holder.itemView.findViewById<CheckBox>(R.id.favIcon)
         val itemId = sell.itemUniqueId
-        MainRepositoryImpl.getInstance(db, storageReference).isItemFavourite(itemId) {
+        MainRepositoryImpl.getInstance(db, storageReference, application).isItemFavourite(itemId) {
             when (it) {
                 is Resource.Success -> {
                     if (it.data) {
@@ -122,7 +124,7 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
         checkBox.setOnClickListener {
             val isChecked = checkBox.isChecked
             if (isChecked) {
-                MainRepositoryImpl.getInstance(db, storageReference).addToFavourite(sell) {
+                MainRepositoryImpl.getInstance(db, storageReference, application).addToFavourite(sell) {
                     when (it) {
                         is Resource.Success -> {
                             Toast.makeText(holder.itemView.context, "Added to favourites", Toast.LENGTH_SHORT).show()
@@ -140,7 +142,7 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
                     }
                 }
             } else {
-                MainRepositoryImpl.getInstance(db, storageReference).removeFromFavourite(sell) {
+                MainRepositoryImpl.getInstance(db, storageReference, application).removeFromFavourite(sell) {
                     when (it) {
                         is Resource.Success -> {
                             Toast.makeText(holder.itemView.context, "Removed from favourites", Toast.LENGTH_SHORT).show()

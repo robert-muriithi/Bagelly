@@ -10,12 +10,23 @@ import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
     //suspend fun getUser(userId : String) : Resource<Users>
-    suspend fun updateUser(userId: String, userProfile: Uri, user : Users, result: (Resource<Users>) -> Unit)
-    suspend fun getSingleUser(userId : String, result : (Resource<Users>) -> Unit ) : Resource<Users>
-    suspend fun sell(sell: Sell, imageList : ArrayList<String>, result: (Resource<List<Sell>>) -> Unit)
+    suspend fun updateUser(
+        userId: String,
+        userProfile: Uri,
+        user: Users,
+        result: (Resource<Users>) -> Unit
+    )
+
+    suspend fun getSingleUser(userId: String, result: (Resource<Users>) -> Unit): Resource<Users>
+    suspend fun sell(
+        sell: Sell,
+        imageList: ArrayList<String>,
+        result: (Resource<List<Sell>>) -> Unit
+    )
+
     suspend fun getRecentSells(result: (Resource<List<Sell>>) -> Unit)
     suspend fun getAllSells(result: (Resource<List<Sell>>) -> Unit)
-    suspend fun createStore(shop: Shop, iconImage : Uri, result: (Resource<List<Shop>>) -> Unit)
+    suspend fun createStore(shop: Shop, iconImage: Uri, result: (Resource<List<Shop>>) -> Unit)
     suspend fun getElectronicStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getHomeAndLivingStores(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getMobilePhonesStores(result: (Resource<List<Shop>>) -> Unit)
@@ -25,7 +36,7 @@ interface MainRepository {
     suspend fun getMotorcycleAndVehicleDealers(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getServiceProvidersShops(result: (Resource<List<Shop>>) -> Unit)
     suspend fun getFarmInputStores(result: (Resource<List<Shop>>) -> Unit)
-    suspend fun postAd(post: Post, postImage : Uri, result: (Resource<List<Post>>) -> Unit)
+    suspend fun postAd(post: Post, postImage: Uri, result: (Resource<List<Post>>) -> Unit)
     suspend fun getPosts(result: (Resource<List<Post>>) -> Unit)
     suspend fun deleteSinglePost(post: Post, result: (Resource<Post>) -> Unit)
     suspend fun getFavouriteItems(result: (Resource<List<Sell>>) -> Unit)
@@ -35,6 +46,4 @@ interface MainRepository {
     suspend fun getCurrentUserSells(result: (Resource<List<Sell>>) -> Unit)
     suspend fun storeUserDetails(user: Users)
     suspend fun deleteSellItem(sell: Sell, result: (Resource<Sell>) -> Unit)
-
-
 }

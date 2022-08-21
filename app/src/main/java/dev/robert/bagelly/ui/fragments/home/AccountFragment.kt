@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.auth.User
 import dagger.hilt.android.AndroidEntryPoint
 import dev.robert.bagelly.R
 import dev.robert.bagelly.databinding.FragmentAccountBinding
@@ -28,31 +29,20 @@ class AccountFragment : BottomSheetDialogFragment() {
         // Inflate the layout for this fragment
         binding = FragmentAccountBinding.inflate(inflater, container, false)
         val view = binding.root
-        fetchAccountDetails()
-
+        initViews()
 
         return view
     }
 
-    private fun fetchAccountDetails() {
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            val user = FirebaseAuth.getInstance().currentUser
-            if (user != null) {
-                myAccountViewModel.getSingleUser(user.uid)
-            }
-        }
-        myAccountViewModel.user.observe(viewLifecycleOwner) {
-            when(it){
-                is Resource.Success -> {
-                    binding.userName.text = it.data.name
-                    binding.userEmail.text = it.data.email
-                    binding.textView27.text = it.data.phoneNumber
-                    Glide.with(requireContext()).load(it.data.profileImageUrl).into(binding.circleImageView3)
-                }
-                is Resource.Error -> {}
-                is Resource.Loading -> {}
-            }
-        }
+    private fun initViews() {
+        binding.userName.text = requireContext().getSharedPreferences("bagelly", 0).getString("user_name", "")
+        binding.userEmail.text = requireContext().getSharedPreferences("bagelly", 0).getString("user_email", "")
+        binding.textView27.text = requireContext().getSharedPreferences("bagelly", 0).getString("user_phone", "")
+        Glide.with(requireContext())
+            .load(requireContext().getSharedPreferences("bagelly", 0).getString("user_image", ""))
+            .placeholder(R.drawable.avatar)
+            .into(binding.circleImageView3)
     }
+
 
 }

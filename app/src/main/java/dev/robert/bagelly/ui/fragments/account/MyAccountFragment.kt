@@ -1,9 +1,12 @@
 package dev.robert.bagelly.ui.fragments.account
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -24,9 +27,11 @@ import dev.robert.bagelly.model.Users
 import dev.robert.bagelly.ui.fragments.account.viewmodel.MyAccountViewModel
 import dev.robert.bagelly.utils.CheckInternet
 import dev.robert.bagelly.utils.Resource
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyAccountFragment : Fragment() {
+    @Inject lateinit var preferences: SharedPreferences
     private lateinit var binding: FragmentMyAccountBinding
     private val viewModel : MyAccountViewModel by viewModels()
     private var imageUri : Uri? = null
@@ -139,6 +144,7 @@ class MyAccountFragment : Fragment() {
         val profileImageUrl = imageUri.toString()
         val profileUri = imageUri
         val user = Users(userId!!, name, email, phoneNumber, profileImageUrl, location)
+
         FirebaseAuth.getInstance().currentUser?.updateEmail(email)
         if (CheckInternet.isConnected(requireContext())){
             if (imageUri != null){
@@ -163,6 +169,7 @@ class MyAccountFragment : Fragment() {
                             binding.progressIndicator.isVisible = false
                             binding.progressIndicator.hide()
                             showEditText()
+                            updateSharedPrefs()
                             Toast.makeText(requireContext(), "Profile updated", Toast.LENGTH_SHORT).show()
                             requireActivity().onBackPressed()
                         }
@@ -189,5 +196,16 @@ class MyAccountFragment : Fragment() {
         binding.lNameInputLayout.editText?.isEnabled = true
         binding.phoneNumberLayout.editText?.isEnabled = true
         binding.locationSpinner.isEnabled = true
+    }
+    private fun updateSharedPrefs() : Boolean{
+        val editor = preferences.edit()
+        editor.putString("user_id", FirebaseAuth.getInstance().currentUser?.uid.toString())
+        editor.putString("user_name", binding.name.text.toString())
+        editor.putString("user_email", binding.email.text.toString())
+        editor.putString("user_phone", binding.phoneNumber.text.toString())
+        editor.putString("user_image", imageUri.toString())
+        editor.putString("user_loc", binding.locationSpinner.selectedItem.toString())
+        editor.apply()
+        return true
     }
 }

@@ -1,6 +1,9 @@
 package dev.robert.bagelly.data.repository
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.SharedPreferences
+import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
@@ -16,8 +19,10 @@ class AuthenticationRepositoryImpl
 @Inject constructor(
     private val auth: FirebaseAuth,
     private val db: FirebaseFirestore,
-    @ApplicationContext private val application: Application
+    @ApplicationContext private val application: Application,
+    private val preferences: SharedPreferences
 ) : AuthenticationRepository {
+    private  val TAG = "AuthenticationRepositoryImpl"
     companion object {
         val firestoreSettings = FirebaseFirestoreSettings.Builder()
             .setPersistenceEnabled(true)
@@ -27,6 +32,7 @@ class AuthenticationRepositoryImpl
     init {
         db.firestoreSettings = firestoreSettings
     }
+    @SuppressLint("LongLogTag")
     override suspend fun registerUser(
         email: String,
         password: String,
@@ -41,6 +47,16 @@ class AuthenticationRepositoryImpl
                     val uid = user?.uid
                     users.id = uid
                     db.collection(FirestoreCollections.UserCollection).document(uid!!).set(users)
+                    preferences.edit()
+                        .putString("user_id", uid)
+                        .putString("user_email", email)
+                        .putString("user_name", users.name)
+                        .putString("user_phone", users.phoneNumber)
+                        .putString("user_loc", users.location)
+                        .putString("user_image", users.profileImageUrl)
+                        .apply()
+
+                    Log.d(TAG, "registerUser: ${preferences.all}")
                     result(Resource.Success("Success"))
                     Toast.makeText(application.applicationContext, "User created Successfully", Toast.LENGTH_SHORT).show()
                 } else {

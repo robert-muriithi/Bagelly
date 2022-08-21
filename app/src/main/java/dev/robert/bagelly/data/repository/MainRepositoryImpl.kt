@@ -1,5 +1,8 @@
 package dev.robert.bagelly.data.repository
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
@@ -18,14 +21,13 @@ import javax.inject.Inject
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-import dev.robert.bagelly.data.repository.AuthenticationRepositoryImpl.Companion.firestoreSettings
-import kotlinx.coroutines.flow.Flow
-
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 class MainRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore,
     private val storageReference: StorageReference,
+    @ApplicationContext private val application: Application,
     //private val dao: AppDao
 ) :
     MainRepository {
@@ -38,9 +40,10 @@ class MainRepositoryImpl @Inject constructor(
         private var instance: MainRepositoryImpl? = null
         fun getInstance(
             db: FirebaseFirestore,
-            storageReference: StorageReference
+            storageReference: StorageReference,
+            application: Application
         ) = instance ?: synchronized(this) {
-            instance ?: MainRepositoryImpl(db, storageReference).also { instance = it }
+            instance ?: MainRepositoryImpl(db, storageReference, application).also { instance = it }
         }
 
         val firestoreSettings = FirebaseFirestoreSettings.Builder()
@@ -62,7 +65,7 @@ class MainRepositoryImpl @Inject constructor(
                 val user = db.collection(FirestoreCollections.UserCollection).document(userId).get().await()
                 withContext(Dispatchers.Main) {
                     Log.d(TAG, "getSingleUser: ${user.data}")
-                   result(Resource.Success(user.toObject(Users::class.java)!!))
+                    result(Resource.Success(user.toObject(Users::class.java)!!))
                 }
 
                 Resource.Success(user.toObject(Users::class.java)!!)
@@ -74,13 +77,38 @@ class MainRepositoryImpl @Inject constructor(
             }
         }
     }
-
     //store current user details to shared preferences
+  /*fun storeUserToSharedPrefs(user: Users){
+        val sharedPrefs = application.getSharedPreferences("users", Context.MODE_PRIVATE)
+        val editor = sharedPrefs.edit()
+        editor.putString("user_id", user.id)
+        editor.putString("user_name", user.name)
+        editor.putString("user_email", user.email)
+        editor.putString("user_phone", user.phoneNumber)
+        editor.putString("user_image", user.profileImageUrl)
+        editor.putString("user_location", user.location)
+        editor.apply()
+    }*/
+
+    /*fun retrieveUserFromSharedPref(): Users {
+        val sharedPrefs = application.getSharedPreferences("users", Context.MODE_PRIVATE)
+        val userId = sharedPrefs.getString("user_id", "")
+        val userName = sharedPrefs.getString("user_name", "")
+        val userEmail = sharedPrefs.getString("user_email", "")
+        val userPhone = sharedPrefs.getString("user_phone", "")
+        val userImage = sharedPrefs.getString("user_image", "")
+        val userLocation = sharedPrefs.getString("user_location", "")
+        return Users(userId, userName, userEmail, userPhone, userImage, userLocation)
+    }*/
+
+
     override suspend fun storeUserDetails(user: Users) {
         withContext(Dispatchers.IO) {
             db.collection(FirestoreCollections.UserCollection).document(user.id!!).set(user).await()
         }
     }
+
+
 
 
     override suspend fun updateUser(

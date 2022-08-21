@@ -1,6 +1,7 @@
 package dev.robert.bagelly.adapter
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dev.robert.bagelly.R
 import dev.robert.bagelly.data.repository.MainRepository
 import dev.robert.bagelly.data.repository.MainRepositoryImpl
@@ -93,9 +95,11 @@ class RecommendationsAdapter : ListAdapter<Sell, RecommendationsAdapter.ShopsVie
         val sell = getItem(position)
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val storageReference = FirebaseStorage.getInstance().reference
+        val application = holder.itemView.context.applicationContext as Application
         val checkBox = holder.itemView.findViewById<CheckBox>(R.id.favIcon)
         val itemId = sell.itemUniqueId
-        MainRepositoryImpl.getInstance(db, storageReference).isItemFavourite(itemId) {
+
+        MainRepositoryImpl.getInstance(db, storageReference, application).isItemFavourite(itemId) {
             when (it) {
                 is Resource.Success -> {
                     if (it.data) {
@@ -117,7 +121,7 @@ class RecommendationsAdapter : ListAdapter<Sell, RecommendationsAdapter.ShopsVie
         checkBox.setOnClickListener {
             val isChecked = checkBox.isChecked
             if (isChecked) {
-                MainRepositoryImpl.getInstance(db, storageReference).addToFavourite(sell) {
+                MainRepositoryImpl.getInstance(db, storageReference, application).addToFavourite(sell) {
                     when (it) {
                         is Resource.Success -> {
                             Toast.makeText(
@@ -140,7 +144,7 @@ class RecommendationsAdapter : ListAdapter<Sell, RecommendationsAdapter.ShopsVie
                     }
                 }
             } else {
-                MainRepositoryImpl.getInstance(db, storageReference).removeFromFavourite(sell) {
+                MainRepositoryImpl.getInstance(db, storageReference, application).removeFromFavourite(sell) {
                     when (it) {
                         is Resource.Success -> {
                             Toast.makeText(

@@ -1,6 +1,7 @@
 package dev.robert.bagelly.adapter
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -98,8 +99,9 @@ class FavouriteItemsAdapter : ListAdapter<Sell, FavouriteItemsAdapter.ShopsViewH
         val deleteIcon = holder.itemView.findViewById<ImageView>(R.id.deleteIcon)
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val storageReference = FirebaseStorage.getInstance().reference
+        val application = holder.itemView.context.applicationContext as Application
         deleteIcon.setOnClickListener {
-            MainRepositoryImpl.getInstance(db, storageReference).removeFromFavourite(sell) {
+            MainRepositoryImpl.getInstance(db, storageReference, application).removeFromFavourite(sell) {
                 when (it) {
                     is Resource.Success -> {
                         notifyItemRemoved(position)
