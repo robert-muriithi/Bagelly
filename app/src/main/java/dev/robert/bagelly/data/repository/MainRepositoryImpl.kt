@@ -77,39 +77,11 @@ class MainRepositoryImpl @Inject constructor(
             }
         }
     }
-    //store current user details to shared preferences
-  /*fun storeUserToSharedPrefs(user: Users){
-        val sharedPrefs = application.getSharedPreferences("users", Context.MODE_PRIVATE)
-        val editor = sharedPrefs.edit()
-        editor.putString("user_id", user.id)
-        editor.putString("user_name", user.name)
-        editor.putString("user_email", user.email)
-        editor.putString("user_phone", user.phoneNumber)
-        editor.putString("user_image", user.profileImageUrl)
-        editor.putString("user_location", user.location)
-        editor.apply()
-    }*/
-
-    /*fun retrieveUserFromSharedPref(): Users {
-        val sharedPrefs = application.getSharedPreferences("users", Context.MODE_PRIVATE)
-        val userId = sharedPrefs.getString("user_id", "")
-        val userName = sharedPrefs.getString("user_name", "")
-        val userEmail = sharedPrefs.getString("user_email", "")
-        val userPhone = sharedPrefs.getString("user_phone", "")
-        val userImage = sharedPrefs.getString("user_image", "")
-        val userLocation = sharedPrefs.getString("user_location", "")
-        return Users(userId, userName, userEmail, userPhone, userImage, userLocation)
-    }*/
-
-
     override suspend fun storeUserDetails(user: Users) {
         withContext(Dispatchers.IO) {
             db.collection(FirestoreCollections.UserCollection).document(user.id!!).set(user).await()
         }
     }
-
-
-
 
     override suspend fun updateUser(
         userId: String,

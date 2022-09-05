@@ -43,10 +43,11 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
             binding.sellPrice.text = "Ksh "+sell?.price
             binding.sellLocation.text = sell?.location
 
+            val currentUserImage = binding.root.context.getSharedPreferences("bagelly",0).getString("user_image","")
             Glide.with(binding.root.context)
-                .load(sell?.images?.get(0))
+                .load(currentUserImage)
                 .placeholder(R.drawable.avatar)
-                .into(binding.itemImage)
+                .into(binding.circleImageView)
 
             Glide.with(binding.root.context)
                 .load(sell?.images?.get(0))

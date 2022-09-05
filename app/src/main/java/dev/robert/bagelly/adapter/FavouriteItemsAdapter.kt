@@ -105,6 +105,7 @@ class FavouriteItemsAdapter : ListAdapter<Sell, FavouriteItemsAdapter.ShopsViewH
                 when (it) {
                     is Resource.Success -> {
                         notifyItemRemoved(position)
+                        notifyItemChanged(position)
                         Toast.makeText(holder.itemView.context, "Removed from favourites", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Error -> {
