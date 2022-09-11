@@ -66,6 +66,12 @@
         <action
             android:id="@+id/action_homeFragment_to_accountFragment"
             app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_viewShopFragment"
+            app:destination="@id/viewShopFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_sellItemDetailsFragment"
+            app:destination="@id/sellItemDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/shopsFragment"
@@ -110,7 +116,11 @@
         android:id="@+id/favoritesFragment"
         android:name="dev.robert.bagelly.ui.fragments.favorites.FavoritesFragment"
         android:label="@string/favorite"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_sellItemDetailsFragment"
+            app:destination="@id/sellItemDetailsFragment" />
+    </fragment>
     <dialog
         android:id="@+id/signInFragment"
         android:name="dev.robert.bagelly.ui.fragments.auth.SignInFragment"
@@ -134,16 +144,7 @@
         android:id="@+id/myAccountFragment"
         android:name="dev.robert.bagelly.ui.fragments.account.MyAccountFragment"
         android:label="fragment_my_account"
-        tools:layout="@layout/fragment_my_account" >
-        <action
-            android:id="@+id/action_myAccountFragment_to_editProfileFragment"
-            app:destination="@id/editProfileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editProfileFragment"
-        android:name="dev.robert.bagelly.ui.fragments.account.EditProfileFragment"
-        android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_my_account" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="dev.robert.bagelly.ui.fragments.settings.SettingsFragment"
@@ -367,5 +368,14 @@
         <argument
             android:name="postDetails"
             app:argType="dev.robert.bagelly.model.Post" />
+    </fragment>
+    <fragment
+        android:id="@+id/sellItemDetailsFragment"
+        android:name="dev.robert.bagelly.ui.fragments.sell.SellItemDetailsFragment"
+        android:label="fragment_sell_item_details"
+        tools:layout="@layout/fragment_sell_item_details" >
+        <argument
+            android:name="itemDetails"
+            app:argType="dev.robert.bagelly.model.Sell" />
     </fragment>
 </navigation>

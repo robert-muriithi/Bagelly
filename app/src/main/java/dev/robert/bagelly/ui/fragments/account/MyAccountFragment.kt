@@ -1,9 +1,12 @@
 package dev.robert.bagelly.ui.fragments.account
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -24,9 +27,11 @@ import dev.robert.bagelly.model.Users
 import dev.robert.bagelly.ui.fragments.account.viewmodel.MyAccountViewModel
 import dev.robert.bagelly.utils.CheckInternet
 import dev.robert.bagelly.utils.Resource
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyAccountFragment : Fragment() {
+    @Inject lateinit var preferences: SharedPreferences
     private lateinit var binding: FragmentMyAccountBinding
     private val viewModel : MyAccountViewModel by viewModels()
     private var imageUri : Uri? = null
@@ -40,7 +45,7 @@ class MyAccountFragment : Fragment() {
         setHasOptionsMenu(true)
         (activity as AppCompatActivity).setSupportActionBar(binding.myAccountFragmentToolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+
 
         val arrayAdapter: ArrayAdapter<String> =
             ArrayAdapter<String>(requireContext(), R.layout.drop_down_item, Kenya.counties())
@@ -65,15 +70,24 @@ class MyAccountFragment : Fragment() {
         viewModel.user.observe(viewLifecycleOwner) {
             when(it) {
                 is Resource.Loading -> {
-                    Toast.makeText(requireContext(), "Loading details", Toast.LENGTH_SHORT).show()
+                    binding.progressIndicator.isVisible = true
+                    binding.progressIndicator.show()
+                    hideEditText()
                 }
                 is Resource.Error -> {
+                    binding.progressIndicator.isVisible = false
+                    binding.progressIndicator.hide()
+                    showEditText()
                     Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Success -> {
+                    binding.progressIndicator.isVisible = false
+                    binding.progressIndicator.hide()
+                    showEditText()
                     binding.nameLayout.editText?.setText(it.data.name)
                     binding.lNameInputLayout.editText?.setText(it.data.email)
                     binding.phoneNumberLayout.editText?.setText(it.data.phoneNumber)
+
                     //binding.locationSpinner.setSelection(it.l ocation)
                     Glide.with(requireContext())
                         .load(it.data.profileImageUrl)
@@ -130,6 +144,7 @@ class MyAccountFragment : Fragment() {
         val profileImageUrl = imageUri.toString()
         val profileUri = imageUri
         val user = Users(userId!!, name, email, phoneNumber, profileImageUrl, location)
+
         FirebaseAuth.getInstance().currentUser?.updateEmail(email)
         if (CheckInternet.isConnected(requireContext())){
             if (imageUri != null){
@@ -139,15 +154,22 @@ class MyAccountFragment : Fragment() {
                 viewModel.updateUser.observe(viewLifecycleOwner) {
                     when(it) {
                         is Resource.Loading -> {
-                            binding.myAccountFragmentProgressBar.isVisible = true
+                            binding.progressIndicator.isVisible = true
+                            binding.progressIndicator.show()
+                            hideEditText()
                             Toast.makeText(requireContext(), "Updating Details", Toast.LENGTH_SHORT).show()
                         }
                         is Resource.Error -> {
-                            binding.myAccountFragmentProgressBar.isVisible = false
+                            binding.progressIndicator.isVisible = false
+                            binding.progressIndicator.hide()
+                            showEditText()
                             Toast.makeText(requireContext(), it.string, Toast.LENGTH_SHORT).show()
                         }
                         is Resource.Success -> {
-                            binding.myAccountFragmentProgressBar.isVisible = false
+                            binding.progressIndicator.isVisible = false
+                            binding.progressIndicator.hide()
+                            showEditText()
+                            updateSharedPrefs()
                             Toast.makeText(requireContext(), "Profile updated", Toast.LENGTH_SHORT).show()
                             requireActivity().onBackPressed()
                         }
@@ -161,5 +183,29 @@ class MyAccountFragment : Fragment() {
         else{
             Toast.makeText(requireContext(), "No internet connection", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun hideEditText(){
+        binding.nameLayout.editText?.isEnabled = false
+        binding.lNameInputLayout.editText?.isEnabled = false
+        binding.phoneNumberLayout.editText?.isEnabled = false
+        binding.locationSpinner.isEnabled = false
+    }
+    private fun showEditText(){
+        binding.nameLayout.editText?.isEnabled = true
+        binding.lNameInputLayout.editText?.isEnabled = true
+        binding.phoneNumberLayout.editText?.isEnabled = true
+        binding.locationSpinner.isEnabled = true
+    }
+    private fun updateSharedPrefs() : Boolean{
+        val editor = preferences.edit()
+        editor.putString("user_id", FirebaseAuth.getInstance().currentUser?.uid.toString())
+        editor.putString("user_name", binding.name.text.toString())
+        editor.putString("user_email", binding.email.text.toString())
+        editor.putString("user_phone", binding.phoneNumber.text.toString())
+        editor.putString("user_image", imageUri.toString())
+        editor.putString("user_loc", binding.locationSpinner.selectedItem.toString())
+        editor.apply()
+        return true
     }
 }

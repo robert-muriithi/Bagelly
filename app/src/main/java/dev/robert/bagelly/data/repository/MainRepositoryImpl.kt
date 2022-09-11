@@ -1,5 +1,8 @@
 package dev.robert.bagelly.data.repository
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
 import androidx.core.net.toUri
@@ -16,15 +19,15 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-import dev.robert.bagelly.data.repository.AuthenticationRepositoryImpl.Companion.firestoreSettings
-import kotlinx.coroutines.flow.Flow
-
+import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 class MainRepositoryImpl @Inject constructor(
     private val db: FirebaseFirestore,
     private val storageReference: StorageReference,
+    @ApplicationContext private val application: Application,
     //private val dao: AppDao
 ) :
     MainRepository {
@@ -37,9 +40,10 @@ class MainRepositoryImpl @Inject constructor(
         private var instance: MainRepositoryImpl? = null
         fun getInstance(
             db: FirebaseFirestore,
-            storageReference: StorageReference
+            storageReference: StorageReference,
+            application: Application
         ) = instance ?: synchronized(this) {
-            instance ?: MainRepositoryImpl(db, storageReference).also { instance = it }
+            instance ?: MainRepositoryImpl(db, storageReference, application).also { instance = it }
         }
 
         val firestoreSettings = FirebaseFirestoreSettings.Builder()
@@ -61,7 +65,7 @@ class MainRepositoryImpl @Inject constructor(
                 val user = db.collection(FirestoreCollections.UserCollection).document(userId).get().await()
                 withContext(Dispatchers.Main) {
                     Log.d(TAG, "getSingleUser: ${user.data}")
-                   result(Resource.Success(user.toObject(Users::class.java)!!))
+                    result(Resource.Success(user.toObject(Users::class.java)!!))
                 }
 
                 Resource.Success(user.toObject(Users::class.java)!!)
@@ -71,6 +75,11 @@ class MainRepositoryImpl @Inject constructor(
             } catch (e: FirebaseException) {
                 Resource.Error(e.message!!)
             }
+        }
+    }
+    override suspend fun storeUserDetails(user: Users) {
+        withContext(Dispatchers.IO) {
+            db.collection(FirestoreCollections.UserCollection).document(user.id!!).set(user).await()
         }
     }
 
@@ -623,6 +632,7 @@ class MainRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             try {
                 db.collection(FirestoreCollections.FavoriteCollection)
+                    .whereEqualTo("sellerId", FirebaseAuth.getInstance().currentUser?.uid)
                     .get()
                     .addOnSuccessListener {
                         result.invoke(
@@ -699,6 +709,87 @@ class MainRepositoryImpl @Inject constructor(
                 db.collection(FirestoreCollections.SellCollection)
                     .orderBy("datePosted", Query.Direction.DESCENDING)
                     .limit(6)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getCurrentUserSells(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.SellCollection)
+                    .whereEqualTo("sellerId", FirebaseAuth.getInstance().currentUser?.uid)
+                    .orderBy("datePosted", Query.Direction.DESCENDING)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun deleteSellItem(sell: Sell, result: (Resource<Sell>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.SellCollection)
+                    .whereEqualTo("itemUniqueId", sell.itemUniqueId)
+                    .get()
+                    .addOnSuccessListener {
+                        if (it.isEmpty) {
+                            result.invoke(Resource.Error("No such sell found"))
+                        } else {
+                            it.documents.forEach {
+                                it.reference.delete()
+                                    .addOnSuccessListener {
+                                        result.invoke(Resource.Success(sell))
+                                    }
+                                    .addOnFailureListener {
+                                        result.invoke(Resource.Error(it.message.toString()))
+                                    }
+                            }
+                        }
+                    }
+                    .addOnFailureListener {
+                        result.invoke(Resource.Error(it.message.toString()))
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun getAllSells(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.SellCollection)
+                    .orderBy("datePosted", Query.Direction.DESCENDING)
                     .get()
                     .addOnSuccessListener {
                         result.invoke(

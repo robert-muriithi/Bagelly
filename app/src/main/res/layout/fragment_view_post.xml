@@ -10,7 +10,7 @@
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,9 +19,9 @@
             android:id="@+id/postsToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIcon="?attr/nav_icon"
             app:title="Create an Ad"
-            app:titleTextColor="@color/light_grey" />
+            app:titleTextColor="?attr/more_text" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,6 +29,7 @@
         android:id="@+id/nestedScrollView4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="#F3F3F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +55,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/postImage">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -81,15 +83,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvPostTitle" />
 
                     <TextView
-                        android:id="@+id/tvPostType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Item type"
-                        app:layout_constraintStart_toStartOf="@+id/tvPostCondition"
-                        app:layout_constraintTop_toBottomOf="@+id/tvPostCondition" />
-
-                    <TextView
                         android:id="@+id/tvPostPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -97,20 +90,9 @@
                         android:text="Price"
                         android:textColor="@color/main"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/tvPostType"
-                        app:layout_constraintTop_toBottomOf="@+id/tvPostType" />
+                        app:layout_constraintStart_toStartOf="@+id/tvPostCondition"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPostCondition" />
 
-                    <TextView
-                        android:id="@+id/tvPostDescription"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:text="@string/item_description"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/tvPostPrice"
-                        app:layout_constraintTop_toBottomOf="@+id/tvPostPrice" />
 
                     <ImageView
                         android:id="@+id/favIconFilled"
@@ -118,47 +100,187 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
-                        android:visibility="gone"
                         android:src="@drawable/ic_favorite_filled"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
+                    <CheckBox
                         android:id="@+id/favIconEmpty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/ic_favorite_border"
+                        android:button="@drawable/like_checkbox_item"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:useMaterialThemeColors="false" />
 
                     <ImageView
                         android:id="@+id/imageView19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="24dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="16dp"
                         android:src="@drawable/ic_location"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/tvPostDescription"
-                        app:layout_constraintTop_toBottomOf="@+id/tvPostDescription"
+                        app:layout_constraintEnd_toStartOf="@+id/tvPostLocation"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPostPrice"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
                         android:id="@+id/tvPostLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="16dp"
                         android:text="Kileleshwa"
                         app:layout_constraintBottom_toBottomOf="@+id/imageView19"
-                        app:layout_constraintStart_toEndOf="@+id/imageView19"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/imageView19" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp"
+                android:text="Call"
+                android:backgroundTint="#03c04a"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/btnWhatsapp"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnWhatsapp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="WhatsApp"
+                android:backgroundTint="#128C7E"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/btnCall"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnCall"
+                app:layout_constraintTop_toTopOf="@+id/btnCall" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnCall">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/tvPostDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView5"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView4">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/circleImageView4"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="32dp"
+                        android:src="@drawable/avatar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textView37"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/robert_muriithi"
+                        app:layout_constraintStart_toEndOf="@+id/circleImageView4"
+                        app:layout_constraintTop_toTopOf="@+id/circleImageView4" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_verified"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView37"
+                        app:layout_constraintStart_toEndOf="@+id/textView37"
+                        app:layout_constraintTop_toTopOf="@+id/textView37" />
+
+                    <TextView
+                        android:id="@+id/textView38"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Last seen at 12:00pm"
+                        app:layout_constraintStart_toStartOf="@+id/textView37"
+                        app:layout_constraintTop_toBottomOf="@+id/textView37" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Similar Posts"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView5" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/similarPostsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/post_item_layout"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

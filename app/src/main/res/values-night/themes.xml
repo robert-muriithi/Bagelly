@@ -1,14 +1,32 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Bagelly" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Bagelly.Dark" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/dark</item>
-        <item name="colorPrimaryVariant">@color/white</item>
-        <item name="colorOnPrimary">@color/dark</item>
+        <item name="colorPrimary">@color/main_dark</item>
+        <item name="colorPrimaryVariant">@color/dark</item>
+        <item name="colorOnPrimary">@color/main_dark</item>
+
+        <item name="background_color">@color/dark</item>
+        <item name="splash_screen_bg">@color/dark</item>
+        <item name="nav_icon">@drawable/ic_arrow_back_night</item>
+        <item name="more_text">@color/white</item>
+        <item name="forwad_img">@drawable/ic_forwad_night</item>
+        <item name="toolbar_logo">@drawable/ic_logo_toolbar_night</item>
+        <item name="toolbar_color">@color/dark</item>
+        <item name="search_toolbar_color">@color/dark</item>
+        <item name="profile_card_color">@color/main_dark</item>
+        <item name="account_icon">@drawable/ic_account_night</item>
+        <item name="notification_icon">@drawable/ic_notifications_night</item>
+        <item name="splash_screen_image">@drawable/ic_logo_transparent</item>
+        <item name="text_color">@color/white</item>
+        <item name="light_grey">@color/dark</item>
+        <item name="shop_details_toolbar">@color/dark</item>
+        <item name="button_color">@color/white</item>
+        <item name="button_text_color">@color/main_dark</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->

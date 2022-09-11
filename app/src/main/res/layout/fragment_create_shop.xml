@@ -10,7 +10,7 @@
         android:id="@+id/appBarLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="?attr/toolbar_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,8 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:title="Create a new Store"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:titleTextColor="@color/light_grey" />
+            app:navigationIcon="?attr/nav_icon"
+            app:titleTextColor="?attr/more_text" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView

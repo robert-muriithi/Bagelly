@@ -10,7 +10,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:background="?attr/toolbar_color"
         app:layout_constraintBottom_toTopOf="@+id/settingsListView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,9 +20,9 @@
             android:id="@+id/settingsToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:navigationIcon="@drawable/ic_arrow_back"
+            app:navigationIcon="?attr/nav_icon"
             app:title="Settings"
-            app:titleTextColor="@color/light_grey" />
+            app:titleTextColor="?attr/more_text" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ListView

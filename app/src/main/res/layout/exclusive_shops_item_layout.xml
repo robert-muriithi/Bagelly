@@ -40,7 +40,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/tecno_mobile"
-            android:textColor="@color/black"
+            android:textColor="?attr/text_color"
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/shopIcon"

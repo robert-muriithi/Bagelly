@@ -1,6 +1,7 @@
 package dev.robert.bagelly.ui.fragments.settings
 
 import android.content.Intent
+import android.media.MediaCodec.MetricsConstants.MODE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -34,7 +36,6 @@ class SettingsFragment : Fragment() {
         val view = binding.root
         (activity as AppCompatActivity).setSupportActionBar(binding.settingsToolbar)
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
         listItem = resources.getStringArray(R.array.settings_list)
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
@@ -54,7 +55,22 @@ class SettingsFragment : Fragment() {
                         .setTitle("Choose one from the below")
                         .setSingleChoiceItems(options, 0){ _, i ->
                             //requireActivity().setTheme(R.style.AppTheme)
-                            requireActivity().recreate()
+                            when (i) {
+                                0 -> {
+                                    //AppCompatDelegate.MODE_NIGHT_YES
+                                    requireActivity().setTheme(R.style.Theme_Bagelly)
+                                    storeToSharedPrefs()
+                                    requireActivity().recreate()
+                                }
+                                1 -> {
+                                    requireActivity().setTheme(R.style.Theme_Bagelly_Dark)
+                                    storeToSharedPrefs()
+                                    requireActivity().recreate()
+                                }
+                                else -> {
+                                    AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                                }
+                            }
                             Toast.makeText(requireContext(), options[i], Toast.LENGTH_SHORT).show()
                         }.create()
                     singleChoiceDialog.show()
@@ -111,5 +127,13 @@ class SettingsFragment : Fragment() {
         return view
     }
 
+    private fun storeToSharedPrefs() : Boolean{
+        val modePref = requireActivity().getSharedPreferences("mode",0).edit()
+        modePref.putString("light","Light")
+        modePref.putString("night","Dark")
+        modePref.putString("system","SystemDefault")
+        modePref.apply()
+        return true
+    }
 
 }

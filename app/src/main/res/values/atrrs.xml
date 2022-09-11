@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="daynight">
+        <attr name="background_color" format="color"/>
+        <attr name="text_color" format="color"/>
+        <attr name="splash_screen_bg" format="color"/>
+        <attr name="splash_screen_image" format="reference"/>
+        <attr name="toolbar_logo" format="reference"/>
+        <attr name="toolbar_color" format="color"/>
+        <attr name="account_icon" format="reference"/>
+        <attr name="more_text" format="color"/>
+        <attr name="search_toolbar_color" format="color"/>
+        <attr name="forwad_img" format="reference"/>
+        <attr name="notification_icon" format="reference"/>
+        <attr name="nav_icon" format="reference"/>
+        <attr name="button_color" format="color"/>
+        <attr name="shop_details_toolbar" format="color"/>
+        <attr name="button_text_color" format="color"/>
+        <attr name="light_grey" format="color"/>
+        <attr name="profile_card_color" format="color"/>
+   </declare-styleable>
+</resources>

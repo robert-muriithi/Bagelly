@@ -1,11 +1,13 @@
 package dev.robert.bagelly.adapter
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +16,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import dev.robert.bagelly.R
@@ -22,6 +25,8 @@ import dev.robert.bagelly.data.repository.MainRepositoryImpl
 import dev.robert.bagelly.databinding.FavoriteItemLayoutBinding
 import dev.robert.bagelly.databinding.RecentlyUploadedItemLayoutBinding
 import dev.robert.bagelly.model.Sell
+import dev.robert.bagelly.ui.fragments.favorites.FavoritesFragmentDirections
+import dev.robert.bagelly.ui.fragments.home.HomeFragmentDirections
 import dev.robert.bagelly.utils.Resource
 import javax.inject.Inject
 
@@ -94,11 +99,13 @@ class FavouriteItemsAdapter : ListAdapter<Sell, FavouriteItemsAdapter.ShopsViewH
         val deleteIcon = holder.itemView.findViewById<ImageView>(R.id.deleteIcon)
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val storageReference = FirebaseStorage.getInstance().reference
+        val application = holder.itemView.context.applicationContext as Application
         deleteIcon.setOnClickListener {
-            MainRepositoryImpl.getInstance(db, storageReference).removeFromFavourite(sell) {
+            MainRepositoryImpl.getInstance(db, storageReference, application).removeFromFavourite(sell) {
                 when (it) {
                     is Resource.Success -> {
                         notifyItemRemoved(position)
+                        notifyItemChanged(position)
                         Toast.makeText(holder.itemView.context, "Removed from favourites", Toast.LENGTH_SHORT).show()
                     }
                     is Resource.Error -> {
@@ -113,6 +120,11 @@ class FavouriteItemsAdapter : ListAdapter<Sell, FavouriteItemsAdapter.ShopsViewH
                     }
                 }
             }
+        }
+        val card = holder.itemView.findViewById<MaterialCardView>(R.id.favoriteCardView)
+        card.setOnClickListener {
+            val action = FavoritesFragmentDirections.actionFavoritesFragmentToSellItemDetailsFragment(sell)
+            Navigation.findNavController(holder.itemView).navigate(action)
         }
         holder.bind(sell)
     }

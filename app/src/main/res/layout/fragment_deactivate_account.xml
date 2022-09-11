@@ -9,14 +9,14 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/deactivateAccAppBar"
         android:layout_width="0dp"
-        android:background="@color/white"
+        android:background="?attr/toolbar_color"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <androidx.appcompat.widget.Toolbar
             app:title="Deactivate my Account"
-            app:titleTextColor="@color/light_grey"
+            app:titleTextColor="?attr/more_text"
             app:navigationIcon="@drawable/ic_arrow_back"
             android:id="@+id/deactivateAccToolbar"
             android:layout_width="match_parent"

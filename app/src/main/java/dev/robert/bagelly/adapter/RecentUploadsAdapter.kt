@@ -1,12 +1,16 @@
 package dev.robert.bagelly.adapter
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +19,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -23,6 +28,7 @@ import dev.robert.bagelly.data.repository.MainRepository
 import dev.robert.bagelly.data.repository.MainRepositoryImpl
 import dev.robert.bagelly.databinding.RecentlyUploadedItemLayoutBinding
 import dev.robert.bagelly.model.Sell
+import dev.robert.bagelly.ui.fragments.home.HomeFragmentDirections
 import dev.robert.bagelly.utils.Resource
 import javax.inject.Inject
 
@@ -37,10 +43,11 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
             binding.sellPrice.text = "Ksh "+sell?.price
             binding.sellLocation.text = sell?.location
 
+            val currentUserImage = binding.root.context.getSharedPreferences("bagelly",0).getString("user_image","")
             Glide.with(binding.root.context)
-                .load(sell?.images?.get(0))
+                .load(currentUserImage)
                 .placeholder(R.drawable.avatar)
-                .into(binding.itemImage)
+                .into(binding.circleImageView)
 
             Glide.with(binding.root.context)
                 .load(sell?.images?.get(0))
@@ -93,9 +100,10 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
         val sell = getItem(position)
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val storageReference = FirebaseStorage.getInstance().reference
+        val application = holder.itemView.context.applicationContext as Application
         val checkBox = holder.itemView.findViewById<CheckBox>(R.id.favIcon)
         val itemId = sell.itemUniqueId
-        MainRepositoryImpl.getInstance(db, storageReference).isItemFavourite(itemId) {
+        MainRepositoryImpl.getInstance(db, storageReference, application).isItemFavourite(itemId) {
             when (it) {
                 is Resource.Success -> {
                     if (it.data) {
@@ -117,7 +125,7 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
         checkBox.setOnClickListener {
             val isChecked = checkBox.isChecked
             if (isChecked) {
-                MainRepositoryImpl.getInstance(db, storageReference).addToFavourite(sell) {
+                MainRepositoryImpl.getInstance(db, storageReference, application).addToFavourite(sell) {
                     when (it) {
                         is Resource.Success -> {
                             Toast.makeText(holder.itemView.context, "Added to favourites", Toast.LENGTH_SHORT).show()
@@ -135,7 +143,7 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
                     }
                 }
             } else {
-                MainRepositoryImpl.getInstance(db, storageReference).removeFromFavourite(sell) {
+                MainRepositoryImpl.getInstance(db, storageReference, application).removeFromFavourite(sell) {
                     when (it) {
                         is Resource.Success -> {
                             Toast.makeText(holder.itemView.context, "Removed from favourites", Toast.LENGTH_SHORT).show()
@@ -193,6 +201,11 @@ class RecentUploadsAdapter : ListAdapter<Sell, RecentUploadsAdapter.ShopsViewHol
             }
         }*/
 
+        }
+        val card = holder.itemView.findViewById<MaterialCardView>(R.id.itemCardView)
+        card.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToSellItemDetailsFragment(sell)
+            Navigation.findNavController(holder.itemView).navigate(action)
         }
         holder.bind(sell)
     }

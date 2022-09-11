@@ -112,9 +112,7 @@ class SellFragment2 : Fragment() {
                     binding.descriptionInputLayout.isErrorEnabled = false
                     binding.priceInputLayout.isErrorEnabled = false
                     if (CheckInternet.isConnected(requireContext())) {
-                        viewLifecycleOwner.lifecycleScope.launch {
-                            viewModel.sell(sell, imagesList)
-                        }
+                        viewModel.sell(sell, imagesList)
                         viewModel.sell.observe(viewLifecycleOwner) {
                             when (it) {
                                 is Resource.Loading -> {

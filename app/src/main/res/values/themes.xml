@@ -12,6 +12,23 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="background_color">@color/main_dark</item>
+        <item name="splash_screen_bg">@color/white</item>
+        <item name="toolbar_logo">@drawable/ic_logo_toolbar</item>
+        <item name="toolbar_color">@color/white</item>
+        <item name="account_icon">@drawable/ic_account</item>
+        <item name="notification_icon">@drawable/ic_notification</item>
+        <item name="more_text">@color/light_grey</item>
+        <item name="forwad_img">@drawable/ic_forwad</item>
+        <item name="search_toolbar_color">@color/light_grey</item>
+        <item name="shop_details_toolbar">@color/light_grey</item>
+        <item name="light_grey">#F3F3F3</item>
+        <item name="profile_card_color">@color/white</item>
+        <item name="nav_icon">@drawable/ic_arrow_back</item>
+        <item name="splash_screen_image">@drawable/ic_logo</item>
+        <item name="text_color">@color/black</item>
+        <item name="button_color">@color/white</item>
+        <item name="button_text_color">@color/main_dark</item>
     </style>
 
     <style name="spinner_style" parent="android:Widget.TextView.SpinnerItem">

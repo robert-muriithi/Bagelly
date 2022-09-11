@@ -10,7 +10,8 @@
     android:layout_marginEnd="8dp"
     app:cardCornerRadius="20dp"
     app:cardElevation="2dp"
-    android:layout_height="270dp">
+    android:layout_height="270dp"
+    android:id="@+id/itemCardView">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,7 +33,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:text="@string/robert_muriithi"
-            android:textColor="@color/black"
+            android:textColor="?attr/text_color"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/circleImageView"

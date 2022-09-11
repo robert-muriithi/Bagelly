@@ -66,11 +66,9 @@ class FavoritesFragment : Fragment() {
             viewModel.isLoading.observe(viewLifecycleOwner){
                 if(it){
                     startShimmer()
-                    //binding.progressBar.isVisible = true
                 }
                 else{
                     stopShimmer()
-                    //binding.progressBar.isVisible = false
                 }
             }
         }
@@ -83,10 +81,13 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun stopShimmer() {
-
+        binding.shimmerViewContainer.isVisible = false
+        binding.shimmerViewContainer.stopShimmer()
     }
 
     private fun startShimmer() {
+        binding.shimmerViewContainer.isVisible = true
+        binding.shimmerViewContainer.startShimmer()
 
     }
 

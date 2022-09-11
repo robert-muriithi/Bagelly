@@ -1,6 +1,8 @@
 package dev.robert.bagelly.di
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -25,11 +27,13 @@ object AppModule {
     @Singleton
     fun provideRepository(
         database: FirebaseFirestore,
-        storageReference: StorageReference
+        storageReference: StorageReference,
+        app: Application,
     ): MainRepository {
         return MainRepositoryImpl(
             database,
-            storageReference
+            storageReference,
+            app
         )
     }
 
@@ -48,9 +52,10 @@ object AppModule {
     fun providerAuthRepository(
         auth: FirebaseAuth,
         db: FirebaseFirestore,
-        app: Application
+        app: Application,
+        sharedPreferences: SharedPreferences
     ): AuthenticationRepository {
-        return AuthenticationRepositoryImpl(auth, db, app)
+        return AuthenticationRepositoryImpl(auth, db, app, sharedPreferences)
     }
 
     @Provides
@@ -63,12 +68,9 @@ object AppModule {
     fun provideStorageReference(): StorageReference =
         FirebaseStorage.getInstance().reference
 
-    /*@Provides
+    @Provides
     @Singleton
-    fun provideDatabase(application: Application) =
-        Room.databaseBuilder(
-            application,
-            AppDatabase::class.java,
-            "bagellydb.db"
-        )*/
+    fun provideSharedPreferences(app: Application): SharedPreferences =
+        app.getSharedPreferences("bagelly", Context.MODE_PRIVATE)
+
 }
