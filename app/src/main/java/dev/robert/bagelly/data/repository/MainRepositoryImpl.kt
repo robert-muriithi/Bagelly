@@ -808,5 +808,58 @@ class MainRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun getElectronics(result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.SellCollection)
+                    .whereEqualTo("category", "Electronics")
+                    .orderBy("datePosted", Query.Direction.DESCENDING)
+                    .get()
+                    .addOnSuccessListener {
+                        result.invoke(
+                            Resource.Success(it.toObjects(Sell::class.java))
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    override suspend fun searchItems(searchQuery: String, result: (Resource<List<Sell>>) -> Unit) {
+        withContext(Dispatchers.IO) {
+            try {
+                db.collection(FirestoreCollections.SellCollection)
+                    .orderBy("datePosted", Query.Direction.DESCENDING)
+                    .get()
+                    .addOnSuccessListener {
+                        val sells = it.toObjects(Sell::class.java)
+                        val filteredSells = sells.filter {
+                            it.itemName?.contains(searchQuery, true) ?: false
+                        }
+                        result.invoke(
+                            Resource.Success(filteredSells)
+                        )
+                    }
+                    .addOnFailureListener {
+                        result.invoke(
+                            Resource.Error(it.message.toString())
+                        )
+                    }.await()
+            } catch (e: Exception) {
+                Log.d(TAG, "exception ${e.message}")
+            } catch (e: Exception) {
+                result.invoke(Resource.Error(e.message.toString()))
+            }
+        }
+    }
 }
 
