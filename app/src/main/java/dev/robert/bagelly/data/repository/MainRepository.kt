@@ -118,4 +118,13 @@ interface MainRepository {
         sell: Sell,
         result: (Resource<Sell>) -> Unit
     )
+
+    suspend fun getElectronics(
+        result: (Resource<List<Sell>>) -> Unit
+    )
+
+    suspend fun searchItems(
+        searchQuery: String,
+        result: (Resource<List<Sell>>) -> Unit
+    )
 }
