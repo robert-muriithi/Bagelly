@@ -4,7 +4,7 @@
 A buying and selling app made using kotlin. A user can create his/her own shop online to sell products.
 
 ## Note:
-- The app is still under development. Features like Search, App theme and few more features are not fully functional.
+- Features like Search, App theme and few more features are not fully functional.
 
 ## Demo
 <center>
